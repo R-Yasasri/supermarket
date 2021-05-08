@@ -6,6 +6,7 @@
 package GUI;
 
 import database.db;
+import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +24,7 @@ public class Cashier extends javax.swing.JInternalFrame {
     public Cashier() {
         initComponents();
         init();
-        clearItemFields();
+        clearItemFields(true);
     }
 
     /**
@@ -360,14 +361,25 @@ public class Cashier extends javax.swing.JInternalFrame {
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         String stockId = jTextField1.getText();
 
+        jTextField1.setForeground(Color.black);
         if (stockId.isEmpty()) {
-            clearItemFields();
+            clearItemFields(true);
         } else {
 
             try {
-                ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.qty>0 AND s.`status`=1 AND idstock='"+stockId+"'");
-                
-                
+                ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.qty>0 AND s.`status`=1 AND idstock='" + stockId + "'");
+
+                if (search.next()) {
+
+                    String name = search.getString("brand") + " " + search.getString("name");
+
+                    jLabel3.setText(name);
+                    jLabel5.setText(search.getString("iditem"));
+                    jLabel10.setText(search.getString("selling_price"));
+                } else {
+                    clearItemFields(false);
+                    jTextField1.setForeground(Color.red);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -391,7 +403,7 @@ public class Cashier extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        clearItemFields();
+        clearItemFields(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
@@ -457,8 +469,12 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     }
 
-    private void clearItemFields() {
-        jTextField1.setText("");
+    private void clearItemFields(boolean clearStockId) {
+
+        if (clearStockId) {
+            jTextField1.setText("");
+        }
+
         jTextField2.setText("");
         jTextField3.setText("");
 
