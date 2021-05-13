@@ -831,7 +831,14 @@ public class GRN extends javax.swing.JInternalFrame {
             netTotal = netTotal + (Double.parseDouble(qty) * Double.parseDouble(unit_price));
             try {
                 db.iud("INSERT INTO grnitem (item_iditem,grn_idgrn,qty,unit_price,unit,returning_container_details)VALUES('" + item + "','" + grn + "','" + qty + "','" + unit_price + "','" + unit + "','" + rcd + "')");
-                db.iud("INSERT INTO stock (item_iditem,qty,selling_price,expiredate)VALUES('" + item + "','" + qty + "','" + selling_price + "','" + expireDate + "')");
+                // retrieving the inserted grnitem id
+                int idgrnitem=0;
+                ResultSet search = db.search("SELECT MAX(idgrnitem) FROM grnitem");
+                if (search.next()) {
+                    idgrnitem=search.getInt(1);
+                }
+                
+                db.iud("INSERT INTO stock (item_iditem,qty,selling_price,expiredate,grnitem_idgrnitem)VALUES('" + item + "','" + qty + "','" + selling_price + "','" + expireDate + "','"+idgrnitem+"')");
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);

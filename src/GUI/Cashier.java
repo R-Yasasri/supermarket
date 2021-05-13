@@ -8,6 +8,8 @@ package GUI;
 import database.db;
 import java.awt.Color;
 import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Thilina
  */
 public class Cashier extends javax.swing.JInternalFrame {
-
+    
     private int selectedItemId = 0;
 
     /**
@@ -99,17 +101,34 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel8.setText("qty");
 
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
+
         jLabel9.setText("unit price (Rs.)");
 
         jLabel10.setText("0.00");
 
         jButton1.setText("add to table");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("total price\n");
 
         jLabel7.setText("Rs. 0.00");
 
         jLabel20.setText("discount");
+
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField3KeyReleased(evt);
+            }
+        });
 
         jLabel21.setText("Rs.");
 
@@ -213,11 +232,11 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "item id", "Item", "qty", "unit", "unit price", "total price"
+                "stock id", "item id", "item", "qty", "unit", "unit price", "net price", "discount", "total price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                true, false, false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -360,22 +379,25 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         String stockId = jTextField1.getText();
-
+        
         jTextField1.setForeground(Color.black);
         if (stockId.isEmpty()) {
             clearItemFields(true);
         } else {
-
+            
             try {
-                ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.qty>0 AND s.`status`=1 AND idstock='" + stockId + "'");
-
+                ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i INNER JOIN grnitem g ON s.item_iditem=i.iditem AND g.idgrnitem=s.grnitem_idgrnitem WHERE s.qty>0 AND s.`status`=1 AND idstock='" + stockId + "'");
+                
                 if (search.next()) {
-
+                    
                     String name = search.getString("brand") + " " + search.getString("name");
-
+                    
                     jLabel3.setText(name);
                     jLabel5.setText(search.getString("iditem"));
                     jLabel10.setText(search.getString("selling_price"));
+                    jLabel23.setText("per " + search.getString("unit"));
+                    
+                    calculateTotalPrice();
                 } else {
                     clearItemFields(false);
                     jTextField1.setForeground(Color.red);
@@ -388,23 +410,85 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selectedRow = jTable1.getSelectedRow();
-
+        
         if (selectedRow != -1) {
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-
+            
             dtm.removeRow(selectedRow);
+            
+            calculateNetTotal();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
-
+        jLabel13.setText("0.00");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         clearItemFields(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        calculateTotalPrice();
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+        calculateTotalPrice();
+    }//GEN-LAST:event_jTextField3KeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String tPrice = jLabel7.getText();
+        String name = jLabel3.getText();
+        
+        if (!tPrice.isEmpty()) {
+            
+            if (Double.parseDouble(tPrice) < 0 || name.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Invalid data", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                
+                Vector v = new Vector();
+                String sId = jTextField1.getText();
+                String iId = jLabel5.getText();
+                String iName = jLabel3.getText();
+                String qty = jTextField2.getText();
+                String u = jLabel23.getText();
+                String uPrice = jLabel10.getText();
+                String discount = jTextField3.getText();
+                
+                if (discount.isEmpty()) {
+                    discount = "0";
+                }
+                
+                String[] split = u.split("per ");//because the String is prefixed with "per". ex: per Kg, per unit ..etc
+
+                String unit = split[1];
+                
+                double nPrice = Double.parseDouble(qty) * Double.parseDouble(uPrice);
+                
+                v.add(sId);
+                v.add(iId);
+                v.add(iName);
+                v.add(qty);
+                v.add(unit);
+                v.add(uPrice);
+                v.add(nPrice);
+                v.add(discount);
+                v.add(tPrice);
+                
+                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                dtm.addRow(v);
+                
+                clearItemFields(true);
+                
+                calculateNetTotal();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please provide a valid qty", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -451,37 +535,84 @@ public class Cashier extends javax.swing.JInternalFrame {
     public void init() {
         try {
             ResultSet search = db.search("SELECT MAX(idinvoice) FROM invoice");
-
+            
             int idInvoice = 0;
             if (search.next()) {
-
+                
                 idInvoice = search.getInt(1);
             }
-
+            
             if (idInvoice == 0) {
                 idInvoice = 1;
             }
-
+            
             jLabel2.setText(Integer.toString(idInvoice));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     private void clearItemFields(boolean clearStockId) {
-
+        
         if (clearStockId) {
             jTextField1.setText("");
         }
-
+        
         jTextField2.setText("");
         jTextField3.setText("");
-
+        
         jLabel3.setText("");
         jLabel5.setText("");
         jLabel10.setText("");
         jLabel23.setText("");
         jLabel7.setText("");
+    }
+    
+    private void calculateTotalPrice() {
+        String qty = jTextField2.getText();
+        String unitPrice = jLabel10.getText();
+        
+        jLabel7.setForeground(Color.black);
+        if (!qty.isEmpty() && !unitPrice.isEmpty()) {
+            
+            Double q = Double.parseDouble(qty);
+            Double u = Double.parseDouble(unitPrice);
+            
+            double total = q * u;
+            
+            String discount = jTextField3.getText();
+            
+            if (!discount.isEmpty()) {
+                double d = Double.parseDouble(discount);
+                
+                total = total - d;
+            }
+            
+            if (total < 0) {
+                jLabel7.setForeground(Color.red);
+            }
+            
+            jLabel7.setText(Double.toString(total));
+        } else {
+            jLabel7.setText("");
+        }
+    }
+    
+    private void calculateNetTotal() {
+        
+        if (jTable1.getRowCount() > 0) {
+            int rowCount = jTable1.getRowCount();
+            
+            double netTotal = 0;
+            for (int i = 0; i < rowCount; i++) {
+                String value = jTable1.getValueAt(i, 8).toString();
+                double totalPrice = Double.parseDouble(value);
+                
+                netTotal = netTotal + totalPrice;
+            }
+            
+            jLabel13.setText(Double.toString(netTotal));
+        }
     }
 }
