@@ -223,7 +223,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
         side_men5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         side_men5.setForeground(new java.awt.Color(255, 255, 255));
         side_men5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/purchase.png"))); // NOI18N
-        side_men5.setText("Purchase");
+        side_men5.setText("Returns & Removes");
         side_men5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         side_men5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -381,8 +381,6 @@ public class Home extends javax.swing.JFrame implements Runnable {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        viewPanel.setLayer(panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
         viewPanel.setLayout(viewPanelLayout);
         viewPanelLayout.setHorizontalGroup(
@@ -393,6 +391,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
             viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        viewPanel.setLayer(panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);

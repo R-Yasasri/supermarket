@@ -8,17 +8,28 @@ package GUI;
 import database.db;
 import java.awt.Color;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Validator;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author Thilina
  */
 public class Cashier extends javax.swing.JInternalFrame {
-    
+
     private int selectedItemId = 0;
+    private static final String perDelimiter = " per ";
+    private static final String maxDelimiter = " max ";
 
     /**
      * Creates new form Cashier
@@ -57,9 +68,11 @@ public class Cashier extends javax.swing.JInternalFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel25 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
@@ -109,7 +122,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel9.setText("unit price (Rs.)");
 
-        jLabel10.setText("0.00");
+        jLabel10.setText("0.00 per Kg");
 
         jButton1.setText("add to table");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +137,11 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel20.setText("discount");
 
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
@@ -134,11 +152,16 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel22.setText("Item :");
 
-        jLabel23.setText("per Kg");
-
         jLabel4.setText("Item id: ");
 
         jLabel5.setText("1");
+
+        jLabel24.setText("Payment Method");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cash", "Cheque", "Credit Card" }));
+
+        jLabel25.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel25.setText("Max: 10");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -146,7 +169,7 @@ public class Cashier extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -154,46 +177,49 @@ public class Cashier extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(120, 120, 120)
-                                .addComponent(jLabel22))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addGap(39, 39, 39))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel23)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75)
+                                .addComponent(jLabel24)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 8, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -203,14 +229,18 @@ public class Cashier extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel22)
+                        .addComponent(jLabel24)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -223,7 +253,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                     .addComponent(jLabel20)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
-                    .addComponent(jLabel23))
+                    .addComponent(jLabel25))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -257,7 +287,7 @@ public class Cashier extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
         );
 
@@ -272,21 +302,33 @@ public class Cashier extends javax.swing.JInternalFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jLabel12.setText("net total");
+        jLabel12.setText("net total Rs");
 
-        jLabel13.setText("Rs. 0.00");
+        jLabel13.setText("0.00");
 
         jLabel14.setText("discount");
 
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
+
         jLabel15.setText("payment");
 
-        jLabel16.setText("balance");
+        jLabel16.setText("balance Rs. ");
 
         jLabel17.setText("Rs.");
 
         jLabel18.setText("Rs.");
 
-        jLabel19.setText("Rs. 0.00");
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField5KeyReleased(evt);
+            }
+        });
+
+        jLabel19.setText("0.00");
 
         jButton2.setText("clear table");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -310,6 +352,11 @@ public class Cashier extends javax.swing.JInternalFrame {
         });
 
         jButton5.setText("sell");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -321,7 +368,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18)
@@ -379,24 +426,29 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         String stockId = jTextField1.getText();
-        
+
         jTextField1.setForeground(Color.black);
         if (stockId.isEmpty()) {
             clearItemFields(true);
         } else {
-            
+
             try {
                 ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i INNER JOIN grnitem g ON s.item_iditem=i.iditem AND g.idgrnitem=s.grnitem_idgrnitem WHERE s.qty>0 AND s.`status`=1 AND idstock='" + stockId + "'");
-                
+
+                String text = null;
                 if (search.next()) {
-                    
+
                     String name = search.getString("brand") + " " + search.getString("name");
-                    
+
                     jLabel3.setText(name);
                     jLabel5.setText(search.getString("iditem"));
-                    jLabel10.setText(search.getString("selling_price"));
-                    jLabel23.setText("per " + search.getString("unit"));
-                    
+
+                    text = search.getString("selling_price") + perDelimiter + search.getString("unit");
+
+                    jLabel10.setText(text);
+
+                    jLabel25.setText(maxDelimiter + search.getString("qty"));
+
                     calculateTotalPrice();
                 } else {
                     clearItemFields(false);
@@ -410,20 +462,29 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selectedRow = jTable1.getSelectedRow();
-        
+
         if (selectedRow != -1) {
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-            
+
             dtm.removeRow(selectedRow);
-            
-            calculateNetTotal();
+
+            if (jTable1.getRowCount() == 0) {
+                clearMonetaryFields();
+            } else {
+
+                calculateNetTotal();
+                calculateBalance();
+
+            }
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
-        jLabel13.setText("0.00");
+        clearMonetaryFields();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -431,7 +492,45 @@ public class Cashier extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
-        calculateTotalPrice();
+        String maxText = jLabel25.getText();
+
+        String q = jTextField2.getText();
+
+        jTextField2.setForeground(Color.black);
+
+        if (q.isEmpty()) {
+            // nothing to do
+            return;
+        }
+
+        if (maxText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a stock id, first", "ERROR", JOptionPane.WARNING_MESSAGE);
+            jTextField2.setText(null);
+            jTextField2.setForeground(Color.red);
+        } else {
+
+            String m = maxText.split(maxDelimiter)[1];
+
+            Double maxQty = Double.parseDouble(m);
+
+            if (Validator.isValidNumber(q)) {
+
+                Double qty = Double.parseDouble(q);
+                if (qty <= maxQty) {
+                    calculateTotalPrice();
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Maximum qty is exceeded", "ERROR", JOptionPane.WARNING_MESSAGE);
+                    jTextField2.setForeground(Color.red);
+                    jTextField2.setText(null);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Please enter a valid number", "ERROR", JOptionPane.WARNING_MESSAGE);
+                jTextField2.setForeground(Color.red);
+                jTextField2.setText(null);
+            }
+        }
     }//GEN-LAST:event_jTextField2KeyReleased
 
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
@@ -441,32 +540,32 @@ public class Cashier extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String tPrice = jLabel7.getText();
         String name = jLabel3.getText();
-        
+
         if (!tPrice.isEmpty()) {
-            
+
             if (Double.parseDouble(tPrice) < 0 || name.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Invalid data", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                
+
                 Vector v = new Vector();
                 String sId = jTextField1.getText();
                 String iId = jLabel5.getText();
                 String iName = jLabel3.getText();
                 String qty = jTextField2.getText();
-                String u = jLabel23.getText();
-                String uPrice = jLabel10.getText();
+
+                String uPriceAndQty = jLabel10.getText();
+
+                String uPrice = uPriceAndQty.split(perDelimiter)[0];
+                String unit = uPriceAndQty.split(perDelimiter)[1];
+
                 String discount = jTextField3.getText();
-                
+
                 if (discount.isEmpty()) {
                     discount = "0";
                 }
-                
-                String[] split = u.split("per ");//because the String is prefixed with "per". ex: per Kg, per unit ..etc
 
-                String unit = split[1];
-                
                 double nPrice = Double.parseDouble(qty) * Double.parseDouble(uPrice);
-                
+
                 v.add(sId);
                 v.add(iId);
                 v.add(iName);
@@ -476,19 +575,169 @@ public class Cashier extends javax.swing.JInternalFrame {
                 v.add(nPrice);
                 v.add(discount);
                 v.add(tPrice);
-                
+
                 DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                 dtm.addRow(v);
-                
+
                 clearItemFields(true);
-                
+
                 calculateNetTotal();
+                calculateBalance();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Please provide a valid qty", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please provide valid data", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
+        String payment = jTextField5.getText();
+
+        if (Validator.isValidNumber(payment)) {
+            jTextField5.setForeground(Color.red);
+            calculateBalance();
+        } else {
+
+            jTextField5.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextField5KeyReleased
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        String netTotal = jLabel13.getText();
+        String discount = jTextField4.getText();
+
+        jTextField4.setForeground(Color.black);
+        if (discount.isEmpty()) {
+
+            calculateBalance();
+
+        } else {
+            try {
+                double dis = Double.parseDouble(discount);
+                double net = Double.parseDouble(netTotal);
+
+                if (dis < net) {
+                    calculateBalance();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Discount could not exceeds the net total", "Warning", JOptionPane.WARNING_MESSAGE);
+                    evt.consume();
+                    jTextField4.setText("");
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                jTextField4.setForeground(Color.red);
+            }
+        }
+
+    }//GEN-LAST:event_jTextField4KeyReleased
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String balance = jLabel19.getText();
+
+        if (jTable1.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Empty table", "WARNING", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (balance.equals("0.00") || (jLabel19.getForeground() == Color.red) || (Double.parseDouble(balance) < 0)) {
+            JOptionPane.showMessageDialog(this, "Invalid balance", "WARNING", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // for later use in invoice generation        
+        String netTotal=jLabel13.getText();// becuase the clearMonetaryFields method is called before generating the invoice and it removes the netTotal value
+        
+        // save the data
+        try {
+            String payment_method = jComboBox1.getSelectedItem().toString();
+
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String today = sdf.format(date);
+
+            String discount = jTextField4.getText();
+
+            if (discount.isEmpty()) {
+                discount = "0.00";
+            }
+            String payment = jTextField5.getText();
+
+            db.iud("INSERT INTO invoice (datetime,payment_method,status,discount,payment) VALUES('" + today + "','" + payment_method + "','" + 1 + "','" + discount + "','"+payment+"')");
+            ResultSet search = db.search("SELECT MAX(idinvoice) FROM invoice");
+
+            int invoiceId = 1;
+            if (search.next()) {
+                invoiceId = search.getInt(1);
+            }
+
+            // save invoice items and reduce the stock
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+
+                String stockId = jTable1.getValueAt(i, 0).toString();
+                String itemId = jTable1.getValueAt(i, 1).toString();
+                String item = jTable1.getValueAt(i, 2).toString();
+                String qty = jTable1.getValueAt(i, 3).toString();
+                String unit = jTable1.getValueAt(i, 4).toString();
+                String unitPrice = jTable1.getValueAt(i, 5).toString();
+                String netPrice = jTable1.getValueAt(i, 6).toString();
+                String dis = jTable1.getValueAt(i, 7).toString();
+                // deduct the stock
+                ResultSet stockSearch = db.search("SELECT qty FROM stock WHERE idstock='" + stockId + "'");
+
+                if (stockSearch.next()) {
+
+                    double stockQty = stockSearch.getDouble(1);
+                    double soldQty = Double.parseDouble(qty);
+
+                    double newStockQty = stockQty - soldQty;// already validated that the newStockQty is a positive number
+
+                    db.iud("UPDATE stock SET qty='" + newStockQty + "' WHERE idstock='" + stockId + "'");
+
+                }
+
+                // save invoice items
+                db.iud("INSERT INTO invoiceitem (item_iditem,invoice_idinvoice,qty,unit_price,unit,discount,status,stock_idstock) VALUES ('" + itemId + "','" + invoiceId + "','" + qty + "','" + unitPrice + "','" + unit + "','" + dis + "','" + 1 + "','"+stockId+"')");
+            }
+
+            JOptionPane.showMessageDialog(this, "Data saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            clearMonetaryFields();
+            // clear the table
+            DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+            dtm.setRowCount(0);
+            
+            // generate invoice
+            
+            try {
+
+                String invId=Integer.toString(invoiceId);
+                
+                Map<String, Object> m = new HashMap();
+                m.put("invId", invId);
+                m.put("net_total", netTotal);
+
+                String context = getClass().getResource("../reports/invoice.jasper").toString();
+                context = context.replace("%20", " ");
+                context = context.replace("file:/", "");
+
+                JasperPrint fillReport = JasperFillManager.fillReport(context, m, db.getConnection());
+                JasperViewer.viewReport(fillReport, false);
+                JasperPrintManager.printReport(fillReport, true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An Error Occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -497,6 +746,7 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -512,7 +762,8 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -535,84 +786,127 @@ public class Cashier extends javax.swing.JInternalFrame {
     public void init() {
         try {
             ResultSet search = db.search("SELECT MAX(idinvoice) FROM invoice");
-            
+
             int idInvoice = 0;
             if (search.next()) {
-                
+
                 idInvoice = search.getInt(1);
             }
-            
+
             if (idInvoice == 0) {
                 idInvoice = 1;
             }
-            
+
             jLabel2.setText(Integer.toString(idInvoice));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     private void clearItemFields(boolean clearStockId) {
-        
+
         if (clearStockId) {
             jTextField1.setText("");
         }
-        
+
         jTextField2.setText("");
         jTextField3.setText("");
-        
+
         jLabel3.setText("");
         jLabel5.setText("");
         jLabel10.setText("");
-        jLabel23.setText("");
         jLabel7.setText("");
+        jLabel25.setText("");
     }
-    
+
     private void calculateTotalPrice() {
         String qty = jTextField2.getText();
-        String unitPrice = jLabel10.getText();
-        
+        String unitPrice = jLabel10.getText().split(perDelimiter)[0];
+
         jLabel7.setForeground(Color.black);
         if (!qty.isEmpty() && !unitPrice.isEmpty()) {
-            
+
             Double q = Double.parseDouble(qty);
             Double u = Double.parseDouble(unitPrice);
-            
+
             double total = q * u;
-            
+
             String discount = jTextField3.getText();
-            
+
             if (!discount.isEmpty()) {
                 double d = Double.parseDouble(discount);
-                
+
                 total = total - d;
             }
-            
+
             if (total < 0) {
                 jLabel7.setForeground(Color.red);
             }
-            
+
             jLabel7.setText(Double.toString(total));
         } else {
             jLabel7.setText("");
         }
     }
-    
+
     private void calculateNetTotal() {
-        
+
         if (jTable1.getRowCount() > 0) {
             int rowCount = jTable1.getRowCount();
-            
+
             double netTotal = 0;
             for (int i = 0; i < rowCount; i++) {
                 String value = jTable1.getValueAt(i, 8).toString();
                 double totalPrice = Double.parseDouble(value);
-                
+
                 netTotal = netTotal + totalPrice;
             }
-            
+
             jLabel13.setText(Double.toString(netTotal));
+            calculateBalance();
         }
+    }
+
+    private void calculateBalance() {
+        String payment = jTextField5.getText();
+        String discount = jTextField4.getText();
+        String netTotal = jLabel13.getText();
+
+        jTextField4.setForeground(Color.black);
+        jTextField5.setForeground(Color.black);
+        jLabel19.setForeground(Color.black);
+
+        if (!netTotal.isEmpty() && !payment.isEmpty()) {
+
+            double balance = 0;
+
+            double pay = Double.parseDouble(payment);
+            double net = Double.parseDouble(netTotal);
+
+            if (discount.isEmpty()) {
+                balance = pay - net;
+            } else {
+
+                double dis = Double.parseDouble(discount);
+                balance = pay - (net - dis);
+            }
+
+            jLabel19.setText(Double.toString(balance));
+
+            if (balance < 0) {
+                jLabel19.setForeground(Color.red);
+            }
+        } else {
+
+            jLabel19.setText("0.00");
+        }
+    }
+
+    private void clearMonetaryFields() {
+
+        jLabel13.setText("0.00");
+        jTextField4.setText("");
+        jTextField5.setText("");
     }
 }

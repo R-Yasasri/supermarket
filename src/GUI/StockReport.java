@@ -54,6 +54,7 @@ public class StockReport extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jTextField2 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -73,11 +74,11 @@ public class StockReport extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Item id", "category", "brand", "item name", "qty", "selling price", "total price", "expire date"
+                "Stock id", "Item id", "category", "brand", "item name", "qty", "selling price", "total price", "expire date", "status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -85,6 +86,9 @@ public class StockReport extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "search"));
 
@@ -144,6 +148,8 @@ public class StockReport extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jLabel2.setText("*crs= customer returned stock");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,7 +159,8 @@ public class StockReport extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -165,7 +172,9 @@ public class StockReport extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(67, 67, 67))
         );
 
@@ -219,6 +228,7 @@ public class StockReport extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -230,7 +240,7 @@ public class StockReport extends javax.swing.JInternalFrame {
     public void loadAll() {
 
         try {
-            ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.status=1");
+            ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.qty>0");
 
             loadTable(search);
 
@@ -255,6 +265,7 @@ public class StockReport extends javax.swing.JInternalFrame {
 
                 double total = qty * selling_price;
 
+                v.add(search.getString("idstock"));
                 v.add(search.getString("iditem"));
                 v.add(search.getString("category"));
                 v.add(search.getString("brand"));
@@ -263,7 +274,13 @@ public class StockReport extends javax.swing.JInternalFrame {
                 v.add(Double.toString(selling_price));
                 v.add(Double.toString(total));
                 v.add(search.getString("expiredate"));
-
+                
+                int status = search.getInt("status");
+                if (status==1) {
+                    v.add("active");
+                }else{
+                    v.add("crs");
+                }
                 dtm.addRow(v);
             }
         } catch (Exception e) {
@@ -290,7 +307,7 @@ public class StockReport extends javax.swing.JInternalFrame {
                     int month = calendar.get(Calendar.MONTH) + 1;
                     String expireDate = calendar.get(Calendar.YEAR) + "-" + month + "-" + calendar.get(Calendar.DATE);
 
-                    String query = "SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.status=1 AND s.expiredate='" + expireDate + "'";
+                    String query = "SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.expiredate='" + expireDate + "' AND s.qty>0";
                     search = db.search(query);
 
                 }
@@ -299,19 +316,19 @@ public class StockReport extends javax.swing.JInternalFrame {
                 String text = jTextField2.getText();
 
                 if (text.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Empty text field", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Empty search field", "ERROR", JOptionPane.ERROR_MESSAGE);
                 } else {
 
                     if (selectedIndex == ID_SEARCH) {
 
-                        search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.status=1 AND iditem='" + text + "'");
+                        search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE iditem = '" + text + "' AND s.qty>0 ");
 
                     } else if (selectedIndex == CATEGORY_SEARCH) {
-                        search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.status=1 AND category='" + text + "'");
+                        search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE category LIKE '%" + text + "%' AND s.qty>0 ");
                     } else if (selectedIndex == BRAND_SEARCH) {
-                        search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.status=1 AND brand='" + text + "'");
+                        search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE brand LIKE '%" + text + "%' AND s.qty>0 ");
                     } else {
-                        search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.status=1 AND name='" + text + "'");
+                        search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE name LIKE '%" + text + "%' AND s.qty>0 ");
                     }
 
                 }

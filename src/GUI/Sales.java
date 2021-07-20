@@ -33,6 +33,8 @@ public class Sales extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        btn3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,17 +122,60 @@ public class Sales extends javax.swing.JFrame {
         btn2Layout.setHorizontalGroup(
             btn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn2Layout.createSequentialGroup()
-                .addGap(0, 23, Short.MAX_VALUE)
+                .addGap(0, 27, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         btn2Layout.setVerticalGroup(
             btn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btn2Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         mainPanel.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 204, -1, -1));
+
+        btn3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn3.setOpaque(false);
+        btn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn3MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn3MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn3MouseReleased(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/List.png"))); // NOI18N
+        jLabel4.setText("View Invoice");
+
+        javax.swing.GroupLayout btn3Layout = new javax.swing.GroupLayout(btn3);
+        btn3.setLayout(btn3Layout);
+        btn3Layout.setHorizontalGroup(
+            btn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn3Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn3Layout.setVerticalGroup(
+            btn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn3Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 291, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,10 +238,34 @@ public class Sales extends javax.swing.JFrame {
     }//GEN-LAST:event_btn2MouseReleased
 
     private void btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn2MouseClicked
-       InvoiceList in= new InvoiceList();
-       Home.viewPanel.add(in);
-       in.show();
+        InvoiceList il = new InvoiceList();
+        Home.viewPanel.add(il);
+        il.show();
     }//GEN-LAST:event_btn2MouseClicked
+
+    private void btn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseClicked
+        ViewInvoice in = new ViewInvoice();
+        Home.viewPanel.add(in);
+        in.show();
+    }//GEN-LAST:event_btn3MouseClicked
+
+    private void btn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseEntered
+        btn3.setOpaque(true);
+        btn3.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn3MouseEntered
+
+    private void btn3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseExited
+        btn3.setOpaque(false);
+        btn3.setBackground(null);
+    }//GEN-LAST:event_btn3MouseExited
+
+    private void btn3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MousePressed
+        btn3.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn3MousePressed
+
+    private void btn3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseReleased
+        btn3.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn3MouseReleased
 
     /**
      * @param args the command line arguments
@@ -239,9 +308,11 @@ public class Sales extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn1;
     private javax.swing.JPanel btn2;
+    private javax.swing.JPanel btn3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     public keeptoo.KGradientPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,8 +19,8 @@ public class db {
 
     private static void setUpConnection() throws Exception {
 
-        Class.forName("com.mysql.jdbc.Driver");
-       c = DriverManager.getConnection("jdbc:mysql://localhost:3307/coopcity_homagama", "root", "123");
+        Class.forName("com.mysql.cj.jdbc.Driver");
+       c = DriverManager.getConnection("jdbc:mysql://localhost:3305/coopcity_homagama", "root", "rajitha123");
     }
 
     public static void iud(String query) throws Exception {

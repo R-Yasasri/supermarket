@@ -755,7 +755,7 @@ public class GRN extends javax.swing.JInternalFrame {
             jTextField7.setForeground(Color.black);
             calculateBalance();
         } else {
-            jTextField7.setForeground(Color.black);
+            jTextField7.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextField7KeyReleased
 
