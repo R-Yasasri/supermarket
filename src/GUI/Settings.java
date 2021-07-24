@@ -71,8 +71,8 @@ public class Settings extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png"))); // NOI18N
-        jLabel2.setText("Users");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userSettings.png"))); // NOI18N
+        jLabel2.setText("User Details");
 
         javax.swing.GroupLayout btn1Layout = new javax.swing.GroupLayout(btn1);
         btn1.setLayout(btn1Layout);
@@ -115,7 +115,7 @@ public class Settings extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userSettings.png"))); // NOI18N
-        jLabel3.setText("User Settings");
+        jLabel3.setText("Shop Details");
 
         javax.swing.GroupLayout btn2Layout = new javax.swing.GroupLayout(btn2);
         btn2.setLayout(btn2Layout);
@@ -195,9 +195,9 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_btn2MouseReleased
 
     private void btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn2MouseClicked
-       UserSettings us = new UserSettings();
-       Home.viewPanel.add(us);
-       us.show();
+       Shop s = new Shop();
+       Home.viewPanel.add(s);
+       s.show();
     }//GEN-LAST:event_btn2MouseClicked
 
     /**

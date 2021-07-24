@@ -46,6 +46,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        side_men7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new keeptoo.KGradientPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,12 +61,30 @@ public class Home extends javax.swing.JFrame implements Runnable {
         side_men3 = new javax.swing.JLabel();
         side_men5 = new javax.swing.JLabel();
         side_men6 = new javax.swing.JLabel();
-        side_men7 = new javax.swing.JLabel();
         side_men8 = new javax.swing.JLabel();
         side_men9 = new javax.swing.JLabel();
         side_men10 = new javax.swing.JLabel();
+        side_men11 = new javax.swing.JLabel();
         viewPanel = new javax.swing.JDesktopPane();
         panel = new javax.swing.JPanel();
+
+        side_men7.setBackground(new java.awt.Color(0, 0, 0));
+        side_men7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        side_men7.setForeground(new java.awt.Color(255, 255, 255));
+        side_men7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/accounting.png"))); // NOI18N
+        side_men7.setText("Advanced Accounting");
+        side_men7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        side_men7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                side_men7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                side_men7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                side_men7MouseExited(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard");
@@ -255,24 +274,6 @@ public class Home extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        side_men7.setBackground(new java.awt.Color(0, 0, 0));
-        side_men7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        side_men7.setForeground(new java.awt.Color(255, 255, 255));
-        side_men7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/accounting.png"))); // NOI18N
-        side_men7.setText("Advanced Accounting");
-        side_men7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        side_men7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                side_men7MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                side_men7MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                side_men7MouseExited(evt);
-            }
-        });
-
         side_men8.setBackground(new java.awt.Color(0, 0, 0));
         side_men8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         side_men8.setForeground(new java.awt.Color(255, 255, 255));
@@ -328,6 +329,24 @@ public class Home extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        side_men11.setBackground(new java.awt.Color(0, 0, 0));
+        side_men11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        side_men11.setForeground(new java.awt.Color(255, 255, 255));
+        side_men11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png"))); // NOI18N
+        side_men11.setText("Employee");
+        side_men11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        side_men11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                side_men11MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                side_men11MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                side_men11MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
@@ -340,34 +359,34 @@ public class Home extends javax.swing.JFrame implements Runnable {
                     .addComponent(side_men5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(side_men6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(side_men1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(side_men7, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                     .addComponent(side_men8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(side_men9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(side_men10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(side_men10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(side_men11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(side_men10, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(side_men10, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(side_men1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(side_men1, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(side_men3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(side_men4, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addComponent(side_men4, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(side_men5, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(side_men5, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(side_men6, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(side_men11, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(side_men7, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(side_men6, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(side_men8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(side_men9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(95, 95, 95))
+                .addGap(77, 77, 77))
         );
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
@@ -676,6 +695,28 @@ public class Home extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_min_btn2MouseClicked
 
+    private void side_men11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side_men11MouseClicked
+        if (evt.getButton() == LEFT_MOUSE_BTN) {
+            panel.removeAll();
+            p = new Employee().mainPanel;
+
+            p.setSize(panel.getSize());
+
+            panel.add(p);
+            panel.repaint();
+        }
+    }//GEN-LAST:event_side_men11MouseClicked
+
+    private void side_men11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side_men11MouseEntered
+        side_men11.setOpaque(true);
+        side_men11.setBackground(new java.awt.Color(0, 168, 255));
+    }//GEN-LAST:event_side_men11MouseEntered
+
+    private void side_men11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side_men11MouseExited
+        side_men11.setOpaque(false);
+        side_men11.setBackground(null);
+    }//GEN-LAST:event_side_men11MouseExited
+
     public static void main(String args[]) {
 
         try {
@@ -717,6 +758,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
     public static javax.swing.JPanel panel;
     private javax.swing.JLabel side_men1;
     private javax.swing.JLabel side_men10;
+    private javax.swing.JLabel side_men11;
     private javax.swing.JLabel side_men3;
     private javax.swing.JLabel side_men4;
     private javax.swing.JLabel side_men5;
@@ -753,7 +795,6 @@ public class Home extends javax.swing.JFrame implements Runnable {
 
     private void icon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Cooperative-logo (1).gif")));
-        
-       
+
     }
 }

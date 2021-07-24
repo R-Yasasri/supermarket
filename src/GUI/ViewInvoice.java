@@ -79,6 +79,12 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Invoice ID");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jButton3.setText("Search");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,9 +286,9 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String invoiceId = jTextField1.getText();
         String netTotal = jLabel9.getText();
-        
+
         if (!invoiceId.isEmpty()) {
-            
+
             try {
 
                 Map<String, Object> m = new HashMap();
@@ -299,9 +305,14 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        String grnId = jTextField1.getText();
+        search(grnId);
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

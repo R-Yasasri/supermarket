@@ -39,6 +39,12 @@ public class Expenses extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btn4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        btn5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        btn6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btn7 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,7 +81,8 @@ public class Expenses extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/GRN.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/expenses.png"))); // NOI18N
+        jLabel2.setText("Add Pretty Cash");
 
         javax.swing.GroupLayout btn1Layout = new javax.swing.GroupLayout(btn1);
         btn1.setLayout(btn1Layout);
@@ -117,7 +124,8 @@ public class Expenses extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/good return.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/expenses.png"))); // NOI18N
+        jLabel3.setText("Petty cash book");
 
         javax.swing.GroupLayout btn2Layout = new javax.swing.GroupLayout(btn2);
         btn2.setLayout(btn2Layout);
@@ -159,7 +167,8 @@ public class Expenses extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/item.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/expenses.png"))); // NOI18N
+        jLabel4.setText("View Furniture");
 
         javax.swing.GroupLayout btn3Layout = new javax.swing.GroupLayout(btn3);
         btn3.setLayout(btn3Layout);
@@ -182,6 +191,9 @@ public class Expenses extends javax.swing.JFrame {
         btn4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn4.setOpaque(false);
         btn4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn4MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btn4MouseEntered(evt);
             }
@@ -198,7 +210,8 @@ public class Expenses extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/reports.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/expenses.png"))); // NOI18N
+        jLabel5.setText("Add furniture details");
 
         javax.swing.GroupLayout btn4Layout = new javax.swing.GroupLayout(btn4);
         btn4.setLayout(btn4Layout);
@@ -217,6 +230,135 @@ public class Expenses extends javax.swing.JFrame {
 
         mainPanel.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
 
+        btn5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn5.setOpaque(false);
+        btn5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn5MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn5MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn5MouseReleased(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/expenses.png"))); // NOI18N
+        jLabel6.setText("Edit furniture details");
+
+        javax.swing.GroupLayout btn5Layout = new javax.swing.GroupLayout(btn5);
+        btn5.setLayout(btn5Layout);
+        btn5Layout.setHorizontalGroup(
+            btn5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn5Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn5Layout.setVerticalGroup(
+            btn5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn5Layout.createSequentialGroup()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, -1, -1));
+
+        btn6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn6.setOpaque(false);
+        btn6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn6MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn6MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn6MouseReleased(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/expenses.png"))); // NOI18N
+        jLabel7.setText("Add a bill");
+
+        javax.swing.GroupLayout btn6Layout = new javax.swing.GroupLayout(btn6);
+        btn6.setLayout(btn6Layout);
+        btn6Layout.setHorizontalGroup(
+            btn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn6Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn6Layout.setVerticalGroup(
+            btn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn6Layout.createSequentialGroup()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 117, -1, -1));
+
+        btn7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn7.setOpaque(false);
+        btn7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn7MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn7MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn7MouseReleased(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/expenses.png"))); // NOI18N
+        jLabel8.setText("View bills");
+
+        javax.swing.GroupLayout btn7Layout = new javax.swing.GroupLayout(btn7);
+        btn7.setLayout(btn7Layout);
+        btn7Layout.setHorizontalGroup(
+            btn7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn7Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn7Layout.setVerticalGroup(
+            btn7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn7Layout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 204, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,11 +374,9 @@ public class Expenses extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn1MouseClicked
-        GRN grn=new GRN();
-        Home.viewPanel.add(grn);
-        grn.show();
-
-
+        AddAPettyCash cash = new AddAPettyCash();
+        Home.viewPanel.add(cash);
+        cash.show();
     }//GEN-LAST:event_btn1MouseClicked
 
     private void btn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn1MouseEntered
@@ -314,20 +454,102 @@ public class Expenses extends javax.swing.JFrame {
     }//GEN-LAST:event_btn3MouseReleased
 
     private void btn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseClicked
-        Items item= new Items();
-        Home.viewPanel.add(item);
-        item.show();
+        ViewFurniture v = new ViewFurniture();
+        Home.viewPanel.add(v);
+        v.show();
     }//GEN-LAST:event_btn3MouseClicked
 
     private void btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn2MouseClicked
-       
+
+        PettyCashBook cBook = new PettyCashBook();
+        Home.viewPanel.add(cBook);
+        cBook.show();
+
     }//GEN-LAST:event_btn2MouseClicked
+
+    private void btn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseClicked
+        AddFurniture af = new AddFurniture();
+        Home.viewPanel.add(af);
+        af.show();
+    }//GEN-LAST:event_btn4MouseClicked
+
+    private void btn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseClicked
+        EditFurniture ef = new EditFurniture();
+        Home.viewPanel.add(ef);
+        ef.show();
+    }//GEN-LAST:event_btn5MouseClicked
+
+    private void btn5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseEntered
+        btn5.setOpaque(true);
+        btn5.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn5MouseEntered
+
+    private void btn5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseExited
+        btn5.setOpaque(false);
+        btn5.setBackground(null);
+    }//GEN-LAST:event_btn5MouseExited
+
+    private void btn5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MousePressed
+        btn5.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn5MousePressed
+
+    private void btn5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseReleased
+        btn5.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn5MouseReleased
+
+    private void btn6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseClicked
+        AddABill a = new AddABill();
+        Home.viewPanel.add(a);
+        a.show();
+    }//GEN-LAST:event_btn6MouseClicked
+
+    private void btn6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseEntered
+        btn6.setOpaque(true);
+        btn6.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn6MouseEntered
+
+    private void btn6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseExited
+        btn6.setOpaque(false);
+        btn6.setBackground(null);
+    }//GEN-LAST:event_btn6MouseExited
+
+    private void btn6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MousePressed
+        btn6.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn6MousePressed
+
+    private void btn6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseReleased
+        btn6.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn6MouseReleased
+
+    private void btn7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseClicked
+        ViewBills v = new ViewBills();
+        Home.viewPanel.add(v);
+        v.show();
+    }//GEN-LAST:event_btn7MouseClicked
+
+    private void btn7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseEntered
+        btn7.setOpaque(true);
+        btn7.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn7MouseEntered
+
+    private void btn7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseExited
+        btn7.setOpaque(false);
+        btn7.setBackground(null);
+    }//GEN-LAST:event_btn7MouseExited
+
+    private void btn7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MousePressed
+        btn7.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn7MousePressed
+
+    private void btn7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseReleased
+        btn7.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn7MouseReleased
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-     
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -367,11 +589,17 @@ public class Expenses extends javax.swing.JFrame {
     private javax.swing.JPanel btn2;
     private javax.swing.JPanel btn3;
     private javax.swing.JPanel btn4;
+    private javax.swing.JPanel btn5;
+    private javax.swing.JPanel btn6;
+    private javax.swing.JPanel btn7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     public keeptoo.KGradientPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

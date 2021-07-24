@@ -41,6 +41,10 @@ public class Purchase extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btn3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        btn4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        btn7 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -269,6 +273,92 @@ public class Purchase extends javax.swing.JFrame {
 
         mainPanel.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 117, -1, -1));
 
+        btn4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn4.setOpaque(false);
+        btn4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn4MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn4MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn4MouseReleased(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/List.png"))); // NOI18N
+        jLabel5.setText("View removed stocks");
+
+        javax.swing.GroupLayout btn4Layout = new javax.swing.GroupLayout(btn4);
+        btn4.setLayout(btn4Layout);
+        btn4Layout.setHorizontalGroup(
+            btn4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn4Layout.createSequentialGroup()
+                .addGap(0, 31, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn4Layout.setVerticalGroup(
+            btn4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn4Layout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 204, -1, -1));
+
+        btn7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn7.setOpaque(false);
+        btn7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn7MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn7MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn7MouseReleased(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/List.png"))); // NOI18N
+        jLabel8.setText("View isolated stocks");
+
+        javax.swing.GroupLayout btn7Layout = new javax.swing.GroupLayout(btn7);
+        btn7.setLayout(btn7Layout);
+        btn7Layout.setHorizontalGroup(
+            btn7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn7Layout.createSequentialGroup()
+                .addGap(0, 27, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn7Layout.setVerticalGroup(
+            btn7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn7Layout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 13, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 291, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -379,7 +469,7 @@ public class Purchase extends javax.swing.JFrame {
     }//GEN-LAST:event_btn6MouseExited
 
     private void btn6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MousePressed
-        // TODO add your handling code here:
+        btn6.setBackground(new java.awt.Color(47, 53, 66));
     }//GEN-LAST:event_btn6MousePressed
 
     private void btn6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseReleased
@@ -387,24 +477,76 @@ public class Purchase extends javax.swing.JFrame {
     }//GEN-LAST:event_btn6MouseReleased
 
     private void btn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseClicked
-        // TODO add your handling code here:
+        RemoveStock rs = new RemoveStock();
+        Home.viewPanel.add(rs);
+        rs.show();
     }//GEN-LAST:event_btn3MouseClicked
 
     private void btn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseEntered
-        // TODO add your handling code here:
+        btn3.setOpaque(true);
+        btn3.setBackground(new java.awt.Color(30, 39, 46));
     }//GEN-LAST:event_btn3MouseEntered
 
     private void btn3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseExited
-        // TODO add your handling code here:
+        btn3.setOpaque(false);
+        btn3.setBackground(null);
     }//GEN-LAST:event_btn3MouseExited
 
     private void btn3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MousePressed
-        // TODO add your handling code here:
+        btn3.setBackground(new java.awt.Color(47, 53, 66));
     }//GEN-LAST:event_btn3MousePressed
 
     private void btn3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseReleased
-        // TODO add your handling code here:
+        btn3.setBackground(new java.awt.Color(30, 39, 46));
     }//GEN-LAST:event_btn3MouseReleased
+
+    private void btn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseClicked
+        ViewRemovedStocks vrs = new ViewRemovedStocks();
+        Home.viewPanel.add(vrs);
+        vrs.show();
+    }//GEN-LAST:event_btn4MouseClicked
+
+    private void btn4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseEntered
+        btn4.setOpaque(true);
+        btn4.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn4MouseEntered
+
+    private void btn4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseExited
+        btn4.setOpaque(false);
+        btn4.setBackground(null);
+    }//GEN-LAST:event_btn4MouseExited
+
+    private void btn4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MousePressed
+        btn4.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn4MousePressed
+
+    private void btn4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseReleased
+        btn4.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn4MouseReleased
+
+    private void btn7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseClicked
+        ViewIsolatedStocks vis = new ViewIsolatedStocks();
+        Home.viewPanel.add(vis);
+        vis.show();
+    }//GEN-LAST:event_btn7MouseClicked
+
+    private void btn7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseEntered
+        btn7.setOpaque(true);
+        btn7.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn7MouseEntered
+
+    private void btn7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseExited
+        btn7.setOpaque(false);
+        btn7.setBackground(null);
+    }//GEN-LAST:event_btn7MouseExited
+
+    private void btn7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MousePressed
+        btn7.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn7MousePressed
+
+    private void btn7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseReleased
+        btn7.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn7MouseReleased
 
     /**
      * @param args the command line arguments
@@ -448,14 +590,18 @@ public class Purchase extends javax.swing.JFrame {
     private javax.swing.JPanel btn1;
     private javax.swing.JPanel btn2;
     private javax.swing.JPanel btn3;
+    private javax.swing.JPanel btn4;
     private javax.swing.JPanel btn5;
     private javax.swing.JPanel btn6;
+    private javax.swing.JPanel btn7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     public keeptoo.KGradientPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

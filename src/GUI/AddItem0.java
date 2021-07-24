@@ -232,6 +232,11 @@ public class AddItem0 extends javax.swing.JInternalFrame {
         });
 
         jButton5.setText("print");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -456,6 +461,14 @@ public class AddItem0 extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            jTable1.print();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -518,10 +531,10 @@ public class AddItem0 extends javax.swing.JInternalFrame {
             jLabel3.setText(text);
 
             ResultSet search1 = db.search("SELECT category,brand FROM item");
-          
+
             Set category = new HashSet();
             Set brand = new HashSet();
-            
+
             while (search1.next()) {
 
                 category.add(search1.getString("category"));
@@ -533,7 +546,7 @@ public class AddItem0 extends javax.swing.JInternalFrame {
             for (int j = 0; j < brand.size(); j++) {
                 jComboBox2.addItem(brand.toArray()[j]);
             }
-            
+
             int itemCount = jComboBox1.getItemCount();
             if (itemCount == 0) {
                 jComboBox1.setEnabled(false);

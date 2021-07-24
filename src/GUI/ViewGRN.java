@@ -74,6 +74,12 @@ public class ViewGRN extends javax.swing.JInternalFrame {
 
         jLabel1.setText("GRN ID");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,6 +326,11 @@ public class ViewGRN extends javax.swing.JInternalFrame {
         search(grnId);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        String grnId = jTextField1.getText();
+        search(grnId);
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -363,7 +374,7 @@ public class ViewGRN extends javax.swing.JInternalFrame {
         dtm.setRowCount(0);
         // search from grn table and supplier table
         try {
-            ResultSet search = db.search("SELECT * FROM supplier s INNER JOIN grn g ON g.supplier_idsupplier=s.idsupplier WHERE g.status=1 AND g.idgrn='"+grnId+"'");
+            ResultSet search = db.search("SELECT * FROM supplier s INNER JOIN grn g ON g.supplier_idsupplier=s.idsupplier WHERE g.status=1 AND g.idgrn='" + grnId + "'");
 
             if (search.next()) {
                 jLabel3.setText(grnId);

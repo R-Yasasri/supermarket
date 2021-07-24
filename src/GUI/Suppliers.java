@@ -73,7 +73,7 @@ public class Suppliers extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/GRN.png"))); // NOI18N
-        jLabel2.setText("New Suplier");
+        jLabel2.setText("New Supplier");
 
         javax.swing.GroupLayout btn1Layout = new javax.swing.GroupLayout(btn1);
         btn1.setLayout(btn1Layout);

@@ -335,14 +335,21 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btn3MouseClicked
 
     private void btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn2MouseClicked
-
+        Cashier c = new Cashier();
+        Home.viewPanel.add(c);
+        try {
+            c.setMaximum(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        c.show();
     }//GEN-LAST:event_btn2MouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

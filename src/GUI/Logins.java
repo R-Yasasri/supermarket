@@ -9,6 +9,7 @@ import database.db;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import model.CustomLogging;
 
 public class Logins extends javax.swing.JFrame {
 
@@ -35,10 +36,8 @@ public class Logins extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,17 +84,6 @@ public class Logins extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, -1, -1));
 
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Remember Me");
-        jCheckBox1.setContentAreaFilled(false);
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 195, -1, -1));
-
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 102, 204));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -113,12 +101,6 @@ public class Logins extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 250, 30));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel5.setText("<html> <a href=#><font color=\"white\"> Forget Password ? </a>"); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 240, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 204));
@@ -144,10 +126,6 @@ public class Logins extends javax.swing.JFrame {
         jButton3ActionPerformed(evt);
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-      
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -165,6 +143,9 @@ public class Logins extends javax.swing.JFrame {
             if (search.next()) {
                 Home m1 = new Home();
                 m1.setVisible(true);
+                
+                CustomLogging.loggingMethod("admin logged in", CustomLogging.INFO);
+                
                 this.dispose();
             } else if (name.equals("superAdmin") && password.equals("20190320")) {
                 Home m1 = new Home();
@@ -219,12 +200,10 @@ public class Logins extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;

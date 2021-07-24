@@ -3,44 +3,41 @@ package GUI;
 import database.db;
 import java.awt.Image;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
-
 public class Users extends javax.swing.JInternalFrame {
+
+    String imgPath = "";
 
     public Users() {
         initComponents();
+        loadAll();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -48,9 +45,7 @@ public class Users extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -58,14 +53,14 @@ public class Users extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel15 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-        setTitle("Users");
+        setTitle("User Details");
+
+        jPasswordField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -74,13 +69,16 @@ public class Users extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Image");
         jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jLabel1.setPreferredSize(new java.awt.Dimension(158, 158));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("NIC number");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("F Name");
+        jLabel3.setText("First Name");
 
         jButton1.setBackground(new java.awt.Color(204, 153, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -88,24 +86,6 @@ public class Users extends javax.swing.JInternalFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(153, 255, 51));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("UPDATE");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setText("DELETE");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -117,19 +97,17 @@ public class Users extends javax.swing.JInternalFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("L Name");
+        jLabel4.setText("Last Name");
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Password");
+        jLabel5.setText("Email");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Email");
+        jLabel7.setText("Password");
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +128,7 @@ public class Users extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setText("Land Phone");
+        jLabel8.setText("Mobile 1");
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +138,7 @@ public class Users extends javax.swing.JInternalFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Hand Phone");
+        jLabel9.setText("Mobile 2");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Address");
@@ -172,29 +150,14 @@ public class Users extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
-            }
-        });
-        jTextField8.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField8KeyReleased(evt);
-            }
-        });
-
         jButton5.setBackground(new java.awt.Color(51, 51, 255));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton5.setText("Open With");
+        jButton5.setText("Browse");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setText("Enter NIC");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Date of Birth");
@@ -222,20 +185,24 @@ public class Users extends javax.swing.JInternalFrame {
         jLabel14.setText("Civil Status");
 
         buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("Married");
+        jRadioButton3.setText("Unmarried");
 
         buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("Unmarried");
+        jRadioButton4.setText("Married");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel15.setText("Search");
+        jCheckBox1.setText("show password");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 69, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -243,9 +210,7 @@ public class Users extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                            .addComponent(jTextField3)))
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -260,67 +225,48 @@ public class Users extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10))
                         .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jRadioButton1)
                                 .addGap(81, 81, 81)
                                 .addComponent(jRadioButton2))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                                .addComponent(jTextField6))
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField5)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jRadioButton3)
                                 .addGap(63, 63, 63)
-                                .addComponent(jRadioButton4)))))
+                                .addComponent(jRadioButton4))
+                            .addComponent(jPasswordField1)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 25, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(50, 50, 50)))))
-                                .addGap(58, 58, 58))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton5)
-                                .addGap(95, 95, 95))))))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jButton5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox1)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -334,53 +280,51 @@ public class Users extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(13, 13, 13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(jLabel13))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jRadioButton3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(jButton5))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addContainerGap(70, Short.MAX_VALUE))))
+                            .addComponent(jRadioButton2)
+                            .addComponent(jRadioButton1)
+                            .addComponent(jLabel13))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButton4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jRadioButton3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -395,233 +339,99 @@ public class Users extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     String NIC =  jTextField1.getText();
-     String Fname = jTextField2.getText();
-     String Lname = jTextField3.getText(); 
-     String Password = jPasswordField1.getText();
-      SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
-        String dob = date.format(jDateChooser1.getDate());
-     String email = jTextField4.getText();
-     String Lphone = jTextField5.getText();
-     String Hphone = jTextField6.getText();
-     String Address = jTextField7.getText();
-     String gender;
-        if (jRadioButton1.isSelected()) {
-            gender = "male";
-            
-        } else {
-            gender = "female";
-        }
-     boolean jr1 = jRadioButton1.isSelected();
-     boolean jr2 = jRadioButton2.isSelected();
-     
-      String civil_status;
-        if (jRadioButton3.isSelected()) {
-          civil_status = "married";
-            
-        } else {
-            civil_status = "unmarried";
-        }
-     boolean jr3 = jRadioButton3.isSelected();
-     boolean jr4 = jRadioButton4.isSelected();
-     
-      String query = "INSERT INTO user (NIC,Fname,Lname,password,dob,email,Lphone,Hphone,Address,gender,civil_status,img) VALUES('"+NIC+"','"+Fname+"','"+Lname+"','"+Password+"','"+dob+"','"+email+"','"+Lphone+"','"+Hphone+"','"+Address+"','"+gender+"','"+civil_status+"','"+dbPAth+"')";
-    if(jTextField1.getText().isEmpty()){
-        // no NIC
-            JOptionPane.showMessageDialog(this, "Please Insert NIC","Error",JOptionPane.ERROR_MESSAGE);
-            jTextField1.grabFocus();
-        }else{
-    
-    }
-     try{
-         database.db.iud(query);
-         JOptionPane.showMessageDialog(null, "indesert success");
-           jTextField1.setText(null);
-           jTextField2.setText(null);
-           jTextField3.setText(null);
-           jPasswordField1.setText(null);
-           if (jDateChooser1.getDate()!= null ) {
-         jDateChooser1.setDate(null);
-    
-}
-      
-           jTextField4.setText(null);
-           jTextField5.setText(null);
-           jTextField6.setText(null);
-           jTextField7.setText(null);
-           
-             
-         buttonGroup1.clearSelection();
-         buttonGroup2.clearSelection();
-         jLabel1.setIcon(null);
-       
-          
-     }catch(Exception e){
-         e.printStackTrace();
-         
-     }
-     
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String nic = jTextField1.getText();
+        String fname = jTextField2.getText();
+        String lname = jTextField3.getText();
+        String password = jPasswordField1.getText();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     String NIC =  jTextField1.getText();
-     String Fname = jTextField2.getText();
-     String Lname = jTextField3.getText();
-     String password = jPasswordField1.getText();
-      SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
-        String dob = date.format(jDateChooser1.getDate());
-     String email = jTextField4.getText();
-     String Lphone = jTextField5.getText();
-     String Hphone = jTextField6.getText();
-     String Address = jTextField7.getText();
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dob = "";
+        if (jDateChooser1.getDate() != null) {
+            dob = date.format(jDateChooser1.getDate());
+
+        }
+
+        String email = jTextField4.getText();
+        String mobile1 = jTextField5.getText();
+        String mobile2 = jTextField6.getText();
+        String address = jTextField7.getText();
+
         String gender;
         if (jRadioButton1.isSelected()) {
-            gender = "male";
-            
+            gender = "Male";
+
         } else {
-            gender = "female";
+            gender = "Female";
         }
-     boolean jr1 = jRadioButton1.isSelected();
-     boolean jr2 = jRadioButton2.isSelected();
-     
-      String civil_status;
+        boolean jr1 = jRadioButton1.isSelected();
+        boolean jr2 = jRadioButton2.isSelected();
+
+        String civil_status;
         if (jRadioButton3.isSelected()) {
-          civil_status = "married";
-            
+            civil_status = "Married";
+
         } else {
-            civil_status = "unmarried";
+            civil_status = "Unmarried";
         }
-     boolean jr3 = jRadioButton3.isSelected();
-     boolean jr4 = jRadioButton4.isSelected();
-   
-     String query = "UPDATE user SET Fname ='"+Fname+"',Lname='"+Lname+"',password='"+password+"',dob='"+dob+"',email='"+email+"',Lphone='"+Lphone+"',Hphone='"+Hphone+"',Address='"+Address+"',gender = '"+gender+"',img='"+dbPAth +"'  WHERE NIC = '"+NIC+"'";
-     
-      try{
-         database.db.iud(query);
-         JOptionPane.showMessageDialog(null, "update success");
-        
-           jTextField1.setText(null);
-           jTextField2.setText(null);
-           jTextField3.setText(null);
-           jPasswordField1.setText(null);
-          
-           jTextField4.setText(null);
-           jTextField5.setText(null);
-           jTextField6.setText(null);
-           jTextField7.setText(null);
-         
-     }catch(Exception e){
-         e.printStackTrace();
-         
-     }
-    
-                                           
+        boolean jr3 = jRadioButton3.isSelected();
+        boolean jr4 = jRadioButton4.isSelected();
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (nic.isEmpty()) {
+            // no NIC
+            JOptionPane.showMessageDialog(this, "Please provide NIC", "Error", JOptionPane.WARNING_MESSAGE);
+            jTextField1.grabFocus();
+            return;
+        }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         String NIC =  jTextField1.getText();
-    
-        String query = "DELETE FROM user WHERE NIC='"+NIC+"'";
-         try{
-         database.db.iud(query);
-         JOptionPane.showMessageDialog(null, "delete success");
-        
-        jTextField1.setText(null);
-        jTextField2.setText(null);
-        jTextField3.setText(null);
-        jPasswordField1.setText(null);
-        
-        jTextField4.setText(null);
-        jTextField5.setText(null);
-        jTextField6.setText(null);
-        jTextField7.setText(null);
-     }catch(Exception e){
-         e.printStackTrace();
-         
-     }
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please provide a password", "Error", JOptionPane.WARNING_MESSAGE);
+            jPasswordField1.grabFocus();
+            return;
+        }
+
+        try {
+            db.iud("UPDATE user SET nic='" + nic + "',password='" + password + "',fname='" + fname + "',lname='" + lname + "',img='" + imgPath + "',dob='" + dob + "',gender='" + gender + "',mobile1='" + mobile1 + "',mobile2='" + mobile2 + "',address='" + address + "',civil_status='" + civil_status + "',img='" + imgPath + "'");// no need to use a where clause becuase there is one and only admin(user)
+
+            JOptionPane.showMessageDialog(null, "saved successfully");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-    
+
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-    
+
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-      
-    }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void jTextField8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyReleased
-       
-            String q = "Select * from user where nic = '"+jTextField8.getText()+"'";
-            try {
-                ResultSet rs = db.search(q); 
-               if(rs.next()){
-                   jTextField1.setText(rs.getString("nic"));
-                   jTextField2.setText(rs.getString("fname"));
-                   jTextField3.setText(rs.getString("lname"));
-                   jPasswordField1.setText(rs.getString("password"));
-                   jDateChooser1.setDate(rs.getDate("dob"));
-                   
-                   if (rs.getString("gender").equals("male")) {
-                     jRadioButton1.setSelected(true);
-                   }else{
-                       jRadioButton2.setSelected(true);
-                   }
-                   if (rs.getString("civil_status").equals("civil_status")) {
-                     jRadioButton3.setSelected(true);
-                   }else{
-                       jRadioButton4.setSelected(true);
-                   }
-                   jTextField4.setText(rs.getString("email"));
-                   jTextField5.setText(rs.getString("Lphone"));
-                   jTextField6.setText(rs.getString("Hphone"));
-                   jTextField7.setText(rs.getString("Address"));
-                  ImageIcon imgThisImg = new ImageIcon(rs.getString("img"));
-                  jLabel1.setIcon(imgThisImg);
-                   
-               }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-        
-    }//GEN-LAST:event_jTextField8KeyReleased
+    }//GEN-LAST:event_jTextField5ActionPerformed
     String dbPAth;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         File destination;
         try {
             JFileChooser jf = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("*images", ".jpeg","png","jpg");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("*images", ".jpeg", "png", "jpg");
             jf.addChoosableFileFilter(filter);
             int soDdialod = jf.showOpenDialog(this);
 
             if (soDdialod == jf.APPROVE_OPTION) {
                 String path = jf.getSelectedFile().getAbsolutePath();
-                String filepath = path.replace("\\", "/");
-                File f = new File(filepath);
-                destination = new File("C:\\MOBSYS\\" + jTextField1.getText().trim() + ".jpg");
+                imgPath = path.replace("\\", "/");
+                File f = new File(imgPath);
 
-                FileInputStream fis = new FileInputStream(f);
-                FileOutputStream fos = new FileOutputStream(destination);
-                int bufferSize;
-                byte[] buffer = new byte[512];
-                while ((bufferSize = fis.read(buffer)) > 0) {
-                    fos.write(buffer, 0, bufferSize);
-
-                }
-                fis.close();
-                fos.close();
-
-                Image img = ImageIO.read(destination);
+                Image img = ImageIO.read(f);
                 img = img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                jLabel1.setText(null);
                 jLabel1.setIcon(new ImageIcon(img));
-                dbPAth = destination.getAbsolutePath().replace("\\", "/");
-                
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -630,15 +440,11 @@ public class Users extends javax.swing.JInternalFrame {
 
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jTextField2KeyTyped
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        
+
         if (Character.isAlphabetic(evt.getKeyChar())) {
             evt.consume();
         }
@@ -649,36 +455,43 @@ public class Users extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField5KeyReleased
 
     private void jTextField5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyPressed
-       
+
     }//GEN-LAST:event_jTextField5KeyPressed
 
     private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
         // TODO add your handling code here:
-        char c =evt.getKeyChar();
-        if (Character.isLetter(c)&&!evt.isAltDown()) {
-            jTextField5.setColumns(10); 
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) && !evt.isAltDown()) {
+            jTextField5.setColumns(10);
             evt.consume();
-            JOptionPane.showMessageDialog(null,"Only numbers are allowed");
+            JOptionPane.showMessageDialog(null, "Only numbers are allowed");
         }
-          
+
     }//GEN-LAST:event_jTextField5KeyTyped
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+
+        if (jCheckBox1.isSelected()) {
+            jPasswordField1.setEchoChar((char) 0);
+        } else {
+            jPasswordField1.setEchoChar('*');
+        }
+
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -698,8 +511,72 @@ public class Users extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 
+    private void loadAll() {
 
+        try {
+            ResultSet search = db.search("SELECT * FROM user");
+
+            if (search.next()) {
+
+                jTextField1.setText(search.getString("nic"));
+                jTextField2.setText(search.getString("fname"));
+                jTextField3.setText(search.getString("lname"));
+                jTextField4.setText(search.getString("email"));
+                jTextField5.setText(search.getString("mobile1"));
+                jTextField6.setText(search.getString("mobile2"));
+                jTextField7.setText(search.getString("address"));
+
+                String dob = search.getString("dob");
+
+                if (!dob.isEmpty()) {
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = sdf.parse(dob);
+
+                    jDateChooser1.setDate(date);
+                }
+
+                String gender = search.getString("gender");
+
+                if (gender.equals("Male")) {
+                    jRadioButton1.setSelected(true);
+                } else {
+                    jRadioButton2.setSelected(true);
+                }
+
+                String civilStatus = search.getString("civil_status");
+
+                if (civilStatus.equals("Married")) {
+
+                    jRadioButton4.setSelected(true);
+
+                } else {
+                    jRadioButton3.setSelected(true);
+                }
+
+                jPasswordField1.setText(search.getString("password"));
+
+                //set image
+                imgPath = search.getString("img");
+
+                if (imgPath.isEmpty()) {
+                    jLabel1.setText("no image");
+                } else {
+                    File f = new File(imgPath);
+
+                    Image img = ImageIO.read(f);
+                    img = img.getScaledInstance(158, 158, Image.SCALE_SMOOTH);
+                    jLabel1.setText(null);
+                    jLabel1.setIcon(new ImageIcon(img));
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

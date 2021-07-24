@@ -8,6 +8,9 @@ package GUI;
 import database.db;
 import java.awt.Color;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import model.Validator;
 
 /**
@@ -16,12 +19,12 @@ import model.Validator;
  */
 public class RemoveStock extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form RemoveStock
-     */
+    double stockQty = 0;
+
     public RemoveStock() {
         initComponents();
         setId();
+        showLabels(false);
     }
 
     /**
@@ -47,11 +50,10 @@ public class RemoveStock extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Remove a stock");
 
         jLabel1.setText("Id:");
@@ -71,8 +73,15 @@ public class RemoveStock extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Qty:");
 
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
+
         jLabel6.setText("Max:");
 
+        jLabel7.setForeground(new java.awt.Color(102, 204, 0));
         jLabel7.setText("5 Kgs");
 
         jLabel8.setText("Reason:");
@@ -82,43 +91,54 @@ public class RemoveStock extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Remove");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Active stock");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel5))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField1)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel9)))
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +151,8 @@ public class RemoveStock extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -151,9 +172,7 @@ public class RemoveStock extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +192,31 @@ public class RemoveStock extends javax.swing.JInternalFrame {
             if (Validator.isValidNumber(stockId)) {
 
                 try {
+                    ResultSet search = db.search("SELECT brand,name,s.qty,unit,s.status FROM stock s INNER JOIN item i INNER JOIN grnitem gi ON i.iditem=s.item_iditem AND gi.idgrnitem=s.grnitem_idgrnitem WHERE idstock='" + stockId + "' AND s.status!=-1 AND s.qty>0 ");
 
+                    if (search.next()) {
+
+                        jLabel4.setText(search.getString("brand") + " " + search.getString("name"));
+                        jLabel7.setText(search.getString("qty") + " " + search.getString("unit"));
+
+                        stockQty = search.getDouble("qty");
+
+                        int status = search.getInt("status");
+
+                        jTextField2.setText(null);
+
+                        if (status == 1) {
+                            jLabel9.setText("active stock");
+                        } else {
+                            jLabel9.setText("isolated stock");
+                        }
+
+                        jTextField1.setForeground(Color.black);
+                        showLabels(true);
+                    } else {
+                        showLabels(false);
+                        jTextField1.setForeground(Color.red);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -188,6 +231,101 @@ public class RemoveStock extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextField1KeyReleased
 
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        String qty = jTextField2.getText();
+
+        if (!qty.isEmpty()) {
+
+            if (Validator.isValidNumber(qty)) {
+
+                Double q = Double.parseDouble(qty);
+
+                if (q <= stockQty) {
+                    jTextField2.setForeground(Color.black);
+                } else {
+                    jTextField2.setForeground(Color.red);
+
+                }
+
+            } else {
+                jTextField2.setForeground(Color.red);
+            }
+
+        }
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String stockId = jTextField1.getText();
+        String qty = jTextField2.getText();
+        String reason = jTextArea1.getText();
+
+        if (stockId.isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "Please provide a stock id", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (qty.isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "Please provide a qty", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (reason.isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "Please provide a reason", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (jTextField2.getForeground() == Color.red) {
+
+            JOptionPane.showMessageDialog(this, "Please provide a valid qty", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int result = JOptionPane.showConfirmDialog(this, "Do you really need to remove this stock ?\n this action can not be reversed", "WARNING", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (result == JOptionPane.YES_OPTION) {
+
+            Date today = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String dateString = sdf.format(today);
+
+            try {
+                db.iud("INSERT INTO removed_stock (qty,reason,date,stock_idstock) VALUES ('" + qty + "','" + reason + "','" + dateString + "','" + stockId + "')");
+                //deducting the parent stock qty
+                ResultSet search = db.search("SELECT qty FROM stock WHERE idstock='" + stockId + "'");
+
+                double stockQty = 0.0;
+
+                if (search.next()) {
+
+                    stockQty = search.getDouble("qty");
+                }
+
+                double newQty = stockQty - Double.parseDouble(qty);
+
+                if (newQty == 0) {
+
+                    db.iud("UPDATE stock SET qty=0,status=-1 WHERE idstock='" + stockId + "'");
+
+                } else {
+
+                    db.iud("UPDATE stock SET qty='" + newQty + "' WHERE idstock='" + stockId + "'");
+
+                    JOptionPane.showMessageDialog(this, "Stock is removed successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            clearFields();
+            showLabels(false);
+            setId();
+
+        } else {
+            showLabels(false);
+            clearFields();
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -199,6 +337,7 @@ public class RemoveStock extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
@@ -232,5 +371,12 @@ public class RemoveStock extends javax.swing.JInternalFrame {
         jLabel4.setVisible(show);
         jLabel6.setVisible(show);
         jLabel7.setVisible(show);
+        jLabel9.setVisible(show);
+    }
+
+    private void clearFields() {
+        jTextArea1.setText(null);
+        jTextField1.setText(null);
+        jTextField2.setText(null);
     }
 }
