@@ -56,6 +56,7 @@ public class ViewRemovedStocks extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("View Removed Stocks");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "search"));
 

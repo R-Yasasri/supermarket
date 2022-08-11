@@ -58,6 +58,7 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("View Employee");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Search"));
 
@@ -277,6 +278,7 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
 
                     if (imgPath.isEmpty()) {
 
+                        jLabel1.setIcon(null);
                         jLabel1.setText("no image");
 
                     } else {

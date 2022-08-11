@@ -6,9 +6,12 @@
 package GUI;
 
 import database.db;
-import java.awt.Color;
+import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import model.CustomLogging;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
@@ -20,11 +23,11 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Reports extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Dashboard
-     */
+    private String baseReportPath;
+
     public Reports() {
         initComponents();
+        setBaseReportPath();
     }
 
     /**
@@ -48,6 +51,12 @@ public class Reports extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btn5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        btn6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btn7 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        btn8 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,7 +137,7 @@ public class Reports extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/summary.png"))); // NOI18N
-        jLabel3.setText("Employee report");
+        jLabel3.setText("Customer returns report");
 
         javax.swing.GroupLayout btn2Layout = new javax.swing.GroupLayout(btn2);
         btn2.setLayout(btn2Layout);
@@ -171,7 +180,7 @@ public class Reports extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/summary.png"))); // NOI18N
-        jLabel4.setText("Received goods report");
+        jLabel4.setText("Bill report");
 
         javax.swing.GroupLayout btn3Layout = new javax.swing.GroupLayout(btn3);
         btn3.setLayout(btn3Layout);
@@ -214,7 +223,7 @@ public class Reports extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/summary.png"))); // NOI18N
-        jLabel5.setText("Returns report");
+        jLabel5.setText("Supplier returns report");
 
         javax.swing.GroupLayout btn4Layout = new javax.swing.GroupLayout(btn4);
         btn4.setLayout(btn4Layout);
@@ -276,6 +285,135 @@ public class Reports extends javax.swing.JFrame {
 
         mainPanel.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
 
+        btn6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn6.setOpaque(false);
+        btn6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn6MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn6MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn6MouseReleased(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/summary.png"))); // NOI18N
+        jLabel7.setText("Employee report");
+
+        javax.swing.GroupLayout btn6Layout = new javax.swing.GroupLayout(btn6);
+        btn6.setLayout(btn6Layout);
+        btn6Layout.setHorizontalGroup(
+            btn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn6Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn6Layout.setVerticalGroup(
+            btn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn6Layout.createSequentialGroup()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 117, -1, -1));
+
+        btn7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn7.setOpaque(false);
+        btn7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn7MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn7MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn7MouseReleased(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/summary.png"))); // NOI18N
+        jLabel8.setText("Attendance report");
+
+        javax.swing.GroupLayout btn7Layout = new javax.swing.GroupLayout(btn7);
+        btn7.setLayout(btn7Layout);
+        btn7Layout.setHorizontalGroup(
+            btn7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn7Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn7Layout.setVerticalGroup(
+            btn7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn7Layout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 204, -1, -1));
+
+        btn8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn8.setOpaque(false);
+        btn8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn8MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn8MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn8MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn8MouseReleased(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/summary.png"))); // NOI18N
+        jLabel9.setText("Leave and time off report");
+
+        javax.swing.GroupLayout btn8Layout = new javax.swing.GroupLayout(btn8);
+        btn8.setLayout(btn8Layout);
+        btn8Layout.setHorizontalGroup(
+            btn8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn8Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn8Layout.setVerticalGroup(
+            btn8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn8Layout.createSequentialGroup()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -291,23 +429,17 @@ public class Reports extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn1MouseClicked
-//        try {
-//
-//            Map<String, Object> m = new HashMap();
-//            m.put("idgrn", Integer.toString(grn));
-//            m.put("net_total", Double.toString(netTotal));
-//
-//            String context = getClass().getResource("../reports/grn.jasper").toString();
-//            context = context.replace("%20", " ");
-//            context = context.replace("file:/", "");
-//
-//            JasperPrint fillReport = JasperFillManager.fillReport(context, m, db.getConnection());
-//            JasperViewer.viewReport(fillReport, false);
-//            JasperPrintManager.printReport(fillReport, true);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
+        try {
+
+            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/stock_report.jasper");
+            JasperPrint fillReport = JasperFillManager.fillReport(is, null, db.getConnection());
+            JasperViewer.viewReport(fillReport, false);
+            JasperPrintManager.printReport(fillReport, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            CustomLogging.loggingMethod(e.getMessage(), CustomLogging.ERROR);
+        }
 
     }//GEN-LAST:event_btn1MouseClicked
 
@@ -386,22 +518,85 @@ public class Reports extends javax.swing.JFrame {
     }//GEN-LAST:event_btn3MouseReleased
 
     private void btn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseClicked
-        Outstanding o = new Outstanding();
-        Home.viewPanel.add(o);
-        o.show();
+        TypeInputDialog t = new TypeInputDialog(this, true);
+        t.setVisible(true);
+
+        String billType = t.getBillType();
+        if (billType == null) {
+            return;
+        }
+
+        try {
+
+            Map<String, Object> m = new HashMap();
+            m.put("type", billType);
+
+            String path = baseReportPath + File.separator + "bill_report.jasper";
+//            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/bill_report.jasper");
+
+            JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
+            JasperViewer.viewReport(fillReport, false);
+            JasperPrintManager.printReport(fillReport, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CustomLogging.loggingMethod("bill report was generated", CustomLogging.INFO);
 
     }//GEN-LAST:event_btn3MouseClicked
 
     private void btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn2MouseClicked
-        CashSummary cs = new CashSummary();
-        Home.viewPanel.add(cs);
-        cs.show();
+        SingleMonthInputDialog s = new SingleMonthInputDialog(this, true);
+        s.setVisible(true);
+        String month = s.getMonth();
+
+        if (month == null) {
+            return;
+        }
+        try {
+
+            Map<String, Object> m = new HashMap();
+            m.put("month", month);
+
+//            String context = getClass().getResource("../reports/customer_returns_report.jasper").toString();
+//            context = context.replace("%20", " ");
+//            context = context.replace("file:/", "");
+            String path = baseReportPath + File.separator + "customer_returns_report.jasper";
+
+            JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
+            JasperViewer.viewReport(fillReport, false);
+            JasperPrintManager.printReport(fillReport, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CustomLogging.loggingMethod("customer returns report was generated", CustomLogging.INFO);
     }//GEN-LAST:event_btn2MouseClicked
 
     private void btn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseClicked
-        AgedPayables ap = new AgedPayables();
-        Home.viewPanel.add(ap);
-        ap.show();
+
+        SingleMonthInputDialog s = new SingleMonthInputDialog(this, true);
+        s.setVisible(true);
+        String month = s.getMonth();
+
+        if (month == null) {
+            return;
+        }
+        try {
+
+            Map<String, Object> m = new HashMap();
+            m.put("month", month);
+
+            String path = baseReportPath + File.separator + "sales_report.jasper";
+
+            JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
+            JasperViewer.viewReport(fillReport, false);
+            JasperPrintManager.printReport(fillReport, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CustomLogging.loggingMethod("sales report was generated", CustomLogging.INFO);
     }//GEN-LAST:event_btn5MouseClicked
 
     private void btn5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseEntered
@@ -423,10 +618,160 @@ public class Reports extends javax.swing.JFrame {
     }//GEN-LAST:event_btn5MouseReleased
 
     private void btn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseClicked
-        ProfitLost pl = new ProfitLost();
-        Home.viewPanel.add(pl);
-        pl.show();
+        SingleMonthInputDialog s = new SingleMonthInputDialog(this, true);
+        s.setVisible(true);
+        String month = s.getMonth();
+
+        if (month == null) {
+            return;
+        }
+
+        try {
+
+            Map<String, Object> m = new HashMap();
+            m.put("month", month);
+
+            String path = baseReportPath + File.separator + "supplier_returns_report.jasper";
+
+            JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
+            JasperViewer.viewReport(fillReport, false);
+            JasperPrintManager.printReport(fillReport, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CustomLogging.loggingMethod("supplier return report was generated", CustomLogging.INFO);
     }//GEN-LAST:event_btn4MouseClicked
+
+    private void btn6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseClicked
+        String id = JOptionPane.showInputDialog("Please provide an employee id to generate the report");
+
+        if (id.isEmpty()) {
+            return;
+        }
+        try {
+
+            Map<String, Object> m = new HashMap();
+            m.put("empId", id);
+
+            String path = baseReportPath + File.separator + "employee_report.jasper";
+
+            JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
+            JasperViewer.viewReport(fillReport, false);
+            JasperPrintManager.printReport(fillReport, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CustomLogging.loggingMethod("employee report was generated", CustomLogging.INFO);
+    }//GEN-LAST:event_btn6MouseClicked
+
+    private void btn6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseEntered
+        btn6.setOpaque(true);
+        btn6.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn6MouseEntered
+
+    private void btn6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseExited
+        btn6.setOpaque(false);
+        btn6.setBackground(null);
+    }//GEN-LAST:event_btn6MouseExited
+
+    private void btn6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MousePressed
+        btn6.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn6MousePressed
+
+    private void btn6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseReleased
+        btn6.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn6MouseReleased
+
+    private void btn7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseClicked
+        SingleMonthInputDialog s = new SingleMonthInputDialog(this, true);
+        s.setVisible(true);
+        String month = s.getMonth();
+
+        if (month == null) {
+            return;
+        }
+
+        try {
+
+            Map<String, Object> m = new HashMap();
+            m.put("month", month);
+
+            String path = baseReportPath + File.separator + "employee_attendance_report.jasper";
+
+            JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
+            JasperViewer.viewReport(fillReport, false);
+            JasperPrintManager.printReport(fillReport, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CustomLogging.loggingMethod("employee attendance report was generated", CustomLogging.INFO);
+    }//GEN-LAST:event_btn7MouseClicked
+
+    private void btn7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseEntered
+        btn7.setOpaque(true);
+        btn7.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn7MouseEntered
+
+    private void btn7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseExited
+        btn7.setOpaque(false);
+        btn7.setBackground(null);
+    }//GEN-LAST:event_btn7MouseExited
+
+    private void btn7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MousePressed
+        btn7.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn7MousePressed
+
+    private void btn7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseReleased
+        btn7.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn7MouseReleased
+
+    private void btn8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn8MouseClicked
+        SingleMonthInputDialog s = new SingleMonthInputDialog(this, true);
+        s.setVisible(true);
+        String month = s.getMonth();
+
+        if (month == null) {
+            return;
+        }
+
+        try {
+
+            Map<String, Object> m = new HashMap();
+            m.put("month", month);
+
+            String path = baseReportPath + File.separator + "employee_leave_time_off_report.jasper";
+            
+            JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
+            JasperViewer.viewReport(fillReport, false);
+            JasperPrintManager.printReport(fillReport, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CustomLogging.loggingMethod("employee leave and time off report was generated", CustomLogging.INFO);
+    }//GEN-LAST:event_btn8MouseClicked
+
+    private void btn8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn8MouseEntered
+        btn8.setOpaque(true);
+        btn8.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn8MouseEntered
+
+    private void btn8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn8MouseExited
+        btn8.setOpaque(false);
+        btn8.setBackground(null);
+
+    }//GEN-LAST:event_btn8MouseExited
+
+    private void btn8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn8MousePressed
+        btn8.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn8MousePressed
+
+    private void btn8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn8MouseReleased
+        btn8.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn8MouseReleased
 
     /**
      * @param args the command line arguments
@@ -472,12 +817,22 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JPanel btn3;
     private javax.swing.JPanel btn4;
     private javax.swing.JPanel btn5;
+    private javax.swing.JPanel btn6;
+    private javax.swing.JPanel btn7;
+    private javax.swing.JPanel btn8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     public keeptoo.KGradientPanel mainPanel;
     // End of variables declaration//GEN-END:variables
+
+    private void setBaseReportPath() {
+        this.baseReportPath = System.getenv("reports");
+    }
 }

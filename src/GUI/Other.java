@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author Thilina
  */
-public class Settings extends javax.swing.JFrame {
+public class Other extends javax.swing.JFrame {
 
     /**
      * Creates new form Dashboard
      */
-    public Settings() {
+    public Other() {
         initComponents();
     }
 
@@ -35,6 +35,12 @@ public class Settings extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        btn3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btn4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        btn5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,7 +51,7 @@ public class Settings extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Settings");
+        jLabel1.setText("Other");
         mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 425, 52));
 
         btn1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -122,17 +128,146 @@ public class Settings extends javax.swing.JFrame {
         btn2Layout.setHorizontalGroup(
             btn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn2Layout.createSequentialGroup()
-                .addGap(0, 23, Short.MAX_VALUE)
+                .addGap(0, 27, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         btn2Layout.setVerticalGroup(
             btn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btn2Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         mainPanel.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 204, -1, -1));
+
+        btn3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn3.setOpaque(false);
+        btn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn3MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn3MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn3MouseReleased(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-note-50.png"))); // NOI18N
+        jLabel4.setText("Add a quick note");
+
+        javax.swing.GroupLayout btn3Layout = new javax.swing.GroupLayout(btn3);
+        btn3.setLayout(btn3Layout);
+        btn3Layout.setHorizontalGroup(
+            btn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn3Layout.createSequentialGroup()
+                .addGap(0, 27, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn3Layout.setVerticalGroup(
+            btn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn3Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 291, -1, -1));
+
+        btn4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn4.setOpaque(false);
+        btn4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn4MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn4MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn4MouseReleased(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-note-50.png"))); // NOI18N
+        jLabel5.setText("View quick notes");
+
+        javax.swing.GroupLayout btn4Layout = new javax.swing.GroupLayout(btn4);
+        btn4.setLayout(btn4Layout);
+        btn4Layout.setHorizontalGroup(
+            btn4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn4Layout.createSequentialGroup()
+                .addGap(0, 27, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn4Layout.setVerticalGroup(
+            btn4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn4Layout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 378, -1, -1));
+
+        btn5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn5.setOpaque(false);
+        btn5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn5MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn5MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn5MouseReleased(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-note-50.png"))); // NOI18N
+        jLabel6.setText("Update a quick note");
+
+        javax.swing.GroupLayout btn5Layout = new javax.swing.GroupLayout(btn5);
+        btn5.setLayout(btn5Layout);
+        btn5Layout.setHorizontalGroup(
+            btn5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn5Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn5Layout.setVerticalGroup(
+            btn5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn5Layout.createSequentialGroup()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 469, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,7 +284,7 @@ public class Settings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn1MouseClicked
-       Users u = new Users();
+        Users u = new Users();
         Home.viewPanel.add(u);
         u.show();
 
@@ -195,10 +330,82 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_btn2MouseReleased
 
     private void btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn2MouseClicked
-       Shop s = new Shop();
-       Home.viewPanel.add(s);
-       s.show();
+        Shop s = new Shop();
+        Home.viewPanel.add(s);
+        s.show();
     }//GEN-LAST:event_btn2MouseClicked
+
+    private void btn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseClicked
+        AddAQuickNote a = new AddAQuickNote();
+        Home.viewPanel.add(a);
+        a.show();
+    }//GEN-LAST:event_btn3MouseClicked
+
+    private void btn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseEntered
+        btn3.setOpaque(true);
+        btn3.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn3MouseEntered
+
+    private void btn3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseExited
+        btn3.setOpaque(false);
+        btn3.setBackground(null);
+    }//GEN-LAST:event_btn3MouseExited
+
+    private void btn3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MousePressed
+        btn3.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn3MousePressed
+
+    private void btn3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseReleased
+        btn3.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn3MouseReleased
+
+    private void btn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseClicked
+        ViewQuickNotes v = new ViewQuickNotes();
+        Home.viewPanel.add(v);
+        v.show();
+    }//GEN-LAST:event_btn4MouseClicked
+
+    private void btn4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseEntered
+        btn4.setOpaque(true);
+        btn4.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn4MouseEntered
+
+    private void btn4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseExited
+        btn4.setOpaque(false);
+        btn4.setBackground(null);
+    }//GEN-LAST:event_btn4MouseExited
+
+    private void btn4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MousePressed
+        btn4.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn4MousePressed
+
+    private void btn4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseReleased
+        btn4.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn4MouseReleased
+
+    private void btn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseClicked
+        EditAQuickNote e = new EditAQuickNote();
+        Home.viewPanel.add(e);
+        e.show();
+    }//GEN-LAST:event_btn5MouseClicked
+
+    private void btn5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseEntered
+        btn5.setOpaque(true);
+        btn5.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn5MouseEntered
+
+    private void btn5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseExited
+        btn5.setOpaque(false);
+        btn5.setBackground(null);
+    }//GEN-LAST:event_btn5MouseExited
+
+    private void btn5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MousePressed
+        btn5.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn5MousePressed
+
+    private void btn5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseReleased
+        btn5.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn5MouseReleased
 
     /**
      * @param args the command line arguments
@@ -217,14 +424,18 @@ public class Settings extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Other.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Other.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Other.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Other.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -233,7 +444,7 @@ public class Settings extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Settings().setVisible(true);
+                new Other().setVisible(true);
             }
         });
     }
@@ -241,9 +452,15 @@ public class Settings extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn1;
     private javax.swing.JPanel btn2;
+    private javax.swing.JPanel btn3;
+    private javax.swing.JPanel btn4;
+    private javax.swing.JPanel btn5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     public keeptoo.KGradientPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

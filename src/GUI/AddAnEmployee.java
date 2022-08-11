@@ -8,12 +8,9 @@ package GUI;
 import database.db;
 import java.awt.Image;
 import java.io.File;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -81,6 +78,7 @@ public class AddAnEmployee extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Add an employee");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jLabel1.setText("Employee id:");
 

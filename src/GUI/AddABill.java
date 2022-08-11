@@ -63,6 +63,7 @@ public class AddABill extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Add a bill");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jLabel1.setText("Id:");
 
@@ -264,7 +265,7 @@ public class AddABill extends javax.swing.JInternalFrame {
 
             db.iud("INSERT INTO bill (type,description,amount,date,paid_by,provider,payment_centre,payment_centre_address,payment_method) VALUES ('" + type + "','" + desc + "','" + amount + "','" + dateString + "','" + paidBy + "','" + provider + "','" + paymentCentre + "','" + address + "','" + payment_method + "')");
 
-            JOptionPane.showMessageDialog(this, "Date Saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Data Saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
             clearFields();
             setId();
         } catch (Exception e) {
