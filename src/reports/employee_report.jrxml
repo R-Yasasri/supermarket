@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employee_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86a8dd33-dfe0-4ff1-9457-e02511ff0ea1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FinalProject8"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="empId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM employee LIMIT 1]]>
+	</queryString>
+	<field name="idemployee" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idemployee"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="nic" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nic"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="fname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="lname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="img" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="img"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="dob" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="dob"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="gender" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gender"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="mobile1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mobile1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="mobile2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mobile2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="address" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="address"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="civil_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="civil_status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="shop_idshop" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="shop_idshop"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement x="130" y="0" width="300" height="25" uuid="25d482d8-bbd7-4804-9c38-6f16892f8b29"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Coopcity - Meegoda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="25" width="300" height="20" uuid="094c6412-e317-4a38-94ba-5c7aaadfe79d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Meegoda Junction Bus Stop, Avissawella Rd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="48" width="360" height="42" uuid="5141004b-bc78-4a31-a119-2418f7a51370"/>
+				<textElement textAlignment="Center">
+					<font size="29"/>
+				</textElement>
+				<text><![CDATA[Employee Report]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="0" y="0" width="80" height="80" uuid="722e0f19-875c-4da2-9b2c-371451cb1129"/>
+				<imageExpression><![CDATA["img/cooplogo.gif"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="2" y="92" width="555" height="1" uuid="483f600c-2c01-439d-a5f9-06cfd2ba48bf"/>
+			</rectangle>
+		</band>
+	</title>
+	<detail>
+		<band height="634" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="180" uuid="0bb0e8d9-f550-4c5d-b2a2-2fbef25602aa"/>
+				<subreportParameter name="empId">
+					<subreportParameterExpression><![CDATA[$P{empId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["employee_report_details.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="193" width="200" height="85" uuid="b160831d-7bc6-4f22-b251-44616a8cb181"/>
+				<subreportParameter name="empId">
+					<subreportParameterExpression><![CDATA[$P{empId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["employee_report_disciplinary.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="310" width="200" height="100" uuid="ae0b1ee0-3f81-4525-9426-a4404a0bebda"/>
+				<subreportParameter name="empId">
+					<subreportParameterExpression><![CDATA[$P{empId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["employee_report_performance.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="415" width="200" height="200" uuid="d0b91b03-3c88-46d3-ae60-621b99c0e1c3"/>
+				<subreportParameter name="empId">
+					<subreportParameterExpression><![CDATA[$P{empId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["employee_report_salary.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="61" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="-2" y="31" width="100" height="30" uuid="703ccddb-7195-4c67-9086-be50483d2088"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="356" y="30" width="100" height="30" uuid="444f60ed-7a8a-404e-b945-7bb11baad140"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="456" y="30" width="100" height="30" uuid="27d233ed-97de-4fe9-97dc-bb8885ad3b35"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

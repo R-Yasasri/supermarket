@@ -8,6 +8,7 @@ package GUI;
 import database.db;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -84,6 +85,7 @@ public class EditAnEmployee extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Edit Employee Details");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jLabel1.setText("Employee id:");
 
@@ -395,14 +397,14 @@ public class EditAnEmployee extends javax.swing.JInternalFrame {
         if (Validator.isValidStringMany(fname, lname) && Validator.isValidAddressString(address) && Validator.isValidPhoneNumber(mobile1) && Validator.isValidNIC(nic) && Validator.isValidEmail(email) && date != null) {
 
             if (!mobile2.isEmpty()) {
-                
+
                 if (!Validator.isValidPhoneNumber(mobile2)) {
                     JOptionPane.showMessageDialog(this, "Invalid data", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
-                
+
             }
-            
+
             String gender = "Male";
 
             if (jRadioButton2.isSelected()) {
@@ -549,14 +551,16 @@ public class EditAnEmployee extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "No such Employee", "Warning", JOptionPane.WARNING_MESSAGE);
 
                 }
+            } catch (IOException io) {
+                jPanel2.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
     }
-    
-    public void searchFromExternal(String empId){
+
+    public void searchFromExternal(String empId) {
         jTextField7.setText(empId);
         search();
     }

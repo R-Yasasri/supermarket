@@ -76,6 +76,7 @@ public class ReturnFromCustomer extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Return From Customer");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jLabel1.setText("Id: ");
 

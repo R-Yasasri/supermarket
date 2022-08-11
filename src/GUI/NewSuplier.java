@@ -74,6 +74,7 @@ public class NewSuplier extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("New Supplier");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(1098, 668));
 
         jLabel1.setText("supplier id");

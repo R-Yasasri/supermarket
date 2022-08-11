@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="supplier_returns_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a32ee5b1-7b0b-4cd8-a64b-56bf9f3e72d6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FinalProject8"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="month" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT date FROM return_to_supplier WHERE date LIKE  $P{month} LIMIT 1]]>
+	</queryString>
+	<field name="date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="return_to_supplier"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement x="0" y="0" width="80" height="80" uuid="6289f8fb-b81c-40a1-9651-080c6f6ff15f"/>
+				<imageExpression><![CDATA["img/cooplogo.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="100" y="48" width="360" height="50" uuid="b10fbe2a-6b64-4f68-9a7a-75f2b95bc64e"/>
+				<textElement textAlignment="Center">
+					<font size="29"/>
+				</textElement>
+				<text><![CDATA[Supplier Returns Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="300" height="25" uuid="7cea95ca-faa9-4c35-8ed3-91e418ffbc99"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Coopcity - Meegoda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="25" width="300" height="20" uuid="786d63ba-0653-4b80-b091-c20c950755df"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Meegoda Junction Bus Stop, Avissawella Rd]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="49" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="48" width="555" height="1" uuid="f0becf17-ccaa-48b0-8579-6a0babe93424"/>
+			</rectangle>
+			<textField pattern="MMMM, yyyy">
+				<reportElement x="230" y="10" width="100" height="30" uuid="0a180d03-951a-44b6-9124-cb8155a5f239"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="324" splitType="Stretch">
+			<subreport>
+				<reportElement x="-3" y="224" width="560" height="100" uuid="36ac068c-963e-4ad1-ad2f-c03b682c0594"/>
+				<subreportParameter name="month">
+					<subreportParameterExpression><![CDATA[$P{month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["supplier_returns_report_sub.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="200" uuid="1f56f385-cd82-4f8e-aa70-0431d30de7fe"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["supplier_returns_chart_supplier.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="280" y="0" width="200" height="200" uuid="2cd24037-cdc7-46d8-8a55-78dc2fdb02a0"/>
+				<subreportParameter name="month">
+					<subreportParameterExpression><![CDATA[$P{month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["supplier_returns_chart_returns.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="350" y="24" width="100" height="30" uuid="b73f0ef1-aef8-4a1f-ac22-1bf8197d063c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="450" y="24" width="100" height="30" uuid="817bc70e-0dd0-4633-a5f2-5746ab2833da"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="22" width="100" height="30" uuid="1200a957-04a8-4d95-af1f-168904ef96e9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

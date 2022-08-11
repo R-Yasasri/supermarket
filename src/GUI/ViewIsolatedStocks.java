@@ -64,6 +64,7 @@ public class ViewIsolatedStocks extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("View Isolated Stocks");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jButton2.setText("refresh");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

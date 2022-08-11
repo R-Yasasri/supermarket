@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bill_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a7b65f5-4ea7-4ad9-b71b-4c5a7e2d58a4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FinalProject8"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="type" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT type FROM bill WHERE type =  $P{type} LIMIT 1]]>
+	</queryString>
+	<field name="type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="bill"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement x="0" y="0" width="80" height="80" uuid="23d7b3e1-3d08-4f74-b368-7f5c334d4041"/>
+				<imageExpression><![CDATA["img/cooplogo.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="130" y="25" width="300" height="20" uuid="37f763e1-7ff3-4ebb-bc55-0a6a34368f50"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Meegoda Junction Bus Stop, Avissawella Rd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="300" height="25" uuid="a8d7cbbb-934a-40ba-9d92-1ab481d5b5b5"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Coopcity - Meegoda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="48" width="360" height="50" uuid="c0306d5e-82d4-4dc0-9042-1766f06c8f5a"/>
+				<textElement textAlignment="Center">
+					<font size="29"/>
+				</textElement>
+				<text><![CDATA[Bill Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="231" y="0" width="100" height="20" uuid="a6d71725-cddc-4720-83a7-a45deef837b1"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{type}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="30" width="555" height="1" uuid="b1f3d17c-7995-457f-b3a5-82b7486149e8"/>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="457" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="26" width="510" height="200" uuid="9974ea20-362e-4f40-bde5-8f9864e85d44"/>
+				<subreportParameter name="type">
+					<subreportParameterExpression><![CDATA[$P{type}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["bill_report_chart.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="250" width="510" height="200" uuid="7465a14d-6f9e-4ac7-8b02-99a27f179753"/>
+				<subreportParameter name="type">
+					<subreportParameterExpression><![CDATA[$P{type}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["bill_report_sub.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="1" y="23" width="100" height="30" uuid="dc423b12-2d48-4f2f-9f92-4561fd103313"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="23" width="100" height="30" uuid="f52fc2d0-91e0-40bb-aec5-39f237655e05"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="450" y="23" width="100" height="30" uuid="cbcddfe6-1ca3-4dbf-99cf-91ec7c9df039"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -83,6 +83,7 @@ public class ReturnToSupplier extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Return To Supplier");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jLabel1.setText("Id: ");
 
