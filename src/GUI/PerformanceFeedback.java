@@ -49,7 +49,6 @@ public class PerformanceFeedback extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Performance Feedback");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jLabel1.setText("Id:");
 

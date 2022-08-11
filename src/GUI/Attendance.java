@@ -60,7 +60,6 @@ public class Attendance extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Attendance");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Search"));
 
@@ -144,11 +143,11 @@ public class Attendance extends javax.swing.JInternalFrame {
             }
         });
         jTable1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jTable1InputMethodTextChanged(evt);
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTable1CaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTable1InputMethodTextChanged(evt);
             }
         });
         jTable1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {

@@ -6,7 +6,6 @@
 package GUI;
 
 import database.db;
-import java.io.File;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +67,6 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("View Invoice");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jButton1.setText("Print");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -297,9 +295,11 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
                 m.put("invId", invoiceId);
                 m.put("net_total", netTotal);
 
-                String report = System.getenv("reports") + File.separator + "invoice.jasper";
+                String context = getClass().getResource("../reports/invoice.jasper").toString();
+                context = context.replace("%20", " ");
+                context = context.replace("file:/", "");
 
-                JasperPrint fillReport = JasperFillManager.fillReport(report, m, db.getConnection());
+                JasperPrint fillReport = JasperFillManager.fillReport(context, m, db.getConnection());
                 JasperViewer.viewReport(fillReport, false);
                 JasperPrintManager.printReport(fillReport, true);
             } catch (Exception e) {

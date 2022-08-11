@@ -116,7 +116,6 @@ public class GRN extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("GRN\n");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -542,7 +541,7 @@ public class GRN extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -563,7 +562,7 @@ public class GRN extends javax.swing.JInternalFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -833,13 +832,13 @@ public class GRN extends javax.swing.JInternalFrame {
             try {
                 db.iud("INSERT INTO grnitem (item_iditem,grn_idgrn,qty,unit_price,unit,returning_container_details)VALUES('" + item + "','" + grn + "','" + qty + "','" + unit_price + "','" + unit + "','" + rcd + "')");
                 // retrieving the inserted grnitem id
-                int idgrnitem = 0;
+                int idgrnitem=0;
                 ResultSet search = db.search("SELECT MAX(idgrnitem) FROM grnitem");
                 if (search.next()) {
-                    idgrnitem = search.getInt(1);
+                    idgrnitem=search.getInt(1);
                 }
-
-                db.iud("INSERT INTO stock (item_iditem,qty,selling_price,expiredate,grnitem_idgrnitem)VALUES('" + item + "','" + qty + "','" + selling_price + "','" + expireDate + "','" + idgrnitem + "')");
+                
+                db.iud("INSERT INTO stock (item_iditem,qty,selling_price,expiredate,grnitem_idgrnitem)VALUES('" + item + "','" + qty + "','" + selling_price + "','" + expireDate + "','"+idgrnitem+"')");
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -861,9 +860,11 @@ public class GRN extends javax.swing.JInternalFrame {
             m.put("idgrn", Integer.toString(grn));
             m.put("net_total", Double.toString(netTotal));
 
-            String report = System.getenv("reports") + File.separator + "grn.jasper";
+            String context = getClass().getResource("../reports/grn.jasper").toString();
+            context = context.replace("%20", " ");
+            context = context.replace("file:/", "");
 
-            JasperPrint fillReport = JasperFillManager.fillReport(report, m, db.getConnection());
+            JasperPrint fillReport = JasperFillManager.fillReport(context, m, db.getConnection());
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {

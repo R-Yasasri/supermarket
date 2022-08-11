@@ -6,13 +6,13 @@
 package GUI;
 
 import database.db;
-import java.io.File;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
@@ -69,7 +69,6 @@ public class ViewGRN extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setTitle("View GRN");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "View"));
 
@@ -309,9 +308,11 @@ public class ViewGRN extends javax.swing.JInternalFrame {
                 m.put("idgrn", grnId);
                 m.put("net_total", netTotal);
 
-                String report = System.getenv("reports") + File.separator + "grn.jasper";
+                String context = getClass().getResource("../reports/grn.jasper").toString();
+                context = context.replace("%20", " ");
+                context = context.replace("file:/", "");
 
-                JasperPrint fillReport = JasperFillManager.fillReport(report, m, db.getConnection());
+                JasperPrint fillReport = JasperFillManager.fillReport(context, m, db.getConnection());
                 JasperViewer.viewReport(fillReport, false);
                 JasperPrintManager.printReport(fillReport, true);
             } catch (Exception e) {

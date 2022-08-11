@@ -1,15 +1,12 @@
 package GUI;
 
-import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -20,7 +17,6 @@ public class Home extends javax.swing.JFrame implements Runnable {
     int x, y;
     JPanel p;
     static boolean maximized = true;
-    public static String loggedInUserNIC;
 
     private static final int LEFT_MOUSE_BTN = 1;
     private int hour;
@@ -95,7 +91,6 @@ public class Home extends javax.swing.JFrame implements Runnable {
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(25, 42, 86));
         setUndecorated(true);
-        setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
 
         jPanel4.setBackground(new java.awt.Color(25, 42, 86));
@@ -301,7 +296,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
         side_men9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         side_men9.setForeground(new java.awt.Color(255, 255, 255));
         side_men9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/settings.png"))); // NOI18N
-        side_men9.setText("Other");
+        side_men9.setText("Settings");
         side_men9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         side_men9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -405,8 +400,6 @@ public class Home extends javax.swing.JFrame implements Runnable {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        viewPanel.setLayer(panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
         viewPanel.setLayout(viewPanelLayout);
         viewPanelLayout.setHorizontalGroup(
@@ -417,6 +410,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
             viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        viewPanel.setLayer(panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -686,7 +680,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
     private void side_men9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side_men9MouseClicked
         if (evt.getButton() == LEFT_MOUSE_BTN) {
             panel.removeAll();
-            p = new Other().mainPanel;
+            p = new Settings().mainPanel;
 
             p.setSize(panel.getSize());
 
@@ -726,14 +720,12 @@ public class Home extends javax.swing.JFrame implements Runnable {
     public static void main(String args[]) {
 
         try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-            setLookAndFeel();
-
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -804,14 +796,5 @@ public class Home extends javax.swing.JFrame implements Runnable {
     private void icon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Cooperative-logo (1).gif")));
 
-    }
-
-    public static void setLookAndFeel() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-
-        Properties p = new Properties();
-        javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-
-        p.put("windowDecoration", "off");
-        AcrylLookAndFeel.setTheme(p);
     }
 }

@@ -50,7 +50,6 @@ public class DisciplinaryHistory extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Disciplinary History");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jLabel1.setText("Id:");
 

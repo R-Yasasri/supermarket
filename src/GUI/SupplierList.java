@@ -78,7 +78,6 @@ public class SupplierList extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Supplier List");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(1095, 774));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {

@@ -7,7 +7,6 @@ package GUI;
 
 import database.db;
 import java.awt.Color;
-import java.io.File;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -96,7 +95,6 @@ public class Cashier extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Invoice");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -653,14 +651,14 @@ public class Cashier extends javax.swing.JInternalFrame {
         }
 
         // for later use in invoice generation        
-        String netTotal = jLabel13.getText();// becuase the clearMonetaryFields method is called before generating the invoice and it removes the netTotal value
-
+        String netTotal=jLabel13.getText();// becuase the clearMonetaryFields method is called before generating the invoice and it removes the netTotal value
+        
         // save the data
         try {
             String payment_method = jComboBox1.getSelectedItem().toString();
 
             Date date = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             String today = sdf.format(date);
 
             String discount = jTextField4.getText();
@@ -670,7 +668,7 @@ public class Cashier extends javax.swing.JInternalFrame {
             }
             String payment = jTextField5.getText();
 
-            db.iud("INSERT INTO invoice (datetime,payment_method,status,discount,payment) VALUES('" + today + "','" + payment_method + "','" + 1 + "','" + discount + "','" + payment + "')");
+            db.iud("INSERT INTO invoice (datetime,payment_method,status,discount,payment) VALUES('" + today + "','" + payment_method + "','" + 1 + "','" + discount + "','"+payment+"')");
             ResultSet search = db.search("SELECT MAX(idinvoice) FROM invoice");
 
             int invoiceId = 1;
@@ -704,7 +702,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                 }
 
                 // save invoice items
-                db.iud("INSERT INTO invoiceitem (item_iditem,invoice_idinvoice,qty,unit_price,unit,discount,status,stock_idstock) VALUES ('" + itemId + "','" + invoiceId + "','" + qty + "','" + unitPrice + "','" + unit + "','" + dis + "','" + 1 + "','" + stockId + "')");
+                db.iud("INSERT INTO invoiceitem (item_iditem,invoice_idinvoice,qty,unit_price,unit,discount,status,stock_idstock) VALUES ('" + itemId + "','" + invoiceId + "','" + qty + "','" + unitPrice + "','" + unit + "','" + dis + "','" + 1 + "','"+stockId+"')");
             }
 
             JOptionPane.showMessageDialog(this, "Data saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
@@ -712,25 +710,29 @@ public class Cashier extends javax.swing.JInternalFrame {
             // clear the table
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.setRowCount(0);
-
+            
             // generate invoice
+            
             try {
 
-                String invId = Integer.toString(invoiceId);
-
+                String invId=Integer.toString(invoiceId);
+                
                 Map<String, Object> m = new HashMap();
                 m.put("invId", invId);
                 m.put("net_total", netTotal);
 
-                String report = System.getenv("reports") + File.separator + "invoice.jasper";
+                String context = getClass().getResource("../reports/invoice.jasper").toString();
+                context = context.replace("%20", " ");
+                context = context.replace("file:/", "");
 
-                JasperPrint fillReport = JasperFillManager.fillReport(report, m, db.getConnection());
+                JasperPrint fillReport = JasperFillManager.fillReport(context, m, db.getConnection());
                 JasperViewer.viewReport(fillReport, false);
                 JasperPrintManager.printReport(fillReport, true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "An Error Occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
