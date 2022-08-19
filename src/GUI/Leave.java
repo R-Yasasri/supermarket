@@ -173,6 +173,11 @@ public class Leave extends javax.swing.JInternalFrame {
             return;
         }
 
+        if (end.before(begin)) {
+            JOptionPane.showMessageDialog(this, "Please provide a date after the begin date as an end date", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         //employee id validation
         try {
             ResultSet search = db.search("SELECT * FROM employee WHERE idemployee='" + empId + "'");
@@ -183,7 +188,7 @@ public class Leave extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Please provide a valid employee id", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String beginDateString = sdf.format(begin);
             String endDateString = sdf.format(end);
