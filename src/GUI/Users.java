@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import model.Validator;
 
 public class Users extends javax.swing.JInternalFrame {
 
@@ -390,8 +391,32 @@ public class Users extends javax.swing.JInternalFrame {
             return;
         }
 
+        if (!Validator.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Please provide a valid email", "Error", JOptionPane.WARNING_MESSAGE);
+            jTextField4.grabFocus();
+            return;
+        }
+
+        if (!Validator.isValidNIC(nic)) {
+            JOptionPane.showMessageDialog(this, "Please provide a valid nic", "Error", JOptionPane.WARNING_MESSAGE);
+            jTextField1.grabFocus();
+            return;
+        }
+
+        if (!Validator.isValidPhoneNumber(mobile1)) {
+            JOptionPane.showMessageDialog(this, "Please fill mobile 1 field", "Error", JOptionPane.WARNING_MESSAGE);
+            jTextField5.grabFocus();
+            return;
+        }
+
+        if (!mobile2.isEmpty() && !Validator.isValidPhoneNumber(mobile2)) {
+            JOptionPane.showMessageDialog(this, "Invalid value provided for mobile 2 field", "Error", JOptionPane.WARNING_MESSAGE);
+            jTextField6.grabFocus();
+            return;
+        }
+
         try {
-            db.iud("UPDATE user SET nic='" + nic + "',password='" + password + "',fname='" + fname + "',lname='" + lname + "',img='" + imgPath + "',dob='" + dob + "',gender='" + gender + "',mobile1='" + mobile1 + "',mobile2='" + mobile2 + "',address='" + address + "',civil_status='" + civil_status + "',img='" + imgPath + "'");// no need to use a where clause becuase there is one and only admin(user)
+            db.iud("UPDATE user SET email ='" + email + "' ,nic='" + nic + "',password='" + password + "',fname='" + fname + "',lname='" + lname + "',img='" + imgPath + "',dob='" + dob + "',gender='" + gender + "',mobile1='" + mobile1 + "',mobile2='" + mobile2 + "',address='" + address + "',civil_status='" + civil_status + "',img='" + imgPath + "'");// no need to use a where clause becuase there is one and only admin(user)
 
             JOptionPane.showMessageDialog(null, "saved successfully");
 

@@ -617,8 +617,9 @@ public class GRN extends javax.swing.JInternalFrame {
                 jLabel33.setText("");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
+            jTextField2.setForeground(Color.red);
             jLabel31.setText("");
             jLabel32.setText("");
             jLabel33.setText("");

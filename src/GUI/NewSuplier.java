@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.HeaderRenderer;
+import model.Validator;
 
 /**
  *
@@ -367,20 +368,45 @@ public class NewSuplier extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTextField1.getText().isEmpty() && jTextField6.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill the name and city", "WARNING", JOptionPane.WARNING_MESSAGE);
+
+        String name = jTextField1.getText();
+        String mobile = jTextField2.getText();
+        String email = jTextField3.getText();
+        String no = jTextField4.getText();
+        String street = jTextField5.getText();
+        String city = jTextField6.getText();
+
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the name field", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (jTextField2.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill the mobile", "WARNING", JOptionPane.WARNING_MESSAGE);
+        if (mobile.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the mobile field", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (jTextField4.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill the address no.", "WARNING", JOptionPane.WARNING_MESSAGE);
+
+        if (!Validator.isValidPhoneNumber(mobile)) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid mobile number", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (jTextField5.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill the street", "WARNING", JOptionPane.WARNING_MESSAGE);
+
+        if (!Validator.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid email address", "WARNING", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (no.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the address no. field", "WARNING", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (street.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the street field", "WARNING", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (city.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the city field", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -415,14 +441,7 @@ public class NewSuplier extends javax.swing.JInternalFrame {
 
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
 
-        String name = jTextField1.getText();
-        String mobile = jTextField2.getText();
-        String email = jTextField3.getText();
-        String city = jTextField4.getText();
-        String street = jTextField5.getText();
-        String no = jTextField6.getText();
-
-        String address = city + ",\n" + street + ",\n" + no;
+        String address = no + ",\n" + street + ",\n" + city;
 
         Vector v = new Vector();
         v.add(id);
@@ -636,15 +655,20 @@ public class NewSuplier extends javax.swing.JInternalFrame {
         header.setDefaultRenderer(new HeaderRenderer(jTable1));
         jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
 
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(150); /*10*/
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
+        /*10*/
 
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(400); /*10*/
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(400);
+        /*10*/
 
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(200); /*10*/
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
+        /*10*/
 
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(350); /*10*/
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(350);
+        /*10*/
 
-        jTable1.getColumnModel().getColumn(4).setPreferredWidth(530); /*10*/
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(530);
+        /*10*/
 
     }
 

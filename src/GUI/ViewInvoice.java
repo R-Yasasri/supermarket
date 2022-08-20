@@ -296,7 +296,7 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
                 Map<String, Object> m = new HashMap();
                 m.put("invId", invoiceId);
                 m.put("net_total", netTotal);
-
+                
                 String report = System.getenv("reports") + File.separator + "invoice.jasper";
 
                 JasperPrint fillReport = JasperFillManager.fillReport(report, m, db.getConnection());

@@ -381,7 +381,7 @@ public class Items0 extends javax.swing.JInternalFrame {
                 String category = jTextField2.getText();
                 String brand = jTextField3.getText();
                 String name = jTextField4.getText();
-
+           
                 db.iud("UPDATE item SET category='" + category + "',brand='" + brand + "',name='" + name + "' WHERE iditem='" + editID + "'");
                 JOptionPane.showMessageDialog(this, "successfully updated!!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
                 setDetails();
@@ -417,16 +417,10 @@ public class Items0 extends javax.swing.JInternalFrame {
             jTextField3.setText(brand);
             jTextField4.setText(name);
 
-            Pattern p = Pattern.compile("\\d");
-            Matcher m = p.matcher(id);
+            editID = id;
 
-            int i = 0;
-            if (m.find()) {
-                i = m.start();
-            }
-
-            editID = id.substring(i).split("0+")[1];
-
+         
+            
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
 
             dtm.removeRow(selectedRow);
@@ -538,25 +532,8 @@ public class Items0 extends javax.swing.JInternalFrame {
 // nothing to do
                 } else {
 
-                    String idtext = "00001";
-                    if (id <= 99999) {
-                        idtext = Integer.toString(id);
-                    }
-                    if (id <= 9999) {
-                        idtext = "0" + Integer.toString(id);
-                    }
-                    if (id <= 999) {
-                        idtext = "00" + Integer.toString(id);
-                    }
-                    if (id <= 99) {
-                        idtext = "000" + Integer.toString(id);
-                    }
-                    if (id <= 9) {
-                        idtext = "0000" + Integer.toString(id);
-                    }
-
                     Vector v = new Vector();
-                    v.add("I" + idtext);
+                    v.add(id);
                     v.add(category);
                     v.add(brand);
                     v.add(name);

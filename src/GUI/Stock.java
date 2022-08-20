@@ -418,7 +418,7 @@ public class Stock extends javax.swing.JFrame {
             AddItem0 item = new AddItem0();
             Home.viewPanel.add(item);
             try {
-                item.setMaximumSize(this.getSize());
+               // item.setMaximumSize(this.getSize());
                 item.setMaximum(true);
 
             } catch (Exception e) {

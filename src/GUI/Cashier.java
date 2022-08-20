@@ -160,7 +160,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel24.setText("Payment Method");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cash", "Cheque", "Credit Card" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cash" }));
 
         jLabel25.setForeground(new java.awt.Color(0, 204, 0));
         jLabel25.setText("Max: 10");
