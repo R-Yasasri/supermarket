@@ -21,14 +21,14 @@ import model.LoggingAndFeedbackHelper;
  *
  * @author Rajitha Yasasri
  */
-public class Items0 extends javax.swing.JInternalFrame {
+public class ViewItems extends javax.swing.JInternalFrame {
 
     private boolean btnWasPressed = false;
     private static final int ACTIVE = 1;
     private static final int DELETE = 0;
     private String editID;
 
-    public Items0() {
+    public ViewItems() {
         initComponents();
         icon();
         table();
@@ -288,13 +288,13 @@ public class Items0 extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1081, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 

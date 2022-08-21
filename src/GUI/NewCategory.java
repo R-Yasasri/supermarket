@@ -112,16 +112,16 @@ public class NewCategory extends javax.swing.JDialog {
             return;
         }
         
-        AddItem0.jComboBox1.addItem(jTextField1.getText());
-        AddItem0.jComboBox1.setSelectedItem(jTextField1.getText());
-        AddItem0.jComboBox1.setEnabled(true);
+        AddItem.jComboBox1.addItem(jTextField1.getText());
+        AddItem.jComboBox1.setSelectedItem(jTextField1.getText());
+        AddItem.jComboBox1.setEnabled(true);
         this.dispose();
         
-        int itemCount = AddItem0.jComboBox2.getItemCount();
+        int itemCount = AddItem.jComboBox2.getItemCount();
         if (itemCount == 0) {
             NewBrand n = new NewBrand(null, false);
             n.setVisible(true);
-            AddItem0.jComboBox2.setEnabled(false);
+            AddItem.jComboBox2.setEnabled(false);
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed

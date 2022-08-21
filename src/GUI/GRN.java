@@ -933,7 +933,7 @@ public class GRN extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        AddItem0 item = new AddItem0();
+        AddItem item = new AddItem();
         Home.viewPanel.add(item);
         try {
             item.setMaximumSize(this.getSize());

@@ -107,11 +107,11 @@ public class NewBrand extends javax.swing.JDialog {
             return;
         }
         
-        AddItem0.jComboBox2.addItem(jTextField1.getText());
-        AddItem0.jComboBox2.setSelectedItem(jTextField1.getText());
+        AddItem.jComboBox2.addItem(jTextField1.getText());
+        AddItem.jComboBox2.setSelectedItem(jTextField1.getText());
         this.dispose();
-        AddItem0.jComboBox2.setEnabled(true);
-        AddItem0.jTextField2.grabFocus();
+        AddItem.jComboBox2.setEnabled(true);
+        AddItem.jTextField2.grabFocus();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

@@ -21,12 +21,12 @@ import model.ErrorReporter;
  *
  * @author Rajitha Yasasri
  */
-public class AddItem0 extends javax.swing.JInternalFrame {
+public class AddItem extends javax.swing.JInternalFrame {
 
     private static final int ACTIVE = 1;
     private static final int DELETE = 0;
 
-    public AddItem0() {
+    public AddItem() {
         initComponents();
         icon();
         table();

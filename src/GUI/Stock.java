@@ -415,7 +415,7 @@ public class Stock extends javax.swing.JFrame {
 
     private void btn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseClicked
         if (evt.getButton() == LEFT_MOUSE_BTN) {
-            AddItem0 item = new AddItem0();
+            AddItem item = new AddItem();
             Home.viewPanel.add(item);
             try {
                // item.setMaximumSize(this.getSize());
@@ -456,7 +456,7 @@ public class Stock extends javax.swing.JFrame {
 
     private void btn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseClicked
         if (evt.getButton() == LEFT_MOUSE_BTN) {
-            Items0 a = new Items0();
+            ViewItems a = new ViewItems();
             Home.viewPanel.add(a);
             try {
                 a.setMaximumSize(this.getSize());
