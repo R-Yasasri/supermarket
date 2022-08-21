@@ -72,7 +72,7 @@ public class GoodReturn extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "GRN id", "Supplier id", "Supplier name", "Date", "Payment", "Discount"
+                "GRN id", "Supplier id", "Supplier name", "Date", "Payment", "Discount(%)"
             }
         ) {
             boolean[] canEdit = new boolean [] {

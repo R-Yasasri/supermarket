@@ -94,21 +94,21 @@ public class GRN extends javax.swing.JInternalFrame {
         jLabel26 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jSpinField1 = new com.toedter.components.JSpinField();
+        discount_value_text = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        grn_total_text = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -417,23 +417,13 @@ public class GRN extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jLabel13.setText("net total");
+        jLabel13.setText("net total (Rs.)");
 
-        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField6KeyReleased(evt);
-            }
-        });
-
-        jLabel14.setText("discount");
+        jLabel14.setText("discount (%)");
 
         jLabel15.setText("0.00");
 
-        jLabel16.setText("Rs.");
-
-        jLabel17.setText("payment");
-
-        jLabel18.setText("Rs.");
+        jLabel17.setText("payment (Rs.)");
 
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -446,9 +436,7 @@ public class GRN extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel19.setText("balance");
-
-        jLabel20.setText("Rs.");
+        jLabel19.setText("balance (Rs.)");
 
         jButton4.setText("Clear table");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -478,14 +466,29 @@ public class GRN extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel22.setText("Rs.");
-
         jLabel23.setText("0.00");
         jLabel23.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jLabel23KeyReleased(evt);
             }
         });
+
+        jSpinField1.setMaximum(100);
+        jSpinField1.setMinimum(0);
+        jSpinField1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jSpinField1PropertyChange(evt);
+            }
+        });
+
+        discount_value_text.setText("0.00");
+
+        jLabel16.setText("Rs.");
+
+        jLabel22.setText("GRN total (Rs.)");
+
+        grn_total_text.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        grn_total_text.setText("0.00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -499,30 +502,31 @@ public class GRN extends javax.swing.JInternalFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addComponent(jLabel13)
-                .addGap(24, 24, 24)
-                .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(discount_value_text, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(grn_total_text, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel23)
-                .addGap(0, 126, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -541,21 +545,22 @@ public class GRN extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel23))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel14)
+                        .addComponent(jLabel15)
+                        .addComponent(jLabel17)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel19)
+                        .addComponent(jLabel23)
+                        .addComponent(discount_value_text)
+                        .addComponent(jLabel16)
+                        .addComponent(jLabel22)
+                        .addComponent(grn_total_text))
+                    .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
@@ -799,11 +804,7 @@ public class GRN extends javax.swing.JInternalFrame {
         // validation ends
 
         String payment = jTextField7.getText();
-        String discount = jTextField6.getText();
-
-        if (discount.isEmpty()) {
-            discount = "0";
-        }
+        int discount = jSpinField1.getValue();
 
         Date d = new Date();
         String s = "YYYY-MM-dd";
@@ -854,6 +855,9 @@ public class GRN extends javax.swing.JInternalFrame {
 
         LoggingAndFeedbackHelper.successfulInsert("GRN " + grn + " was added", this);
 
+        // do not take this variable below the clear fields method calling. Because then the grn total field is set to 0 and this 0 value is taken and passed to the grn report.
+        String grn_total = grn_total_text.getText();
+
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
         clearFields();
@@ -866,6 +870,8 @@ public class GRN extends javax.swing.JInternalFrame {
             Map<String, Object> m = new HashMap();
             m.put("idgrn", Integer.toString(grn));
             m.put("net_total", Double.toString(netTotal));
+            m.put("grn_total", grn_total);
+            m.put("balance", balance);
 
             String report = System.getenv("reports") + File.separator + "grn.jasper";
 
@@ -958,17 +964,19 @@ public class GRN extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTextField5KeyReleased
 
-    private void jTextField6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyReleased
-        validateDiscount();
-    }//GEN-LAST:event_jTextField6KeyReleased
-
     private void jLabel23KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel23KeyReleased
         calculateBalance();
     }//GEN-LAST:event_jLabel23KeyReleased
 
+    private void jSpinField1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jSpinField1PropertyChange
+        calculateDiscount();
+    }//GEN-LAST:event_jSpinField1PropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel discount_value_text;
+    private javax.swing.JLabel grn_total_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -987,10 +995,8 @@ public class GRN extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1016,6 +1022,7 @@ public class GRN extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
@@ -1023,7 +1030,6 @@ public class GRN extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
@@ -1086,7 +1092,7 @@ public class GRN extends javax.swing.JInternalFrame {
         }
         jLabel15.setText(Double.toString(net_total));
 
-        validateDiscount();
+        calculateDiscount();
         calculateBalance();
 
     }
@@ -1112,47 +1118,38 @@ public class GRN extends javax.swing.JInternalFrame {
         jLabel29.setText(null);
     }
 
-    private void validateDiscount() {
-        String discount = jTextField6.getText();
-
-        if (Validator.isValidNumber(discount)) {
-            jTextField6.setForeground(Color.black);
-
-            String netTotal = jLabel15.getText();
-
-            if (Validator.isValidNumber(netTotal)) {
-
-                if (Double.parseDouble(netTotal) < Double.parseDouble(discount)) {
-                    JOptionPane.showMessageDialog(this, "Discount could not be greater than the net total", "Error", JOptionPane.WARNING_MESSAGE);
-                    jTextField6.setText("");
-
-                }
-            }
+    private void calculateDiscount() {
+        int percentage = jSpinField1.getValue();
+        if (percentage == 0) {
+            discount_value_text.setText("0.00");
         } else {
-            jTextField6.setForeground(Color.red);
+            if (jTable1.getRowCount() > 0) {
+                String s = jLabel15.getText();
+                double netTotal = Double.parseDouble(s);
 
+                double discount = netTotal * percentage / 100;
+
+                String formattedDiscount = String.format("%.2f", discount);
+                discount_value_text.setText(formattedDiscount);
+                discount_value_text.setVisible(true);
+            }
         }
-        calculateBalance();
 
+        calculateGRNTotal();
+        calculateBalance();
     }
 
     private void calculateBalance() {
-        String netTotal = jLabel15.getText();
-        String discount = jTextField6.getText();
+        String grnTotal = grn_total_text.getText();
         String payment = jTextField7.getText();
 
-        if (Validator.isValidNumberMany(netTotal, payment)) {
+        if (Validator.isValidNumber(payment)) {
 
-            if (Double.parseDouble(netTotal) <= 0) {
+            if (Double.parseDouble(grnTotal) <= 0) {
                 return;
             } else {
-                double balance = 0;
-                if (Validator.isValidNumber(discount)) {
-                    balance = Double.parseDouble(payment) - (Double.parseDouble(netTotal) - Double.parseDouble(discount));
-                } else {
-                    balance = Double.parseDouble(payment) - Double.parseDouble(netTotal);
-                }
 
+                double balance = Double.parseDouble(payment) - Double.parseDouble(grnTotal);
                 jLabel23.setText(Double.toString(balance));
 
                 if (balance < 0) {
@@ -1169,8 +1166,22 @@ public class GRN extends javax.swing.JInternalFrame {
 
     private void clearMonetaryFields() {
         jLabel15.setText("0.00");
-        jTextField6.setText("");
+        discount_value_text.setText("0.00");
         jTextField7.setText("");
         jLabel23.setText("0.00");
+        grn_total_text.setText("0.00");
+        jSpinField1.setValue(0);
+    }
+
+    private void calculateGRNTotal() {
+        String net_total = jLabel15.getText();
+        String discount_value = discount_value_text.getText();
+
+        double total = Double.parseDouble(net_total);
+        double discount = Double.parseDouble(discount_value);
+
+        double grnTotal = total - discount;
+        String text = String.format("%.2f", grnTotal);
+        grn_total_text.setText(text);
     }
 }

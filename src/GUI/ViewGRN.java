@@ -65,6 +65,11 @@ public class ViewGRN extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        discount_percentage_text = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
         setClosable(true);
@@ -206,6 +211,16 @@ public class ViewGRN extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Net total (Rs.): ");
 
+        discount_percentage_text.setText("0");
+
+        jLabel16.setText("Balance (Rs.):");
+
+        jLabel17.setText("0.00");
+
+        jLabel18.setText("GRN Total (Rs.)");
+
+        jLabel19.setText("0.00");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -213,19 +228,21 @@ public class ViewGRN extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel10)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel14)))
-                .addContainerGap())
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel18))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(discount_percentage_text)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,11 +254,20 @@ public class ViewGRN extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(discount_percentage_text))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17))
                 .addContainerGap())
         );
 
@@ -271,15 +297,14 @@ public class ViewGRN extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))))
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,6 +328,8 @@ public class ViewGRN extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String grnId = jTextField1.getText();
         String netTotal = jLabel10.getText();
+        String grnTotal = jLabel19.getText();
+        String balance = jLabel17.getText();
 
         if (!grnId.isEmpty()) {
             try {
@@ -310,6 +337,8 @@ public class ViewGRN extends javax.swing.JInternalFrame {
                 Map<String, Object> m = new HashMap();
                 m.put("idgrn", grnId);
                 m.put("net_total", netTotal);
+                m.put("grn_total", grnTotal);
+                m.put("balance", balance);
 
                 String report = System.getenv("reports") + File.separator + "grn.jasper";
 
@@ -334,6 +363,7 @@ public class ViewGRN extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel discount_percentage_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -342,6 +372,10 @@ public class ViewGRN extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -377,6 +411,8 @@ public class ViewGRN extends javax.swing.JInternalFrame {
         try {
             ResultSet search = db.search("SELECT * FROM supplier s INNER JOIN grn g ON g.supplier_idsupplier=s.idsupplier WHERE g.status=1 AND g.idgrn='" + grnId + "'");
 
+            double discountPercentage = 0;
+            double payment = 0;
             if (search.next()) {
                 jLabel3.setText(grnId);
                 jLabel5.setText(search.getString("name"));
@@ -385,8 +421,12 @@ public class ViewGRN extends javax.swing.JInternalFrame {
 
                 jLabel6.setText(address);
                 jLabel8.setText(search.getString("datetime"));
-                jLabel12.setText(search.getString("discount"));
-                jLabel14.setText(search.getString("payment"));
+
+                discountPercentage = search.getDouble("discount");
+                discount_percentage_text.setText("( " + String.format("%.2f", discountPercentage) + "% )");
+
+                payment = search.getDouble("payment");
+                jLabel14.setText(String.format("%.2f", payment));
                 // search the grn item
 
                 ResultSet itemSearch = db.search("SELECT * FROM grnitem g INNER JOIN item i ON g.item_iditem=i.iditem WHERE grn_idgrn='" + grnId + "'");
@@ -409,7 +449,10 @@ public class ViewGRN extends javax.swing.JInternalFrame {
                     net_total = net_total + total;
                 }
 
-                jLabel10.setText(Double.toString(net_total));
+                String formatted_net_total = String.format("%.2f", net_total);
+                jLabel10.setText(formatted_net_total);
+
+                showMonetaryValues(net_total, discountPercentage, payment);
 
                 showGRNDetails(true);
                 CustomLogging.loggingMethod("GRN " + grnId + " was viewed", CustomLogging.INFO);
@@ -420,6 +463,35 @@ public class ViewGRN extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             ErrorReporter.reportError(e);
         }
+    }
+
+    private void showMonetaryValues(double net_total, double discountPercentage, double payment) {
+        String discount = calculateDiscount(net_total, discountPercentage);
+
+        jLabel12.setText(discount);
+
+        String total = calculateTotal(net_total, Double.parseDouble(discount));
+        jLabel19.setText(total);
+
+        String balance = calculateBalance(Double.parseDouble(total), payment);
+        jLabel17.setText(balance);
+    }
+
+    private String calculateTotal(double net_total, double discount) {
+
+        double total = net_total - discount;
+        return String.format("%.2f", total);
+    }
+
+    private String calculateDiscount(double netTotal, double discountPercentage) {
+
+        double discount = netTotal * discountPercentage / 100;
+        return String.format("%.2f", discount);
+    }
+
+    private String calculateBalance(double total, double payment) {
+        double balance = payment - total;
+        return String.format("%.2f", balance);
     }
 
 }
