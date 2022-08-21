@@ -3,3 +3,6 @@
 /build/
 *.log
 *.class
+/Log files/
+nbproject/private
+log.txt
