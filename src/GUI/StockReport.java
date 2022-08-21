@@ -6,15 +6,19 @@
 package GUI;
 
 import database.db;
+import java.awt.Color;
+import java.awt.Component;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.CustomLogging;
 import model.ErrorReporter;
-import model.TableRowColor;
 
 /**
  *
@@ -286,10 +290,55 @@ public class StockReport extends javax.swing.JInternalFrame {
                 }
                 dtm.addRow(v);
             }
+
+            jTable1.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table,
+                        Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+                    super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+                    if (col == 8) {
+                        String expDate = (String) table.getModel().getValueAt(row, 8);
+                        long diff = getDiff(expDate);
+                        if (diff < 30) {
+                            setBackground(Color.red);
+                        } else if (diff < 60) {
+                            setBackground(Color.yellow);
+                        } else {
+                            setBackground(table.getBackground());
+                            setForeground(table.getForeground());
+                        }
+                    } else {
+                        setBackground(table.getBackground());
+                        setForeground(table.getForeground());
+                    }
+
+                    return this;
+                }
+            });
+
             CustomLogging.loggingMethod("Stock was viewed", CustomLogging.INFO);
         } catch (Exception e) {
             ErrorReporter.reportError(e, this, "An Error occurred");
         }
+    }
+
+    private long getDiff(String exp) {
+
+        Date today = new Date();
+        long diff = 0;
+        try {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date expireDate = sdf.parse(exp);
+
+            diff = expireDate.getTime() - today.getTime();
+            diff = diff / 1000 / 3600 / 24;
+        } catch (Exception e) {
+        }
+
+        return diff;
     }
 
     public void searchStock() {
