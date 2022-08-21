@@ -7,6 +7,7 @@ package GUI;
 
 import java.awt.Toolkit;
 import model.ErrorReporter;
+import model.StockChecker;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Progressbar extends javax.swing.JFrame {
         initComponents();
         icon();
         m();
+        StockChecker.stockCorrector();
     }
 
     /**
@@ -106,7 +108,7 @@ public class Progressbar extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Progressbar().setVisible(true);
-                
+
             }
         });
     }
@@ -118,17 +120,17 @@ public class Progressbar extends javax.swing.JFrame {
 
     private void icon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Cooperative-logo (1).gif")));
-        
+
     }
 
     private void n() {
         this.setVisible(false);
     }
-    
+
     private void m() {
-        
+
         Thread t = new Thread() {
-            
+
             @Override
             public void run() {
                 for (int i = 0; i <= 100; i++) {
@@ -149,7 +151,7 @@ public class Progressbar extends javax.swing.JFrame {
                     ErrorReporter.reportError(e);
                 }
             }
-            
+
         };
         t.start();
     }

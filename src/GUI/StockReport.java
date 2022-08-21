@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.CustomLogging;
 import model.ErrorReporter;
+import model.StockChecker;
 
 /**
  *
@@ -286,8 +287,10 @@ public class StockReport extends javax.swing.JInternalFrame {
 
     public void loadAll() {
 
+        StockChecker.stockCorrector();
+
         try {
-            ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.qty>0");
+            ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i ON s.item_iditem=i.iditem WHERE s.status > 0");
 
             loadTable(search);
 
