@@ -258,7 +258,6 @@ public class StockReport extends javax.swing.JInternalFrame {
 
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.setRowCount(0);
-            rowColors.clear();
 
             while (search.next()) {
 
