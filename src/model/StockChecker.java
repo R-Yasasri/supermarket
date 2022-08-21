@@ -15,10 +15,10 @@ public class StockChecker {
     public static void stockCorrector() {
         try {
 
-            String expirequery = "UPDATE stock SET status = 0 WHERE expiredate < curdate() AND status = 1";
+            String expirequery = "UPDATE stock SET status = 0 WHERE expiredate < curdate() AND status > 0";
             db.iud(expirequery);
 
-            String qtyquery = "UPDATE stock SET status = 0 WHERE qty = 0 AND status = 1";
+            String qtyquery = "UPDATE stock SET status = 0 WHERE qty = 0 AND status > 0";
             db.iud(qtyquery);
 
         } catch (Exception e) {
