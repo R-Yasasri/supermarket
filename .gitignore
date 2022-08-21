@@ -4,5 +4,5 @@
 *.log
 *.class
 /Log files/
-nbproject/private
+nbproject/private/
 log.txt
