@@ -29,7 +29,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author Thilina
  */
 public class Cashier extends javax.swing.JInternalFrame {
-    
+
     private int selectedItemId = 0;
     private static final String perDelimiter = " per ";
     private static final String maxDelimiter = " max ";
@@ -94,7 +94,7 @@ public class Cashier extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        invoice_total_text = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -362,8 +362,8 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel26.setText("Invoice total (Rs.)");
 
-        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel27.setText("0.00");
+        invoice_total_text.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        invoice_total_text.setText("0.00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -398,7 +398,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(invoice_total_text, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -426,7 +426,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                         .addComponent(jLabel21)
                         .addComponent(jLabel23)
                         .addComponent(jLabel26)
-                        .addComponent(jLabel27))
+                        .addComponent(invoice_total_text))
                     .addComponent(jSpinField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -443,29 +443,29 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         String stockId = jTextField1.getText();
-        
+
         jTextField1.setForeground(Color.black);
         if (stockId.isEmpty()) {
             clearItemFields(true);
         } else {
-            
+
             try {
                 ResultSet search = db.search("SELECT * FROM stock s INNER JOIN item i INNER JOIN grnitem g ON s.item_iditem=i.iditem AND g.idgrnitem=s.grnitem_idgrnitem WHERE s.qty>0 AND s.`status`=1 AND idstock='" + stockId + "'");
-                
+
                 String text = null;
                 if (search.next()) {
-                    
+
                     String name = search.getString("brand") + " " + search.getString("name");
-                    
+
                     jLabel3.setText(name);
                     jLabel5.setText(search.getString("iditem"));
-                    
+
                     text = search.getString("selling_price") + perDelimiter + search.getString("unit");
-                    
+
                     jLabel10.setText(text);
-                    
+
                     jLabel25.setText(maxDelimiter + search.getString("qty"));
-                    
+
                     calculateTotalPrice();
                 } else {
                     clearItemFields(false);
@@ -479,21 +479,21 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selectedRow = jTable1.getSelectedRow();
-        
+
         if (selectedRow != -1) {
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-            
+
             dtm.removeRow(selectedRow);
-            
+
             if (jTable1.getRowCount() == 0) {
                 clearMonetaryFields();
             } else {
-                
+
                 calculateNetTotal();
                 calculateBalance();
-                
+
             }
-            
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -510,38 +510,38 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
         String maxText = jLabel25.getText();
-        
+
         String q = jTextField2.getText();
-        
+
         jTextField2.setForeground(Color.black);
-        
+
         if (q.isEmpty()) {
             // nothing to do
             return;
         }
-        
+
         if (maxText.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter a stock id, first", "ERROR", JOptionPane.WARNING_MESSAGE);
             jTextField2.setText(null);
             jTextField2.setForeground(Color.red);
         } else {
-            
+
             String m = maxText.split(maxDelimiter)[1];
-            
+
             Double maxQty = Double.parseDouble(m);
-            
+
             if (Validator.isValidNumber(q)) {
-                
+
                 Double qty = Double.parseDouble(q);
                 if (qty <= maxQty) {
                     calculateTotalPrice();
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(this, "Maximum qty is exceeded", "ERROR", JOptionPane.WARNING_MESSAGE);
                     jTextField2.setForeground(Color.red);
                     jTextField2.setText(null);
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Please enter a valid number", "ERROR", JOptionPane.WARNING_MESSAGE);
                 jTextField2.setForeground(Color.red);
@@ -553,28 +553,28 @@ public class Cashier extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String tPrice = jLabel7.getText();
         String name = jLabel3.getText();
-        
+
         if (!tPrice.isEmpty()) {
-            
+
             if (Double.parseDouble(tPrice) < 0 || name.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Invalid data", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                
+
                 Vector v = new Vector();
                 String sId = jTextField1.getText();
                 String iId = jLabel5.getText();
                 String iName = jLabel3.getText();
                 String qty = jTextField2.getText();
-                
+
                 String uPriceAndQty = jLabel10.getText();
-                
+
                 String uPrice = uPriceAndQty.split(perDelimiter)[0];
                 String unit = uPriceAndQty.split(perDelimiter)[1];
-                
+
                 int discount = jSpinField1.getValue();
-                
+
                 double nPrice = Double.parseDouble(qty) * Double.parseDouble(uPrice);
-                
+
                 v.add(sId);
                 v.add(iId);
                 v.add(iName);
@@ -584,12 +584,12 @@ public class Cashier extends javax.swing.JInternalFrame {
                 v.add(nPrice);
                 v.add(discount);
                 v.add(tPrice);
-                
+
                 DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                 dtm.addRow(v);
-                
+
                 clearItemFields(true);
-                
+
                 calculateNetTotal();
                 calculateBalance();
             }
@@ -601,24 +601,24 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
         String payment = jTextField5.getText();
-        
+
         if (Validator.isValidNumber(payment)) {
             jTextField5.setForeground(Color.red);
             calculateBalance();
         } else {
-            
+
             jTextField5.setForeground(Color.black);
         }
     }//GEN-LAST:event_jTextField5KeyReleased
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         String balance = jLabel19.getText();
-        
+
         if (jTable1.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Empty table", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         if (balance.equals("0.00") || (jLabel19.getForeground() == Color.red) || (Double.parseDouble(balance) < 0)) {
             JOptionPane.showMessageDialog(this, "Invalid balance", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
@@ -630,18 +630,18 @@ public class Cashier extends javax.swing.JInternalFrame {
         // save the data
         try {
             String payment_method = jComboBox1.getSelectedItem().toString();
-            
+
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String today = sdf.format(date);
-            
+
             int discount = jSpinField2.getValue();
-            
+
             String payment = jTextField5.getText();
-            
+
             db.iud("INSERT INTO invoice (datetime,payment_method,status,discount,payment) VALUES('" + today + "','" + payment_method + "','" + 1 + "','" + discount + "','" + payment + "')");
             ResultSet search = db.search("SELECT MAX(idinvoice) FROM invoice");
-            
+
             int invoiceId = 1;
             if (search.next()) {
                 invoiceId = search.getInt(1);
@@ -649,7 +649,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             // save invoice items and reduce the stock
             for (int i = 0; i < jTable1.getRowCount(); i++) {
-                
+
                 String stockId = jTable1.getValueAt(i, 0).toString();
                 String itemId = jTable1.getValueAt(i, 1).toString();
                 String item = jTable1.getValueAt(i, 2).toString();
@@ -660,22 +660,22 @@ public class Cashier extends javax.swing.JInternalFrame {
                 String dis = jTable1.getValueAt(i, 7).toString();
                 // deduct the stock
                 ResultSet stockSearch = db.search("SELECT qty FROM stock WHERE idstock='" + stockId + "'");
-                
+
                 if (stockSearch.next()) {
-                    
+
                     double stockQty = stockSearch.getDouble(1);
                     double soldQty = Double.parseDouble(qty);
-                    
+
                     double newStockQty = stockQty - soldQty;// already validated that the newStockQty is a positive number
 
                     db.iud("UPDATE stock SET qty='" + newStockQty + "' WHERE idstock='" + stockId + "'");
-                    
+
                 }
 
                 // save invoice items
                 db.iud("INSERT INTO invoiceitem (item_iditem,invoice_idinvoice,qty,unit_price,unit,discount,status,stock_idstock) VALUES ('" + itemId + "','" + invoiceId + "','" + qty + "','" + unitPrice + "','" + unit + "','" + dis + "','" + 1 + "','" + stockId + "')");
             }
-            
+
             LoggingAndFeedbackHelper.successfulInsert("Invoice " + invoiceId + " was added", this);
             clearMonetaryFields();
             // clear the table
@@ -684,22 +684,22 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             // generate invoice
             try {
-                
+
                 String invId = Integer.toString(invoiceId);
-                
+
                 Map<String, Object> m = new HashMap();
                 m.put("invId", invId);
                 m.put("net_total", netTotal);
-                
+
                 String report = System.getenv("reports") + File.separator + "invoice.jasper";
-                
+
                 JasperPrint fillReport = JasperFillManager.fillReport(report, m, db.getConnection());
                 JasperViewer.viewReport(fillReport, false);
                 JasperPrintManager.printReport(fillReport, true);
             } catch (Exception e) {
                 ErrorReporter.reportError(e);
             }
-            
+
         } catch (Exception e) {
             ErrorReporter.reportError(e);
             JOptionPane.showMessageDialog(this, "An Error Occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -708,6 +708,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel invoice_total_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -733,7 +734,6 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -756,126 +756,134 @@ public class Cashier extends javax.swing.JInternalFrame {
     public void init() {
         try {
             ResultSet search = db.search("SELECT MAX(idinvoice) FROM invoice");
-            
+
             int idInvoice = 0;
             if (search.next()) {
-                
+
                 idInvoice = search.getInt(1);
             }
-            
+
             if (idInvoice == 0) {
                 idInvoice = 1;
             }
-            
+
             jLabel2.setText(Integer.toString(idInvoice));
         } catch (Exception e) {
             ErrorReporter.reportError(e);
         }
-        
+
     }
-    
+
     private void clearItemFields(boolean clearStockId) {
-        
+
         if (clearStockId) {
             jTextField1.setText("");
         }
-        
+
         jTextField2.setText("");
         jSpinField1.setValue(0);
-        
+
         jLabel3.setText("");
         jLabel5.setText("");
         jLabel10.setText("");
         jLabel7.setText("");
         jLabel25.setText("");
     }
-    
+
     private void calculateTotalPrice() {
         String qty = jTextField2.getText();
         String unitPrice = jLabel10.getText().split(perDelimiter)[0];
-        
+
         jLabel7.setForeground(Color.black);
         if (!qty.isEmpty() && !unitPrice.isEmpty()) {
-            
+
             Double q = Double.parseDouble(qty);
             Double u = Double.parseDouble(unitPrice);
-            
+
             double total = q * u;
-            
+
             Integer discount = jSpinField1.getValue();
-            
+
             if (discount != 0) {
                 double d = discount.doubleValue();
-                
+
                 total = total - d;
             }
-            
+
             if (total < 0) {
                 jLabel7.setForeground(Color.red);
             }
-            
+
             jLabel7.setText(Double.toString(total));
         } else {
             jLabel7.setText("");
         }
     }
-    
+
     private void calculateNetTotal() {
-        
+
         if (jTable1.getRowCount() > 0) {
             int rowCount = jTable1.getRowCount();
-            
+
             double netTotal = 0;
             for (int i = 0; i < rowCount; i++) {
                 String value = jTable1.getValueAt(i, 8).toString();
                 double totalPrice = Double.parseDouble(value);
-                
+
                 netTotal = netTotal + totalPrice;
             }
-            
+
             jLabel13.setText(Double.toString(netTotal));
+            calculateInvoiceTotal();
             calculateBalance();
         }
     }
-    
+
     private void calculateBalance() {
         String payment = jTextField5.getText();
         Integer discount = jSpinField2.getValue();
         String netTotal = jLabel13.getText();
-        
+
         jTextField5.setForeground(Color.black);
         jLabel19.setForeground(Color.black);
-        
+
         if (!netTotal.isEmpty() && !payment.isEmpty()) {
-            
+
             double balance = 0;
-            
+
             double pay = Double.parseDouble(payment);
             double net = Double.parseDouble(netTotal);
-            
+
             if (discount == 0) {
                 balance = pay - net;
             } else {
-                
+
                 double dis = discount.doubleValue();
                 balance = pay - (net - dis);
             }
-            
+
             jLabel19.setText(Double.toString(balance));
-            
+
             if (balance < 0) {
                 jLabel19.setForeground(Color.red);
             }
         } else {
-            
+
             jLabel19.setText("0.00");
         }
     }
-    
+
     private void clearMonetaryFields() {
-        
+
         jLabel13.setText("0.00");
         jSpinField2.setValue(0);
         jTextField5.setText("");
+    }
+
+    private void calculateInvoiceTotal() {
+        Integer discount = jSpinField2.getValue();
+
+        double total = Double.parseDouble(jLabel13.getText()) - discount.doubleValue();
+        invoice_total_text.setText(Double.toString(total));
     }
 }
