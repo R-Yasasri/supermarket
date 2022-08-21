@@ -691,6 +691,13 @@ public class GRN extends javax.swing.JInternalFrame {
             return;
         }
 
+        Date today = new Date();
+        if (exp.before(today)) {
+            JOptionPane.showMessageDialog(this, "Expire date cannot be a previous day", "WARNING", JOptionPane.WARNING_MESSAGE);
+            jDateChooser1.grabFocus();
+            return;
+        }
+
         // validation ends
         double total = Double.parseDouble(qty) * Double.parseDouble(unit_price);
 
