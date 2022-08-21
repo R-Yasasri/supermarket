@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.ErrorReporter;
+import model.LoggingAndFeedbackHelper;
 
 /**
  *
@@ -233,12 +235,11 @@ public class TimeOffRequest extends javax.swing.JInternalFrame {
 
             db.iud("INSERT INTO time_off_requests (reason,begin_time,end_time,employee_idemployee) VALUES ('" + reason + "','" + sTime + "','" + eTime + "','" + empId + "')");
 
-            JOptionPane.showMessageDialog(this, "Data saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            LoggingAndFeedbackHelper.successfulInsert("Time off request for employee" + empId + " was added", this);
             clearFields();
             setId();
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error occurred. Please recheck the data", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            ErrorReporter.reportError(e, this, "Error occurred. Please recheck the data");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -276,7 +277,7 @@ public class TimeOffRequest extends javax.swing.JInternalFrame {
             jLabel2.setText(Integer.toString(id));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

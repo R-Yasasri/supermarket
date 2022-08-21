@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import model.CustomLogging;
+import model.ErrorReporter;
 
 public class Logins extends javax.swing.JFrame {
 
@@ -153,9 +154,7 @@ public class Logins extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
-
+            ErrorReporter.reportError(e, this);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

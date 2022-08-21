@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import model.CustomLogging;
+import model.ErrorReporter;
 import model.Validator;
 
 public class Users extends javax.swing.JInternalFrame {
@@ -418,10 +420,11 @@ public class Users extends javax.swing.JInternalFrame {
         try {
             db.iud("UPDATE user SET email ='" + email + "' ,nic='" + nic + "',password='" + password + "',fname='" + fname + "',lname='" + lname + "',img='" + imgPath + "',dob='" + dob + "',gender='" + gender + "',mobile1='" + mobile1 + "',mobile2='" + mobile2 + "',address='" + address + "',civil_status='" + civil_status + "',img='" + imgPath + "'");// no need to use a where clause becuase there is one and only admin(user)
 
+            CustomLogging.loggingMethod("User details were updated", CustomLogging.INFO);
             JOptionPane.showMessageDialog(null, "saved successfully");
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
 
         }
 
@@ -459,7 +462,7 @@ public class Users extends javax.swing.JInternalFrame {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -600,7 +603,7 @@ public class Users extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }

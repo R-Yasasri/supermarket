@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 
 /**
  *
@@ -178,12 +180,12 @@ public class DisciplinaryHistory extends javax.swing.JInternalFrame {
 
             db.iud("INSERT INTO disciplinary_history (description,action_taken,date,employee_idemployee) VALUES ('" + description + "','" + action + "','" + dateString + "','" + empId + "')");
 
-            JOptionPane.showMessageDialog(this, "Data is saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            LoggingAndFeedbackHelper.successfulInsert("Disciplinary history record for employee " + empId + " was added", this);
 
             clearFields();
             setId();
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -218,7 +220,7 @@ public class DisciplinaryHistory extends javax.swing.JInternalFrame {
             jLabel2.setText(Integer.toString(id));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

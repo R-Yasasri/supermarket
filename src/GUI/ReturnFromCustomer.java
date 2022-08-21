@@ -12,9 +12,11 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import model.CustomLogging;
+import model.ErrorReporter;
+import model.LoggingAndFeedbackHelper;
 import model.Validator;
 
 /**
@@ -364,7 +366,7 @@ public class ReturnFromCustomer extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No such Invoice", "Warning", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -415,39 +417,36 @@ public class ReturnFromCustomer extends javax.swing.JInternalFrame {
             String todayString = sdf.format(today);
 
             db.iud("INSERT INTO return_from_customer (reason,payment_paid,qty,invoiceitem_invoiceitemid,date) VALUES ('" + reason + "','" + payment + "','" + qty + "','" + idInvItem + "','" + todayString + "')");
-            
+
             if (jCheckBox1.isSelected()) {
                 //add as a separate stock
                 // take the selling price, expire date, itemid and grnitem_idgrnitem from the parent stock record
-                ResultSet search = db.search("SELECT selling_price,expiredate,grnitem_idgrnitem,s.item_iditem FROM stock s INNER JOIN invoiceitem i ON i.stock_idstock=s.idstock WHERE i.invoiceitemid='"+idInvItem+"' ");
-                
+                ResultSet search = db.search("SELECT selling_price,expiredate,grnitem_idgrnitem,s.item_iditem FROM stock s INNER JOIN invoiceitem i ON i.stock_idstock=s.idstock WHERE i.invoiceitemid='" + idInvItem + "' ");
+
                 if (search.next()) {
-                    
-                    String selling_price=search.getString("selling_price");
-                    String expireDate=search.getString("expiredate");
-                    String idgrnitem=search.getString("grnitem_idgrnitem");
-                    String iditem=search.getString("item_iditem");
-                    
-                    db.iud("INSERT INTO stock (item_iditem,qty,selling_price,expiredate,grnitem_idgrnitem,status) VALUES('"+iditem+"','"+qty+"','"+selling_price+"','"+expireDate+"','"+idgrnitem+"','"+2+"') ");
+
+                    String selling_price = search.getString("selling_price");
+                    String expireDate = search.getString("expiredate");
+                    String idgrnitem = search.getString("grnitem_idgrnitem");
+                    String iditem = search.getString("item_iditem");
+
+                    db.iud("INSERT INTO stock (item_iditem,qty,selling_price,expiredate,grnitem_idgrnitem,status) VALUES('" + iditem + "','" + qty + "','" + selling_price + "','" + expireDate + "','" + idgrnitem + "','" + 2 + "') ");
                 }
-            }else{
+            } else {
                 //take the parent stock qty and add this qty to it
-                ResultSet search = db.search("SELECT qty FROM stock WHERE idstock=(SELECT stock_idstock FROM invoiceitem WHERE invoiceitemid='"+idInvItem+"')");
+                ResultSet search = db.search("SELECT qty FROM stock WHERE idstock=(SELECT stock_idstock FROM invoiceitem WHERE invoiceitemid='" + idInvItem + "')");
                 if (search.next()) {
-                    
-                    double stockQty=search.getDouble("qty");
-                    double newQty=stockQty+Double.parseDouble(qty);
-                    
+
+                    double stockQty = search.getDouble("qty");
+                    double newQty = stockQty + Double.parseDouble(qty);
+
                     //save it
-                    
-                    db.iud("UPDATE stock SET qty='"+newQty+"' WHERE idstock=(SELECT stock_idstock FROM invoiceitem WHERE invoiceitemid='"+idInvItem+"')");
-                    
+                    db.iud("UPDATE stock SET qty='" + newQty + "' WHERE idstock=(SELECT stock_idstock FROM invoiceitem WHERE invoiceitemid='" + idInvItem + "')");
+
                 }
             }
-            
 
-            JOptionPane.showMessageDialog(this, "Data saved successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
-
+            LoggingAndFeedbackHelper.successfulInsert("Return From Customer record for invoiceitem id" + idInvItem + " of invoice " + invId + " was added", this);
             //clear fields
             jTextArea1.setText(null);
             jTextField2.setText(null);
@@ -457,8 +456,7 @@ public class ReturnFromCustomer extends javax.swing.JInternalFrame {
             setId();
 
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An Error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, "An Error occurred");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -539,7 +537,7 @@ public class ReturnFromCustomer extends javax.swing.JInternalFrame {
 
             jLabel3.setText(Integer.toString(id));
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }

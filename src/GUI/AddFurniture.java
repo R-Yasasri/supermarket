@@ -20,6 +20,8 @@ import model.Validator;
 import java.util.Date;
 import javax.swing.table.TableCellEditor;
 import java.text.SimpleDateFormat;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 
 /**
  *
@@ -332,7 +334,7 @@ public class AddFurniture extends javax.swing.JInternalFrame {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }//GEN-LAST:event_jLabel12MouseClicked
@@ -397,13 +399,13 @@ public class AddFurniture extends javax.swing.JInternalFrame {
 
             db.iud("INSERT INTO furniture (type,name,color,material,seller,seller_address,warranty_no,warranty,price,bought_date,other,status) VALUES ('" + type + "','" + name + "','" + color + "','" + material + "','" + seller + "','" + seller_address + "','" + warranty_no + "','" + imgPath + "','" + price + "','" + boughtDate + "','" + other + "',1)");
 
-            JOptionPane.showMessageDialog(this, "Data saved Successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            LoggingAndFeedbackHelper.successfulInsert("A furniture with name: " + name + ", type: " + type + " was added", this);
 
             clearFields();
             setId();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -454,7 +456,7 @@ public class AddFurniture extends javax.swing.JInternalFrame {
 
             jLabel2.setText(Integer.toString(id));
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }

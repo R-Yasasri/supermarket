@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 import model.Validator;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -457,7 +459,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                     jTextField1.setForeground(Color.red);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }//GEN-LAST:event_jTextField1KeyReleased
@@ -628,7 +630,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
                 jTextField4.setForeground(Color.red);
             }
         }
@@ -707,7 +709,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                 db.iud("INSERT INTO invoiceitem (item_iditem,invoice_idinvoice,qty,unit_price,unit,discount,status,stock_idstock) VALUES ('" + itemId + "','" + invoiceId + "','" + qty + "','" + unitPrice + "','" + unit + "','" + dis + "','" + 1 + "','" + stockId + "')");
             }
 
-            JOptionPane.showMessageDialog(this, "Data saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            LoggingAndFeedbackHelper.successfulInsert("Invoice " + invoiceId + " was added", this);
             clearMonetaryFields();
             // clear the table
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
@@ -728,11 +730,11 @@ public class Cashier extends javax.swing.JInternalFrame {
                 JasperViewer.viewReport(fillReport, false);
                 JasperPrintManager.printReport(fillReport, true);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
             JOptionPane.showMessageDialog(this, "An Error Occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -797,7 +799,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             jLabel2.setText(Integer.toString(idInvoice));
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }

@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CustomLogging;
+import model.ErrorReporter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
@@ -296,14 +298,14 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
                 Map<String, Object> m = new HashMap();
                 m.put("invId", invoiceId);
                 m.put("net_total", netTotal);
-                
+
                 String report = System.getenv("reports") + File.separator + "invoice.jasper";
 
                 JasperPrint fillReport = JasperFillManager.fillReport(report, m, db.getConnection());
                 JasperViewer.viewReport(fillReport, false);
                 JasperPrintManager.printReport(fillReport, true);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
 
         }
@@ -388,6 +390,7 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
                 jLabel9.setText(Double.toString(total));
 
                 showDetails(true);
+                CustomLogging.loggingMethod("Invoice " + invoiceId + " was viewed", CustomLogging.INFO);
 
             } else {
                 showDetails(false);
@@ -396,7 +399,7 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

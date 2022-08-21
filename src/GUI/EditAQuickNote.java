@@ -15,7 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import model.CustomLogging;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 import model.Validator;
 
 /**
@@ -23,9 +24,9 @@ import model.Validator;
  * @author User
  */
 public class EditAQuickNote extends javax.swing.JInternalFrame {
-    
-    private String imgPath="";
-    
+
+    private String imgPath = "";
+
     public EditAQuickNote() {
         initComponents();
         init();
@@ -228,15 +229,15 @@ public class EditAQuickNote extends javax.swing.JInternalFrame {
             FileNameExtensionFilter filter = new FileNameExtensionFilter("*images", ".jpeg", "png", "jpg");
             jf.addChoosableFileFilter(filter);
             int soDdialod = jf.showOpenDialog(this);
-            
+
             if (soDdialod == jf.APPROVE_OPTION) {
                 String path = jf.getSelectedFile().getAbsolutePath();
                 imgPath = path.replace("\\", "/");
                 setImage();
-                
+
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -248,29 +249,29 @@ public class EditAQuickNote extends javax.swing.JInternalFrame {
         String noteId = jTextField4.getText();
         String topic = jTextField3.getText();
         String note = jTextPane3.getText();
-        
+
         if (Validator.isEmptyText(topic)) {
             JOptionPane.showMessageDialog(this, "Please provide a topic", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            
+
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            
+
             String dateString = sdf.format(date);
-            
+
             String sqlStatement = "UPDATE quicknote SET topic='" + topic + "',note='" + note + "',img='" + imgPath + "',datetaken='" + dateString + "' WHERE idquicknote='" + noteId + "'";
 //            System.out.println(sqlStatement);
             try {
                 db.iud(sqlStatement);
-                CustomLogging.loggingMethod(CustomLogging.INFO, "User " + Home.loggedInUserNIC + " updated the note of id " + noteId);
-                JOptionPane.showMessageDialog(this, "Successfully updated the note", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-                
+
+                LoggingAndFeedbackHelper.successfulUpdate("Quicknote " + noteId + " was updated", this);
+
                 jTextField3.setText(null);
                 jTextPane3.setText(null);
                 jPanel3.setVisible(false);
                 clearImage();
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -306,11 +307,11 @@ public class EditAQuickNote extends javax.swing.JInternalFrame {
         jLabel12.setIcon(null);
         imgPath = "";
     }
-    
+
     private void init() {
         jPanel3.setVisible(false);
     }
-    
+
     private void search() {
         String noteId = jTextField4.getText();
         if (Validator.isEmptyText(noteId)) {
@@ -318,13 +319,13 @@ public class EditAQuickNote extends javax.swing.JInternalFrame {
             jPanel3.setVisible(false);
         } else {
             try {
-                
+
                 ResultSet search = db.search("SELECT * FROM quicknote WHERE idquicknote='" + noteId + "'");
                 if (search.next()) {
                     String topic = search.getString("topic");
                     String note = search.getString("note");
                     imgPath = search.getString("img");
-                    
+
                     jTextField3.setText(topic);
                     jTextPane3.setText(note);
                     setImage();
@@ -334,24 +335,24 @@ public class EditAQuickNote extends javax.swing.JInternalFrame {
                     jPanel3.setVisible(false);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }
-    
+
     public void searchFromExternal(String noteId) {
         jTextField4.setText(noteId);
         search();
     }
-    
+
     private void setImage() throws Exception {
-        
+
         if (Validator.isEmptyText(imgPath)) {
             jLabel12.setText("No image");
         } else {
-            
+
             File f = new File(imgPath);
-            
+
             Image img = ImageIO.read(f);
             img = img.getScaledInstance(jLabel12.getWidth(), jLabel12.getHeight(), Image.SCALE_SMOOTH);
             jLabel12.setText(null);

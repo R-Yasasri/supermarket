@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 import model.Validator;
 
 /**
@@ -177,12 +179,12 @@ public class AddAPettyCash extends javax.swing.JInternalFrame {
 
                 db.iud("INSERT INTO petty_cash (type,amount,date,description)VALUES('" + type + "','" + amount + "','" + dateString + "','" + desc + "')");
 
-                JOptionPane.showMessageDialog(this, "Successfully saved the details", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                LoggingAndFeedbackHelper.successfulInsert("A petty cash record with type: " + type + ", was added", this);
 
                 clearFields();
                 setId();
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         } else {
 
@@ -223,7 +225,7 @@ public class AddAPettyCash extends javax.swing.JInternalFrame {
             jLabel2.setText(Integer.toString(id));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

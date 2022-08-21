@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.ErrorReporter;
 
 /**
  *
@@ -233,7 +234,7 @@ public class ReturnFromCustomerList extends javax.swing.JInternalFrame {
             ResultSet search = db.search(query);
             loadTable(search);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -301,7 +302,7 @@ public class ReturnFromCustomerList extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 }

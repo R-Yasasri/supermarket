@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.CustomLogging;
+import model.ErrorReporter;
 import model.Validator;
 
 /**
@@ -219,7 +221,7 @@ public class RemoveStock extends javax.swing.JInternalFrame {
                         jTextField1.setForeground(Color.red);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    ErrorReporter.reportError(e);
                 }
 
             } else {
@@ -311,10 +313,11 @@ public class RemoveStock extends javax.swing.JInternalFrame {
 
                     db.iud("UPDATE stock SET qty='" + newQty + "' WHERE idstock='" + stockId + "'");
 
-                    JOptionPane.showMessageDialog(this, "Stock is removed successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
                 }
+                CustomLogging.loggingMethod("Stock " + stockId + " was removed", CustomLogging.INFO);
+                JOptionPane.showMessageDialog(this, "Stock is removed successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
             clearFields();
             showLabels(false);
@@ -363,7 +366,7 @@ public class RemoveStock extends javax.swing.JInternalFrame {
             jLabel2.setText(Integer.toString(id));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }

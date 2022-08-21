@@ -16,14 +16,15 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import model.CustomLogging;
+import model.ErrorReporter;
 
 /**
  *
  * @author Rajitha Yasasri
  */
 public class ViewFurniture extends javax.swing.JInternalFrame {
-    
+
     private final int ID_SEARCH = 0;
     private final int TYPE_SEARCH = 1;
     private final int NAME_SEARCH = 2;
@@ -32,10 +33,10 @@ public class ViewFurniture extends javax.swing.JInternalFrame {
     private final int SELLER_SEARCH = 5;
     private final int WARRANTY_SEARCH = 6;
     private final int BOUGHT_DATE_SEARCH = 7;
-    
+
     public final String LINE_SEPARATOR = ",,,,";
     public final String VALUE_SEPARATOR = "----";
-    
+
     public ViewFurniture() {
         initComponents();
         loadAll();
@@ -273,11 +274,11 @@ public class ViewFurniture extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
+
         if (jComboBox1.getSelectedIndex() == BOUGHT_DATE_SEARCH) {
             jDateChooser1.setVisible(true);
             jTextField3.setVisible(false);
-            
+
             jDateChooser1.setDate(null);
         } else {
             jDateChooser1.setVisible(false);
@@ -296,19 +297,19 @@ public class ViewFurniture extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int selectedRow = jTable1.getSelectedRow();
-        
+
         if (selectedRow != -1) {
-            
+
             try {
-                
+
                 String fId = jTable1.getValueAt(selectedRow, 0).toString();
-                
+
                 ResultSet search = db.search("SELECT warranty,other FROM furniture WHERE idfurniture='" + fId + "'");
                 viewImage(search);
-                
+
                 viewOtherDetails(search);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -321,64 +322,65 @@ public class ViewFurniture extends javax.swing.JInternalFrame {
         try {
             jTable1.print();
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+
         int result = JOptionPane.showConfirmDialog(this, "Do you really need to remove this furniture(s) ?\n this action can not be reversed", "WARNING", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        
+
         if (result == JOptionPane.YES_OPTION) {
-            
+
             int rowCount = jTable1.getRowCount();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            
+
             if (rowCount != 0) {
-                
+
                 for (int i = 0; i < rowCount; i++) {
-                    
+
                     String isChecked = jTable1.getValueAt(i, 10).toString();
                     if (Boolean.parseBoolean(isChecked)) {
                         try {
                             String fId = jTable1.getValueAt(i, 0).toString();
-                            
+
                             db.iud("UPDATE furniture SET status=-1 WHERE idfurniture='" + fId + "'");
-                            
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
+                            CustomLogging.loggingMethod("Removed furniture " + fId, CustomLogging.INFO);
+
+                        } catch (Exception e) {
+                            ErrorReporter.reportError(e);
                         }
                     }
                 }
-                
+
                 loadAll();
                 clearTableImage();
                 JOptionPane.showMessageDialog(this, "Successfully removed furniture", "INFO", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        
+
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
         int selectedRow = jTable1.getSelectedRow();
-        
+
         if (selectedRow != -1) {
-            
+
             try {
-                
+
                 EditFurniture ef = new EditFurniture();
                 Home.viewPanel.add(ef);
-                
+
                 ef.show();
                 String fId = jTable1.getValueAt(selectedRow, 0).toString();
-                
+
                 ef.searchFromExternal(fId);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
-            
+
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -407,9 +409,9 @@ public class ViewFurniture extends javax.swing.JInternalFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
         try {
-            
+
             while (search.next()) {
-                
+
                 Vector v = new Vector();
                 v.add(search.getString("idfurniture"));
                 v.add(search.getString("type"));
@@ -422,39 +424,39 @@ public class ViewFurniture extends javax.swing.JInternalFrame {
                 v.add(search.getString("price"));
                 v.add(search.getString("bought_date"));
                 v.add(false);
-                
+
                 dtm.addRow(v);
             }
-            
+
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
-        
+
     }
-    
+
     private void search() {
-        
+
         try {
             int selectedIndex = jComboBox1.getSelectedIndex();
-            
+
             ResultSet search = null;
             if (selectedIndex == BOUGHT_DATE_SEARCH) {
                 Date date = jDateChooser1.getDate();
-                
+
                 if (date != null) {
-                    
+
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    
+
                     String format = sdf.format(date);
-                    
+
                     String query = "SELECT * FROM furniture WHERE status=1 AND bought_date LIKE '%" + format + "%'";
                     search = db.search(query);
                 }
             } else {
                 String text = jTextField3.getText();
-                
+
                 if (!text.isEmpty()) {
-                    
+
                     String query = "";
                     if (selectedIndex == this.ID_SEARCH) {
                         query = "SELECT * FROM furniture WHERE status=1 AND idfurniture = '" + text + "'";
@@ -471,51 +473,51 @@ public class ViewFurniture extends javax.swing.JInternalFrame {
                     } else if (selectedIndex == this.WARRANTY_SEARCH) {
                         query = "SELECT * FROM furniture WHERE status=1 AND warranty_no LIKE '%" + text + "%'";
                     }
-                    
+
                     search = db.search(query);
                 }
             }
-            
+
             if (search != null) {
                 loadTable(search);
             } else {
                 clearTableImage();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
-        
+
     }
-    
+
     private void loadAll() {
-        
+
         try {
             ResultSet search = db.search("SELECT * FROM furniture WHERE status=1");
-            
+
             loadTable(search);
-            
+
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
-        
+
     }
-    
+
     private void viewImage(ResultSet search) {
-        
+
         jLabel1.setText("Loading ...");
         jLabel1.setIcon(null);
         try {
-            
+
             if (search.next()) {
                 String imgPath = search.getString("warranty");
-                
+
                 if (imgPath.isEmpty()) {
-                    
+
                     jLabel1.setText("no image");
-                    
+
                 } else {
                     File f = new File(imgPath);
-                    
+
                     Image img = ImageIO.read(f);
                     img = img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
                     jLabel1.setText(null);
@@ -523,44 +525,44 @@ public class ViewFurniture extends javax.swing.JInternalFrame {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
-    
+
     private void viewOtherDetails(ResultSet search) {
         //other details
 
         DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
         dtm.setRowCount(0);
-        
+
         try {
             String other = search.getString("other");
-            
+
             if (other != null && !other.isEmpty()) {
                 String[] split = other.split(LINE_SEPARATOR);
-                
+
                 for (int i = 0; i < split.length; i++) {
-                    
+
                     String line = split[i];
-                    
+
                     String[] propertyValuePair = line.split(VALUE_SEPARATOR);
-                    
+
                     Vector v = new Vector();
                     v.add(propertyValuePair[0]);
                     v.add(propertyValuePair[1]);
-                    
+
                     dtm.addRow(v);
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
-    
+
     private void clearTableImage() {
         DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
         dtm.setRowCount(0);
-        
+
         jLabel1.setText("warranty");
         jLabel1.setIcon(null);
     }

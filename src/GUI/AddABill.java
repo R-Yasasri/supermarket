@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 import model.Validator;
 
 /**
@@ -265,11 +267,11 @@ public class AddABill extends javax.swing.JInternalFrame {
 
             db.iud("INSERT INTO bill (type,description,amount,date,paid_by,provider,payment_centre,payment_centre_address,payment_method) VALUES ('" + type + "','" + desc + "','" + amount + "','" + dateString + "','" + paidBy + "','" + provider + "','" + paymentCentre + "','" + address + "','" + payment_method + "')");
 
-            JOptionPane.showMessageDialog(this, "Data Saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            LoggingAndFeedbackHelper.successfulInsert("A bill with type: " + type + ", was added", this);
             clearFields();
             setId();
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -316,7 +318,7 @@ public class AddABill extends javax.swing.JInternalFrame {
             jLabel2.setText(Integer.toString(id));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

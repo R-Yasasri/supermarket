@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.ErrorReporter;
+import model.LoggingAndFeedbackHelper;
 
 /**
  *
@@ -172,12 +174,11 @@ public class PerformanceFeedback extends javax.swing.JInternalFrame {
 
             db.iud("INSERT INTO performance_feedback (description,date,employee_idemployee) VALUES ('" + description + "','" + dateString + "','" + empId + "')");
 
-            JOptionPane.showMessageDialog(this, "Data saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
-
+            LoggingAndFeedbackHelper.successfulInsert("PerformanceFeedback for the employee " + empId + " was added", this);
             setId();
             clearFields();
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -211,7 +212,7 @@ public class PerformanceFeedback extends javax.swing.JInternalFrame {
             jLabel2.setText(Integer.toString(id));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

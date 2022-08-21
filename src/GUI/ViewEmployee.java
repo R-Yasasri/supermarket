@@ -15,6 +15,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CustomLogging;
+import model.ErrorReporter;
 
 /**
  *
@@ -248,7 +250,7 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
         try {
             jTable1.print();
         } catch (PrinterException e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -291,7 +293,7 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -313,9 +315,9 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
                             String empId = jTable1.getValueAt(i, 0).toString();
 
                             db.iud("UPDATE employee SET status=-1 WHERE idemployee='" + empId + "'");
-
+                            CustomLogging.loggingMethod("Removed employee " + empId, CustomLogging.INFO);
                         } catch (Exception ex) {
-                            ex.printStackTrace();
+                            ErrorReporter.reportError(ex);
                         }
                     }
                 }
@@ -344,17 +346,16 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
 
             try {
 
-                EditAnEmployee edit=new EditAnEmployee();
+                EditAnEmployee edit = new EditAnEmployee();
                 Home.viewPanel.add(edit);
 
 //                edit.setMaximum(true);
-
                 edit.show();
                 String empId = jTable1.getValueAt(selectedRow, 0).toString();
 
                 edit.searchFromExternal(empId);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
 
         }
@@ -404,7 +405,7 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }
@@ -416,7 +417,7 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
 
             loadTable(search);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -448,7 +449,7 @@ public class ViewEmployee extends javax.swing.JInternalFrame {
                 loadTable(search);
 
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }

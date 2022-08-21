@@ -8,13 +8,11 @@ package GUI;
 import database.db;
 import java.sql.ResultSet;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import model.CustomLogging;
+import model.ErrorReporter;
 
 /**
  *
@@ -250,13 +248,14 @@ public class ViewIsolatedStocks extends javax.swing.JInternalFrame {
                         String stockId = jTable1.getValueAt(i, 0).toString();
 
                         db.iud("UPDATE stock SET status=1 WHERE idstock='" + stockId + "'");
-                        
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+
+                        CustomLogging.loggingMethod("Stock " + stockId + " was added to the main stock", CustomLogging.INFO);
+                    } catch (Exception e) {
+                        ErrorReporter.reportError(e);
                     }
                 }
             }
-            
+
             loadAll();
 
             JOptionPane.showMessageDialog(this, "Successfully added to the main stock", "INFO", JOptionPane.INFORMATION_MESSAGE);
@@ -287,8 +286,7 @@ public class ViewIsolatedStocks extends javax.swing.JInternalFrame {
             loadTable(search);
 
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, "An error occurred");
         }
     }
 
@@ -320,9 +318,10 @@ public class ViewIsolatedStocks extends javax.swing.JInternalFrame {
 
                 dtm.addRow(v);
             }
+
+            CustomLogging.loggingMethod("Isolated stocks were viewed", CustomLogging.INFO);
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, "An error occurred");
         }
     }
 
@@ -375,8 +374,7 @@ public class ViewIsolatedStocks extends javax.swing.JInternalFrame {
                 loadTable(search);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, "An error occurred");
         }
     }
 }

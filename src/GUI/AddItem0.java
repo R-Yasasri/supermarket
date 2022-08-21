@@ -14,6 +14,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.LoggingAndFeedbackHelper;
+import model.CustomLogging;
+import model.ErrorReporter;
 
 /**
  *
@@ -385,7 +388,6 @@ public class AddItem0 extends javax.swing.JInternalFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
 
         for (int i = 0; i < rowCount; i++) {
-            System.out.println(i);
             String id = jTable1.getValueAt(i, 0).toString();
             String category = jTable1.getValueAt(i, 1).toString();
             String brand = jTable1.getValueAt(i, 2).toString();
@@ -403,9 +405,10 @@ public class AddItem0 extends javax.swing.JInternalFrame {
                     // there is no previous record 
                     db.iud("INSERT INTO item (category,brand,name)VALUES('" + category + "','" + brand + "','" + name + "')");
                 }
+
+                CustomLogging.loggingMethod("Item with category:" + category + ", brand: " + brand + ", name:" + name + " was added", CustomLogging.INFO);
             } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+                ErrorReporter.reportError(e);
             }
         }
         JOptionPane.showMessageDialog(this, "Data inserted successfully!!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
@@ -553,8 +556,7 @@ public class AddItem0 extends javax.swing.JInternalFrame {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this);
         }
     }
 }

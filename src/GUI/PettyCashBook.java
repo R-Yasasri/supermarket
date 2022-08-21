@@ -13,17 +13,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import model.ErrorReporter;
+import model.LoggingAndFeedbackHelper;
 
 /**
  *
  * @author Rajitha Yasasri
  */
 public class PettyCashBook extends javax.swing.JInternalFrame {
-
+    
     ArrayList<PettyCash> outComeList = new ArrayList<PettyCash>();
     ArrayList<PettyCash> inComeList = new ArrayList<PettyCash>();
-
+    
     public PettyCashBook() {
         initComponents();
         loadAll();
@@ -252,140 +253,142 @@ public class PettyCashBook extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void addToLists(ResultSet search) {
-
+        
         try {
-
+            
             inComeList = new ArrayList<>();
             outComeList = new ArrayList<>();
-
+            
             while (search.next()) {
-
+                
                 PettyCash p = new PettyCash();
                 p.setAmount(search.getDouble("amount"));
                 p.setDate(search.getString("date"));
                 p.setDecription(search.getString("description"));
                 p.setId(search.getInt("idpetty_cash"));
-
+                
                 if (search.getString("type").equals("Income")) {
-
+                    
                     inComeList.add(p);
-
+                    
                 } else {
                     outComeList.add(p);
                 }
-
+                
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     private void loadTable() {
-
+        
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
 
         //check the size of two lists
         int rowCount = 0;
-
+        
         if (inComeList.size() > outComeList.size()) {
             rowCount = inComeList.size();
         } else {
             rowCount = outComeList.size();
         }
-
+        
         double totalIncome = 0;
         double totalOutcome = 0;
         for (int i = 0; i < rowCount; i++) {
-
+            
             Vector v = new Vector();
-
+            
             if (inComeList.size() >= i + 1) {
                 PettyCash get = inComeList.get(i);
-
+                
                 v.add(get.getDate());
                 v.add(get.getDecription());
                 v.add(get.getAmount());
-
+                
                 totalIncome = totalIncome + get.getAmount();
             } else {
                 v.add("");
                 v.add("");
                 v.add("");
             }
-
+            
             if (outComeList.size() >= i + 1) {
                 PettyCash get = outComeList.get(i);
-
+                
                 v.add(get.getDate());
                 v.add(get.getDecription());
                 v.add(get.getAmount());
-
+                
                 totalOutcome = totalOutcome + get.getAmount();
             } else {
                 v.add("");
                 v.add("");
                 v.add("");
             }
-
+            
             dtm.addRow(v);
         }
-
+        
         jLabel5.setText(Double.toString(totalIncome));
         jLabel7.setText(Double.toString(totalOutcome));
-
+        
         double balance = totalIncome - totalOutcome;
         jLabel9.setText(Double.toString(balance));
     }
-
+    
     private void loadAll() {
-
+        
         Date date = new Date();
         try {
-
+            
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
             String start = sdf.format(date) + "-01";
-
+            
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             String toDay = sdf1.format(date);
-
+            
             String query = "SELECT * FROM petty_cash WHERE date BETWEEN '" + start + "' AND '" + toDay + "' ";
             ResultSet search = db.search(query);
-
+            
             addToLists(search);
             loadTable();
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
-
+    
     private void search() {
         int year = jYearChooser1.getYear();
         int month = jMonthChooser1.getMonth();
-
+        
         System.out.println(year + " " + month);
-
+        
         if (year != -1 && month != -1) {
-
+            
             String startDate = "";
-
+            
             month = month + 1;//because month is zero based in month chooser
             if (month < 10) {
                 startDate = year + "-0" + month;// ex:2021-07-22
             } else {
                 startDate = year + "-" + month;
             }
-
+            
             String query = "SELECT * FROM petty_cash WHERE date LIKE '" + startDate + "%'";
-
+            
             try {
                 ResultSet search = db.search(query);
                 addToLists(search);
                 loadTable();
+                
+                LoggingAndFeedbackHelper.viewData("Pettycash book for " + startDate + " was viewed");
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }

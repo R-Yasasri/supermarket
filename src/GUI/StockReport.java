@@ -7,11 +7,14 @@ package GUI;
 
 import database.db;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CustomLogging;
+import model.ErrorReporter;
+import model.TableRowColor;
 
 /**
  *
@@ -246,8 +249,7 @@ public class StockReport extends javax.swing.JInternalFrame {
             loadTable(search);
 
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, "An Error occurred");
         }
     }
 
@@ -256,6 +258,7 @@ public class StockReport extends javax.swing.JInternalFrame {
 
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.setRowCount(0);
+            rowColors.clear();
 
             while (search.next()) {
 
@@ -275,18 +278,18 @@ public class StockReport extends javax.swing.JInternalFrame {
                 v.add(Double.toString(selling_price));
                 v.add(Double.toString(total));
                 v.add(search.getString("expiredate"));
-                
+
                 int status = search.getInt("status");
-                if (status==1) {
+                if (status == 1) {
                     v.add("active");
-                }else{
+                } else {
                     v.add("crs");
                 }
                 dtm.addRow(v);
             }
+            CustomLogging.loggingMethod("Stock was viewed", CustomLogging.INFO);
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, "An Error occurred");
         }
     }
 
@@ -339,8 +342,7 @@ public class StockReport extends javax.swing.JInternalFrame {
                 loadTable(search);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, "An Error occurred");
         }
     }
 }

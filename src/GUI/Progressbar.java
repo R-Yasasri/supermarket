@@ -6,6 +6,7 @@
 package GUI;
 
 import java.awt.Toolkit;
+import model.ErrorReporter;
 
 /**
  *
@@ -145,7 +146,7 @@ public class Progressbar extends javax.swing.JFrame {
                 try {
                     l.main(args);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    ErrorReporter.reportError(e);
                 }
             }
             

@@ -11,6 +11,8 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
+import model.CustomLogging;
+import model.ErrorReporter;
 
 /**
  *
@@ -210,10 +212,11 @@ public class Shop extends javax.swing.JInternalFrame {
 
             db.iud("UPDATE shop SET name='" + name + "',address='" + address + "',reg_no='" + regNo + "',other='" + other + "'");
 
+            CustomLogging.loggingMethod("Shop details were updated", CustomLogging.INFO);
             JOptionPane.showMessageDialog(null, "saved successfully");
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -291,7 +294,7 @@ public class Shop extends javax.swing.JInternalFrame {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 }

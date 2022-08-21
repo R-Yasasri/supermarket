@@ -13,12 +13,12 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CustomLogging;
+import model.ErrorReporter;
 import model.Validator;
 
 /**
@@ -276,7 +276,7 @@ public class ViewQuickNotes extends javax.swing.JInternalFrame {
         try {
             jTable1.print();
         } catch (PrinterException e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -318,7 +318,7 @@ public class ViewQuickNotes extends javax.swing.JInternalFrame {
                     jTextArea1.setText(note);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -341,15 +341,16 @@ public class ViewQuickNotes extends javax.swing.JInternalFrame {
 
                             db.iud("DELETE FROM quicknote WHERE idquicknote='" + noteId + "'");
 
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
+                            CustomLogging.loggingMethod("Quick note " + noteId + " was deleted", CustomLogging.INFO);
+                        } catch (Exception e) {
+                            ErrorReporter.reportError(e);
                         }
                     }
                 }
 
                 loadAll();
 
-                JOptionPane.showMessageDialog(this, "Successfully the notes", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Deleted successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
             }
         }
 
@@ -371,7 +372,7 @@ public class ViewQuickNotes extends javax.swing.JInternalFrame {
 
                 edit.searchFromExternal(noteId);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
 
         }
@@ -454,7 +455,7 @@ public class ViewQuickNotes extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }
@@ -466,7 +467,7 @@ public class ViewQuickNotes extends javax.swing.JInternalFrame {
 
             loadTable(search);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -486,8 +487,7 @@ public class ViewQuickNotes extends javax.swing.JInternalFrame {
                     ResultSet search = db.search("SELECT * FROM quicknote WHERE datetaken LIKE '%" + dateString + "%'");
                     loadTable(search);
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "An error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    ErrorReporter.reportError(e, this, "An error occurred");
                 }
 
             }
@@ -517,8 +517,7 @@ public class ViewQuickNotes extends javax.swing.JInternalFrame {
                     loadTable(search);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "An error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    ErrorReporter.reportError(e, this, "An error occurred");
                 }
             }
         }

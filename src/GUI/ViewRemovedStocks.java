@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CustomLogging;
+import model.ErrorReporter;
 
 /**
  *
@@ -231,8 +233,9 @@ public class ViewRemovedStocks extends javax.swing.JInternalFrame {
         try {
             ResultSet search = db.search(query);
             loadTable(search);
+            CustomLogging.loggingMethod("Removed Stocks were viewed", CustomLogging.INFO);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -266,7 +269,7 @@ public class ViewRemovedStocks extends javax.swing.JInternalFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String dateString = sdf.format(date);
 
-                String query = "SELECT r.idremoved_stock,it.iditem,it.name,r.qty,r.reason,r.date FROM removed_stock r INNER JOIN stock s INNER JOIN item it ON r.stock_idstock=s.idstock AND s.item_iditem=it.iditem WHERE date='"+dateString+"';";
+                String query = "SELECT r.idremoved_stock,it.iditem,it.name,r.qty,r.reason,r.date FROM removed_stock r INNER JOIN stock s INNER JOIN item it ON r.stock_idstock=s.idstock AND s.item_iditem=it.iditem WHERE date='" + dateString + "';";
 
                 search = db.search(query);
             } else {
@@ -276,10 +279,10 @@ public class ViewRemovedStocks extends javax.swing.JInternalFrame {
 
                     String query = null;
                     if (selectedIndex == ITEM_ID_SEARCH) {
-                     query = "SELECT r.idremoved_stock,it.iditem,it.name,r.qty,r.reason,r.date FROM removed_stock r INNER JOIN stock s INNER JOIN item it ON r.stock_idstock=s.idstock AND s.item_iditem=it.iditem WHERE it.iditem='"+text+"'";
+                        query = "SELECT r.idremoved_stock,it.iditem,it.name,r.qty,r.reason,r.date FROM removed_stock r INNER JOIN stock s INNER JOIN item it ON r.stock_idstock=s.idstock AND s.item_iditem=it.iditem WHERE it.iditem='" + text + "'";
 
-                    } else  {
-                        query = "SELECT r.idremoved_stock,it.iditem,it.name,r.qty,r.reason,r.date FROM removed_stock r INNER JOIN stock s INNER JOIN item it ON r.stock_idstock=s.idstock AND s.item_iditem=it.iditem WHERE it.name LIKE '%"+text+"%'";
+                    } else {
+                        query = "SELECT r.idremoved_stock,it.iditem,it.name,r.qty,r.reason,r.date FROM removed_stock r INNER JOIN stock s INNER JOIN item it ON r.stock_idstock=s.idstock AND s.item_iditem=it.iditem WHERE it.name LIKE '%" + text + "%'";
 
                     }
                     search = db.search(query);
@@ -295,7 +298,7 @@ public class ViewRemovedStocks extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 }

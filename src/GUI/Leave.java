@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.ErrorReporter;
+import model.LoggingAndFeedbackHelper;
 
 /**
  *
@@ -195,13 +197,12 @@ public class Leave extends javax.swing.JInternalFrame {
 
             db.iud("INSERT INTO `leave` (type,begin_date,end_date,employee_idemployee) VALUES ('" + type + "','" + beginDateString + "','" + endDateString + "','" + empId + "')");
 
-            JOptionPane.showMessageDialog(this, "Data saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
-
+            LoggingAndFeedbackHelper.successfulInsert("Logging record for employee " + empId + " was added", this);
             setId();
             clearFields();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -237,7 +238,7 @@ public class Leave extends javax.swing.JInternalFrame {
             jLabel2.setText(Integer.toString(id));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

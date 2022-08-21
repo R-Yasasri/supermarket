@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import model.ErrorReporter;
+import model.LoggingAndFeedbackHelper;
 
 /**
  *
@@ -356,8 +358,7 @@ public class Items0 extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "There are no such data", "WARNING", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -381,9 +382,10 @@ public class Items0 extends javax.swing.JInternalFrame {
                 String category = jTextField2.getText();
                 String brand = jTextField3.getText();
                 String name = jTextField4.getText();
-           
+
                 db.iud("UPDATE item SET category='" + category + "',brand='" + brand + "',name='" + name + "' WHERE iditem='" + editID + "'");
-                JOptionPane.showMessageDialog(this, "successfully updated!!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+
+                LoggingAndFeedbackHelper.successfulUpdate("Item " + editID + " was updated", this);
                 setDetails();
 
                 jTextField1.setText(null);
@@ -391,8 +393,7 @@ public class Items0 extends javax.swing.JInternalFrame {
                 jTextField3.setText(null);
                 jTextField4.setText(null);
             } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+                ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
             }
             btnWasPressed = false;
 
@@ -419,8 +420,6 @@ public class Items0 extends javax.swing.JInternalFrame {
 
             editID = id;
 
-         
-            
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
 
             dtm.removeRow(selectedRow);
@@ -455,8 +454,7 @@ public class Items0 extends javax.swing.JInternalFrame {
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.removeRow(selectedRow);
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -480,7 +478,7 @@ public class Items0 extends javax.swing.JInternalFrame {
             jTable1.print();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -543,8 +541,7 @@ public class Items0 extends javax.swing.JInternalFrame {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
         }
     }
 }

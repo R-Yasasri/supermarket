@@ -660,15 +660,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_side_men6MouseClicked
 
     private void side_men7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side_men7MouseClicked
-        if (evt.getButton() == LEFT_MOUSE_BTN) {
-            panel.removeAll();
-            p = new Accounting().mainPanel;
-
-            p.setSize(panel.getSize());
-
-            panel.add(p);
-            panel.repaint();
-        }
+        
     }//GEN-LAST:event_side_men7MouseClicked
 
     private void side_men8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side_men8MouseClicked

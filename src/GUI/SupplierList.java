@@ -15,20 +15,22 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import model.ErrorReporter;
 import model.HeaderRenderer;
+import model.LoggingAndFeedbackHelper;
 
 /**
  *
  * @author Thilina
  */
 public class SupplierList extends javax.swing.JInternalFrame {
-    
+
     private boolean toggleBtnIsPressed;
-    
+
     private static final int ACTIVE = 1;
     private static final int DELETE = 0;
     private String editedRow;
-    
+
     public SupplierList() {
         initComponents();
         icon();
@@ -360,17 +362,19 @@ public class SupplierList extends javax.swing.JInternalFrame {
             jToggleButton1.setOpaque(true);
             ListSelectionModel selectionModel = jTable1.getSelectionModel();
             selectionModel.clearSelection();
-            
+
             String name = jTextField2.getText();
             String mobile = jTextField3.getText();
             String email = jTextField4.getText();
             String no = jTextField5.getText();
             String street = jTextField6.getText();
             String city = jTextField7.getText();
-            
+
             try {
                 db.iud("UPDATE supplier SET name='" + name + "', mobile='" + mobile + "',email='" + email + "',no='" + no + "',street='" + street + "',city='" + city + "' WHERE idsupplier='" + editedRow + "'");
-                JOptionPane.showMessageDialog(this, "successfully updated!!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+
+                LoggingAndFeedbackHelper.successfulUpdate("Supplier " + editedRow + " was updated", this);
+
                 setDetails();
                 jTextField2.setText(null);
                 jTextField3.setText(null);
@@ -379,17 +383,16 @@ public class SupplierList extends javax.swing.JInternalFrame {
                 jTextField6.setText(null);
                 jTextField7.setText(null);
             } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+                ErrorReporter.reportError(e, this, "Error");
             }
-            
+
             toggleBtnIsPressed = false;
         } else {
             if (jTable1.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(this, "Select a row to edit", "WARNING", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             jTextField3FocusLost(null);
             int selectedRow = jTable1.getSelectedRow();
             jToggleButton1.setText("save");
@@ -397,33 +400,33 @@ public class SupplierList extends javax.swing.JInternalFrame {
             jToggleButton1.setContentAreaFilled(false);
             jToggleButton1.setOpaque(true);
             toggleBtnIsPressed = true;
-            
+
             int s = jTable1.getSelectedRow();
-            
+
             String temp = jTable1.getValueAt(s, 0).toString();
-            
+
             Pattern p = Pattern.compile("\\d");
             Matcher m = p.matcher(temp);
-            
+
             int i = 0;
             if (m.find()) {
                 i = m.start();
             }
-            
+
             editedRow = temp.substring(i).split("0+")[1];
-            
+
             jTextField2.setText(jTable1.getValueAt(s, 1).toString());
             jTextField3.setText(jTable1.getValueAt(s, 2).toString());
             jTextField4.setText(jTable1.getValueAt(s, 3).toString());
-            
+
             jTextField5.setText(jTable1.getValueAt(s, 4).toString().split(",\n")[0]);
             jTextField6.setText(jTable1.getValueAt(s, 4).toString().split(",\n")[1]);
             jTextField7.setText(jTable1.getValueAt(s, 4).toString().split(",\n")[2]);
-            
+
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.removeRow(s);
         }
-        
+
 
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -436,36 +439,35 @@ public class SupplierList extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Select a row to delete", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         String id = dtm.getValueAt(jTable1.getSelectedRow(), 0).toString();  // sup0001 <= format
 
         Pattern p = Pattern.compile("\\d");
         Matcher matcher = p.matcher(id);
-        
+
         int i = 0;
         if (matcher.find()) {
             i = matcher.start();
         }
         System.out.println("ok");
         String idtext = id.substring(i).split("0+")[1];
-        
+
         try {
             db.iud("UPDATE supplier SET status='" + DELETE + "' WHERE idsupplier='" + idtext + "'");
-            JOptionPane.showMessageDialog(this, "Successfully deleted!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            LoggingAndFeedbackHelper.successfulDelete("Supplier " + idtext + " was deleted", jPanel1);
             dtm.removeRow(jTable1.getSelectedRow());
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             jTable1.print();
-            
+
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -477,11 +479,11 @@ public class SupplierList extends javax.swing.JInternalFrame {
         }
         try {
             ResultSet search = db.search("SELECT * FROM supplier WHERE " + toString + " LIKE '%" + text + "%'");
-            
+
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.setRowCount(0);
             while (search.next()) {
-                
+
                 String id = search.getString("idsupplier");
                 int parseInt = Integer.parseInt(id);
                 String idtext = "0001";
@@ -498,12 +500,12 @@ public class SupplierList extends javax.swing.JInternalFrame {
                     idtext = "000" + Integer.toString(parseInt);
                 }
                 idtext = "sup" + idtext;
-                
+
                 String name = search.getString("name");
                 String mobile = search.getString("mobile");
-                
+
                 mobile = "0" + mobile;
-                
+
                 String email = search.getString("email");
                 String no = search.getString("no");
                 String street = search.getString("street");
@@ -513,19 +515,19 @@ public class SupplierList extends javax.swing.JInternalFrame {
                 if (status == DELETE) {
                     // nothing to do
                 } else {
-                    
+
                     Vector v = new Vector();
                     v.add(idtext);
                     v.add(name);
                     v.add(mobile);
                     v.add(email);
                     v.add(address);
-                    
+
                     dtm.addRow(v);
                 }
             }
             if (dtm.getValueAt(0, 0).toString().isEmpty()) {
-                
+
             }
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(this, "There are no such data", "WARNING", JOptionPane.WARNING_MESSAGE);
@@ -546,7 +548,7 @@ public class SupplierList extends javax.swing.JInternalFrame {
             if (showConfirmDialog == JOptionPane.YES_OPTION) {
                 jToggleButton1ActionPerformed(null);
             }
-            
+
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
@@ -614,34 +616,39 @@ public class SupplierList extends javax.swing.JInternalFrame {
     private void icon() {
         this.setFrameIcon(null);
     }
-    
+
     private void table() {
         JTableHeader header = jTable1.getTableHeader();
-        
+
         header.setDefaultRenderer(new HeaderRenderer(jTable1));
         jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
-        
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(150); /*10*/
-        
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(400); /*10*/
-        
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(200); /*10*/
-        
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(350); /*10*/
-        
-        jTable1.getColumnModel().getColumn(4).setPreferredWidth(543); /*10*/
-        
+
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
+        /*10*/
+
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(400);
+        /*10*/
+
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
+        /*10*/
+
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(350);
+        /*10*/
+
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(543);
+        /*10*/
+
     }
-    
+
     private void setDetails() {
-        
+
         try {
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.setRowCount(0);
-            
+
             ResultSet search = db.search("SELECT * FROM supplier");
             while (search.next()) {
-                
+
                 String id = search.getString("idsupplier");
                 int parseInt = Integer.parseInt(id);
                 String idtext = "0001";
@@ -658,7 +665,7 @@ public class SupplierList extends javax.swing.JInternalFrame {
                     idtext = "000" + Integer.toString(parseInt);
                 }
                 idtext = "sup" + idtext;
-                
+
                 String name = search.getString("name");
                 String city = search.getString("city");
                 String street = search.getString("street");
@@ -667,25 +674,24 @@ public class SupplierList extends javax.swing.JInternalFrame {
                 String email = search.getString("email");
                 int status = search.getInt("status");
                 String address = no + ",\n" + street + ",\n" + city;
-                
+
                 if (status == DELETE) {
                     // nothing to do
                 } else {
-                    
+
                     Vector v = new Vector();
                     v.add(idtext);
                     v.add(name);
                     v.add(mobile);
                     v.add(email);
                     v.add(address);
-                    
+
                     dtm.addRow(v);
                 }
-                
+
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
         }
     }
 }

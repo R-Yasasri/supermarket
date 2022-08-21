@@ -8,12 +8,11 @@ package GUI;
 import database.db;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import model.ErrorReporter;
 
 /**
  *
@@ -259,7 +258,7 @@ public class InvoiceList extends javax.swing.JInternalFrame {
                 
                 vi.searchFromExternal(invoiceId);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
 
         }
@@ -303,7 +302,7 @@ public class InvoiceList extends javax.swing.JInternalFrame {
                 dtm.addRow(v);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }
@@ -328,7 +327,7 @@ public class InvoiceList extends javax.swing.JInternalFrame {
                 dtm.addRow(v);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }
@@ -381,7 +380,7 @@ public class InvoiceList extends javax.swing.JInternalFrame {
                 loadTable(search);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

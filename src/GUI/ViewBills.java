@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import model.ErrorReporter;
 
 /**
  *
@@ -297,7 +297,7 @@ public class ViewBills extends javax.swing.JInternalFrame {
                 loadTable(search);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -324,7 +324,7 @@ public class ViewBills extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -335,7 +335,7 @@ public class ViewBills extends javax.swing.JInternalFrame {
 
             loadTable(search);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 }

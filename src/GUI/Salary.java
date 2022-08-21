@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.ErrorReporter;
+import model.LoggingAndFeedbackHelper;
 import model.Validator;
 
 /**
@@ -186,7 +188,6 @@ public class Salary extends javax.swing.JInternalFrame {
             String query = "SELECT month FROM salary WHERE employee_idemployee='" + empId + "' AND month LIKE '" + salaryMonth + "%'";
             ResultSet salarySearch = db.search(query);
 
-
             if (salarySearch.next()) {
                 //the employee already received salary for the month
 
@@ -203,12 +204,12 @@ public class Salary extends javax.swing.JInternalFrame {
 
             db.iud("INSERT INTO salary (month,salary,status,employee_idemployee) VALUES ('" + dateString + "','" + salary + "',1,'" + empId + "')");
 
-            JOptionPane.showMessageDialog(this, "Data saved successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            LoggingAndFeedbackHelper.successfulInsert("Salary of the employee " + empId + " for the month " + month + " was added", this);
 
             setId();
             clearFields();
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -242,7 +243,7 @@ public class Salary extends javax.swing.JInternalFrame {
             jLabel2.setText(Integer.toString(id));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

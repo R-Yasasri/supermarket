@@ -12,9 +12,10 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import model.ErrorReporter;
+import model.LoggingAndFeedbackHelper;
 import model.Validator;
 
 /**
@@ -405,7 +406,7 @@ public class ReturnToSupplier extends javax.swing.JInternalFrame {
                     r.setUnit(itemSearch.getString("unit"));
                     r.setId(itemSearch.getInt("idgrnitem"));
                     r.setStockQty(itemSearch.getDouble("stockQty"));
-                    
+
                     list.add(r);
 
                     model.addElement(itemSearch.getString("name"));
@@ -417,7 +418,7 @@ public class ReturnToSupplier extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No such GRN", "Warning", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -434,7 +435,7 @@ public class ReturnToSupplier extends javax.swing.JInternalFrame {
         ReturnQty get = list.get(selectedIndex);
 
         jLabel13.setText(get.getQty() + " " + get.getUnit());
-        jLabel22.setText(get.getStockQty()+" "+get.getUnit());
+        jLabel22.setText(get.getStockQty() + " " + get.getUnit());
 
         jTextField3.setText(null);
 
@@ -463,36 +464,34 @@ public class ReturnToSupplier extends javax.swing.JInternalFrame {
 
         int idGrnItem = list.get(jComboBox1.getSelectedIndex()).getId();
         try {
-            
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-            Date today=new Date();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = new Date();
             String todayString = sdf.format(today);
-            
-            db.iud("INSERT INTO return_to_supplier (reason,payment_received,qty,grnitem_idgrnitem,date) VALUES ('" + reason + "','" + payment + "','" + qty + "','" + idGrnItem + "','"+todayString+"')");
-            ResultSet qtySearch = db.search("SELECT qty FROM stock WHERE grnitem_idgrnitem='"+idGrnItem+"'");
-            
-            Double stock=0.0;
+
+            db.iud("INSERT INTO return_to_supplier (reason,payment_received,qty,grnitem_idgrnitem,date) VALUES ('" + reason + "','" + payment + "','" + qty + "','" + idGrnItem + "','" + todayString + "')");
+            ResultSet qtySearch = db.search("SELECT qty FROM stock WHERE grnitem_idgrnitem='" + idGrnItem + "'");
+
+            Double stock = 0.0;
             if (qtySearch.next()) {
-                stock=qtySearch.getDouble("qty");
+                stock = qtySearch.getDouble("qty");
             }
-            
-            Double newQty=stock-Double.parseDouble(qty);
-           db.iud("UPDATE stock SET qty='"+newQty+"' WHERE grnitem_idgrnitem='"+idGrnItem+"'");
-            
-            JOptionPane.showMessageDialog(this, "Data saved successfully", "Info", JOptionPane.INFORMATION_MESSAGE);
-            
+
+            Double newQty = stock - Double.parseDouble(qty);
+            db.iud("UPDATE stock SET qty='" + newQty + "' WHERE grnitem_idgrnitem='" + idGrnItem + "'");
+
+            LoggingAndFeedbackHelper.successfulInsert("Return to Supplier record for grnitem id" + idGrnItem + " of grn " + grnId + " was added", this);
+
             //clear fields
-            
             jTextArea1.setText(null);
             jTextField2.setText(null);
             jTextField3.setText(null);
-            
+
             showPanels(false);
             setId();
-            
+
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An Error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, "An Error occurred");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -510,7 +509,7 @@ public class ReturnToSupplier extends javax.swing.JInternalFrame {
 
                 if (textFieldQty == 0) {
                     jTextField3.setForeground(Color.red);
-                } else if (textFieldQty <= qty && textFieldQty<=stockQty) {
+                } else if (textFieldQty <= qty && textFieldQty <= stockQty) {
                     // ok nothing to do
                     jTextField3.setForeground(Color.black);
                 } else {
@@ -577,7 +576,7 @@ public class ReturnToSupplier extends javax.swing.JInternalFrame {
 
             jLabel3.setText(Integer.toString(id));
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }

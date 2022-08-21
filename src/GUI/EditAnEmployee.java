@@ -17,6 +17,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 import model.Validator;
 
 /**
@@ -375,7 +377,7 @@ public class EditAnEmployee extends javax.swing.JInternalFrame {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -423,11 +425,10 @@ public class EditAnEmployee extends javax.swing.JInternalFrame {
 
                 db.iud("UPDATE employee SET nic='" + nic + "',fname='" + fname + "',lname='" + lname + "',img='" + imgPath + "',dob='" + bDay + "',gender='" + gender + "',mobile1='" + mobile1 + "',mobile2='" + mobile2 + "',address='" + address + "',civil_status='" + civilStatus + "' WHERE idemployee='" + empId + "'");
 
-                JOptionPane.showMessageDialog(this, "Updated successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
-
+                LoggingAndFeedbackHelper.successfulUpdate("Employee " + empId + " was updated", this);
                 jPanel2.setVisible(false);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         } else {
 
@@ -554,7 +555,7 @@ public class EditAnEmployee extends javax.swing.JInternalFrame {
             } catch (IOException io) {
                 jPanel2.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
 
         }

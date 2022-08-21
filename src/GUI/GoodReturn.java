@@ -14,6 +14,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import model.ErrorReporter;
 
 /**
  *
@@ -311,7 +312,7 @@ public class GoodReturn extends javax.swing.JInternalFrame {
 
             loadTable(search);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -377,7 +378,7 @@ public class GoodReturn extends javax.swing.JInternalFrame {
             ResultSet search = db.search(query);
             loadTable(search);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }
@@ -399,7 +400,7 @@ public class GoodReturn extends javax.swing.JInternalFrame {
                 dtm.addRow(v);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

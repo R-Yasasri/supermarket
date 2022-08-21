@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import model.CustomLogging;
+import model.ErrorReporter;
 import model.HeaderRenderer;
 import model.Validator;
 
@@ -495,9 +497,10 @@ public class NewSuplier extends javax.swing.JInternalFrame {
                     db.iud("INSERT INTO supplier(name,mobile,email,no,street,city) VALUES('" + name + "','" + mobile + "','" + email + "','" + no + "','" + lane + "','" + city + "')");
 
                 }
+
+                CustomLogging.loggingMethod("Supplier " + name + " of " + address + " was added", CustomLogging.INFO);
             } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+                ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
 
             }
         }
@@ -696,8 +699,7 @@ public class NewSuplier extends javax.swing.JInternalFrame {
 
             jLabel9.setText(idtext);
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
         }
     }
 }

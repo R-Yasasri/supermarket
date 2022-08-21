@@ -8,14 +8,13 @@ package GUI;
 import database.db;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.event.CellEditorListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableModel;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 
 /**
  *
@@ -300,10 +299,10 @@ public class Attendance extends javax.swing.JInternalFrame {
 
                 db.iud("UPDATE attendance SET clock_out='" + dateTime + "' WHERE employee_idemployee='" + empId + "' AND date='" + today + "' ");
 
-                JOptionPane.showMessageDialog(this, "Data is added successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                LoggingAndFeedbackHelper.successfulInsert("Clock out time of employee " + empId + " was added", this);
 
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
                 JOptionPane.showMessageDialog(this, "An Error has occurred. Please recheck the format of the clock out time", "Error", JOptionPane.ERROR_MESSAGE);
 
             }
@@ -362,7 +361,7 @@ public class Attendance extends javax.swing.JInternalFrame {
 
                 db.iud("INSERT INTO attendance (clock_in,date,employee_idemployee) VALUES ('" + dateTime + "','" + today + "','" + empId + "')");
 
-                JOptionPane.showMessageDialog(this, "Data is added successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                LoggingAndFeedbackHelper.successfulInsert("Clock in time of employee " + empId + " was added", this);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -407,7 +406,7 @@ private void loadAll() {
             jTextField1.setText(null);
             loadTable(employeeSearch);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -443,7 +442,7 @@ private void loadAll() {
                 int rowCount = jTable1.getRowCount();
                 for (int i = 0; i < rowCount; i++) {
                     String empId = jTable1.getValueAt(i, 0).toString();
-                    
+
                     if (empId.equals(attendanceSearch.getString("idemployee"))) {
                         jTable1.setValueAt(attendanceSearch.getString("clock_in"), i, 2);
                         jTable1.setValueAt(attendanceSearch.getString("clock_out"), i, 3);
@@ -466,10 +465,10 @@ private void loadAll() {
 
                 jTable1.setEnabled(false);
             }
-            
+
             jTable1.selectAll();// to prevent editing rows at first place
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -490,7 +489,7 @@ private void loadAll() {
                 ResultSet search = db.search(query);
                 loadTable(search);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
 
         }

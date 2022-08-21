@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CustomLogging;
+import model.ErrorReporter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
@@ -315,7 +317,7 @@ public class ViewGRN extends javax.swing.JInternalFrame {
                 JasperViewer.viewReport(fillReport, false);
                 JasperPrintManager.printReport(fillReport, true);
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -410,12 +412,13 @@ public class ViewGRN extends javax.swing.JInternalFrame {
                 jLabel10.setText(Double.toString(net_total));
 
                 showGRNDetails(true);
+                CustomLogging.loggingMethod("GRN " + grnId + " was viewed", CustomLogging.INFO);
             } else {
                 showGRNDetails(false);
                 JOptionPane.showMessageDialog(this, "No such GRN", "Warning", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

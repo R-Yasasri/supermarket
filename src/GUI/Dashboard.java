@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import java.awt.Color;
+import model.ErrorReporter;
 
 /**
  *
@@ -605,7 +605,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             grn.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         grn.show();
 
@@ -673,7 +673,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             c.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         c.show();
     }//GEN-LAST:event_btn2MouseClicked
@@ -684,7 +684,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             p.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         p.show();
     }//GEN-LAST:event_btn4MouseClicked
@@ -696,7 +696,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             v.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         v.show();
 
@@ -728,7 +728,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             s.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         s.show();
 
@@ -760,7 +760,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             // a.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         a.show();
 
@@ -792,7 +792,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             r.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         r.show();
 
@@ -824,7 +824,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             r.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         r.show();
 
@@ -856,7 +856,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             v.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         v.show();
 
@@ -888,7 +888,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             v.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         v.show();
 
@@ -920,7 +920,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             a.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         a.show();
 
@@ -952,7 +952,7 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             s.setMaximum(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         s.show();
 

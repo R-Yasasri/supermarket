@@ -20,6 +20,8 @@ import model.Validator;
 import java.util.Date;
 import javax.swing.table.TableCellEditor;
 import java.text.SimpleDateFormat;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 
 /**
  *
@@ -380,7 +382,7 @@ public class EditFurniture extends javax.swing.JInternalFrame {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
     }//GEN-LAST:event_jLabel12MouseClicked
@@ -447,12 +449,12 @@ public class EditFurniture extends javax.swing.JInternalFrame {
 
             db.iud("UPDATE furniture SET type='" + type + "',name='" + name + "',color='" + color + "',material='" + material + "',seller='" + seller + "',seller_address='" + seller_address + "',warranty_no='" + warranty_no + "',warranty='" + imgPath + "',price='" + price + "',bought_date='" + boughtDate + "',other='" + other + "' WHERE idfurniture='" + fId + "'");
 
-            JOptionPane.showMessageDialog(this, "Data updated Successfully", "INFO", JOptionPane.INFORMATION_MESSAGE);
+            LoggingAndFeedbackHelper.successfulUpdate("Furniture " + fId + " was updated", this);
 
             jPanel1.setVisible(false);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -587,9 +589,7 @@ public class EditFurniture extends javax.swing.JInternalFrame {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Error occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
-
+                ErrorReporter.reportError(e, this, "Error occurred");
             }
 
         }
@@ -620,7 +620,7 @@ public class EditFurniture extends javax.swing.JInternalFrame {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 
@@ -644,7 +644,7 @@ public class EditFurniture extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }
 

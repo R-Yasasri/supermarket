@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import model.CustomLogging;
+import model.ErrorReporter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
@@ -436,9 +437,9 @@ public class Reports extends javax.swing.JFrame {
             JasperPrint fillReport = JasperFillManager.fillReport(is, null, db.getConnection());
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
+            CustomLogging.loggingMethod("Stock report was generated", CustomLogging.INFO);
         } catch (Exception e) {
-            e.printStackTrace();
-            CustomLogging.loggingMethod(e.getMessage(), CustomLogging.ERROR);
+            ErrorReporter.reportError(e);
         }
 
     }//GEN-LAST:event_btn1MouseClicked
@@ -538,10 +539,10 @@ public class Reports extends javax.swing.JFrame {
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
-        CustomLogging.loggingMethod("bill report was generated", CustomLogging.INFO);
+        CustomLogging.loggingMethod("bill report was generated for bill type " + billType, CustomLogging.INFO);
 
     }//GEN-LAST:event_btn3MouseClicked
 
@@ -567,10 +568,10 @@ public class Reports extends javax.swing.JFrame {
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
-        CustomLogging.loggingMethod("customer returns report was generated", CustomLogging.INFO);
+        CustomLogging.loggingMethod("customer returns report was generated for month " + month, CustomLogging.INFO);
     }//GEN-LAST:event_btn2MouseClicked
 
     private void btn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseClicked
@@ -593,10 +594,10 @@ public class Reports extends javax.swing.JFrame {
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
-        CustomLogging.loggingMethod("sales report was generated", CustomLogging.INFO);
+        CustomLogging.loggingMethod("sales report was generated for month " + month, CustomLogging.INFO);
     }//GEN-LAST:event_btn5MouseClicked
 
     private void btn5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseEntered
@@ -637,10 +638,10 @@ public class Reports extends javax.swing.JFrame {
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
-        CustomLogging.loggingMethod("supplier return report was generated", CustomLogging.INFO);
+        CustomLogging.loggingMethod("supplier return report was generated for month " + month, CustomLogging.INFO);
     }//GEN-LAST:event_btn4MouseClicked
 
     private void btn6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseClicked
@@ -660,10 +661,10 @@ public class Reports extends javax.swing.JFrame {
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
-        CustomLogging.loggingMethod("employee report was generated", CustomLogging.INFO);
+        CustomLogging.loggingMethod("employee report was generated for employee " + id, CustomLogging.INFO);
     }//GEN-LAST:event_btn6MouseClicked
 
     private void btn6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseEntered
@@ -704,10 +705,10 @@ public class Reports extends javax.swing.JFrame {
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
-        CustomLogging.loggingMethod("employee attendance report was generated", CustomLogging.INFO);
+        CustomLogging.loggingMethod("employee attendance report was generated for month " + month, CustomLogging.INFO);
     }//GEN-LAST:event_btn7MouseClicked
 
     private void btn7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseEntered
@@ -743,15 +744,15 @@ public class Reports extends javax.swing.JFrame {
             m.put("month", month);
 
             String path = baseReportPath + File.separator + "employee_leave_time_off_report.jasper";
-            
+
             JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
 
-        CustomLogging.loggingMethod("employee leave and time off report was generated", CustomLogging.INFO);
+        CustomLogging.loggingMethod("employee leave and time off report was generated for month " + month, CustomLogging.INFO);
     }//GEN-LAST:event_btn8MouseClicked
 
     private void btn8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn8MouseEntered

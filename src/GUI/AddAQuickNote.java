@@ -14,7 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import model.CustomLogging;
+import model.LoggingAndFeedbackHelper;
+import model.ErrorReporter;
 import model.Validator;
 
 /**
@@ -23,7 +24,7 @@ import model.Validator;
  */
 public class AddAQuickNote extends javax.swing.JInternalFrame {
 
-    private String imgPath="";
+    private String imgPath = "";
 
     public AddAQuickNote() {
         initComponents();
@@ -189,14 +190,14 @@ public class AddAQuickNote extends javax.swing.JInternalFrame {
 
             try {
                 db.iud(sqlStatement);
-                CustomLogging.loggingMethod(CustomLogging.INFO, "User " + Home.loggedInUserNIC + " added a note of topic " + topic);
-                JOptionPane.showMessageDialog(this, "Successfully added the note", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+
+                LoggingAndFeedbackHelper.successfulInsert("a note with topic: " + topic + ", was added", this);
 
                 jTextField1.setText(null);
                 jTextPane1.setText(null);
                 clearImage();
             } catch (Exception e) {
-                e.printStackTrace();
+                ErrorReporter.reportError(e);
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -221,7 +222,7 @@ public class AddAQuickNote extends javax.swing.JInternalFrame {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

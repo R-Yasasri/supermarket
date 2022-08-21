@@ -12,16 +12,15 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import model.ErrorReporter;
 import model.HeaderRenderer;
+import model.LoggingAndFeedbackHelper;
 import model.Validator;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -686,7 +685,7 @@ public class GRN extends javax.swing.JInternalFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
             date = sdf.format(exp);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
             JOptionPane.showMessageDialog(this, "Invalid expire date", "WARNING", JOptionPane.WARNING_MESSAGE);
             jDateChooser1.grabFocus();
             return;
@@ -815,8 +814,7 @@ public class GRN extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
 
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
             return;
         }
         double netTotal = 0;
@@ -843,11 +841,11 @@ public class GRN extends javax.swing.JInternalFrame {
                 db.iud("INSERT INTO stock (item_iditem,qty,selling_price,expiredate,grnitem_idgrnitem)VALUES('" + item + "','" + qty + "','" + selling_price + "','" + expireDate + "','" + idgrnitem + "')");
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
+                ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
             }
         }
-        JOptionPane.showMessageDialog(this, "data is saved successfully", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        LoggingAndFeedbackHelper.successfulInsert("GRN " + grn + " was added", this);
 
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
@@ -868,7 +866,7 @@ public class GRN extends javax.swing.JInternalFrame {
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -912,7 +910,7 @@ public class GRN extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
     }//GEN-LAST:event_jTextField1KeyReleased
 
@@ -929,7 +927,7 @@ public class GRN extends javax.swing.JInternalFrame {
             item.setMaximum(true);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorReporter.reportError(e);
         }
         item.show();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -1070,8 +1068,7 @@ public class GRN extends javax.swing.JInternalFrame {
             jLabel32.setText("");
             jLabel33.setText("");
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            ErrorReporter.reportError(e, this, ErrorReporter.GENERIC_ERROR_MESSAGE);
         }
     }
 
