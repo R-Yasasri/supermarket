@@ -14,7 +14,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.LoggingAndFeedbackHelper;
 import model.CustomLogging;
 import model.ErrorReporter;
 
@@ -47,7 +46,6 @@ public class AddItem0 extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
@@ -83,11 +81,7 @@ public class AddItem0 extends javax.swing.JInternalFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("I");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, -1));
-
-        jLabel3.setText("00001\n");
+        jLabel3.setText("00001 ");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 90, -1));
 
         jLabel4.setText("category");
@@ -303,7 +297,7 @@ public class AddItem0 extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -332,8 +326,7 @@ public class AddItem0 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String idtext = jLabel3.getText();
-        String id = "I" + idtext;
+        String id = jLabel3.getText();
         String category = jComboBox1.getSelectedItem().toString();
         String brand = jComboBox2.getSelectedItem().toString();
         String name = jTextField2.getText();
@@ -352,28 +345,11 @@ public class AddItem0 extends javax.swing.JInternalFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.addRow(v);
 
-        int i = Integer.parseInt(idtext);
+        int i = Integer.parseInt(id);
         i++;
-        System.out.println(i);
-        String s = "00001";
-        if (i <= 9) {
-            s = "0000" + Integer.toString(i);
-        }
+        String newId = Integer.toString(i);
 
-        if (i > 9) {
-            s = "000" + Integer.toString(i);
-        }
-        if (i > 99) {
-            s = "00" + Integer.toString(i);
-        }
-        if (i > 999) {
-            s = "0" + Integer.toString(i);
-        }
-        if (i > 9999) {
-            s = Integer.toString(i);
-        }
-
-        jLabel3.setText(s);
+        jLabel3.setText(newId);
         jTextField2.setText(null);
 
 
@@ -482,7 +458,6 @@ public class AddItem0 extends javax.swing.JInternalFrame {
     public static javax.swing.JComboBox jComboBox1;
     public static javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -508,28 +483,12 @@ public class AddItem0 extends javax.swing.JInternalFrame {
 
         try {
             ResultSet search = db.search("SELECT COUNT(iditem) FROM item");
-            int count = 1;
-            String text = "00001";
+            int id = 1;
             if (search.next()) {
-                count = search.getInt(1);
+                id = search.getInt(1) + 1;
 
             }
-            if (count >= 1) {
-                text = "0000" + Integer.toString(count);
-            }
-            if (count > 9) {
-                text = "000" + Integer.toString(count);
-            }
-            if (count > 99) {
-                text = "00" + Integer.toString(count);
-            }
-            if (count > 999) {
-                text = "0" + Integer.toString(count);
-            }
-            if (count > 9999) {
-                text = Integer.toString(count);
-            }
-            jLabel3.setText(text);
+            jLabel3.setText(Integer.toString(id));
 
             ResultSet search1 = db.search("SELECT category,brand FROM item");
 
