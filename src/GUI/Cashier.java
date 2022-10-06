@@ -327,7 +327,7 @@ public class Cashier extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
         );
 
@@ -388,6 +388,12 @@ public class Cashier extends javax.swing.JInternalFrame {
             }
         });
 
+        jSpinField2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jSpinField2PropertyChange(evt);
+            }
+        });
+
         jLabel21.setText("Rs.");
 
         jLabel23.setText("0.00");
@@ -422,8 +428,8 @@ public class Cashier extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel23)
-                        .addGap(52, 52, 52)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel26))
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -758,6 +764,10 @@ public class Cashier extends javax.swing.JInternalFrame {
         calculateDiscountAndDiscountedPrice();
     }//GEN-LAST:event_jSpinField1PropertyChange
 
+    private void jSpinField2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jSpinField2PropertyChange
+        calculateTotalDiscount();
+    }//GEN-LAST:event_jSpinField2PropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel discountText;
@@ -878,6 +888,7 @@ public class Cashier extends javax.swing.JInternalFrame {
             }
 
             jLabel13.setText(Double.toString(netTotal));
+            calculateTotalDiscount();
             calculateInvoiceTotal();
             calculateBalance();
         }
@@ -925,9 +936,10 @@ public class Cashier extends javax.swing.JInternalFrame {
     }
 
     private void calculateInvoiceTotal() {
-        Integer discount = jSpinField2.getValue();
+        String text = jLabel23.getText();
+        double discount = Double.parseDouble(text);
 
-        double total = Double.parseDouble(jLabel13.getText()) - discount.doubleValue();
+        double total = Double.parseDouble(jLabel13.getText()) - discount;
         invoice_total_text.setText(Double.toString(total));
     }
 
@@ -963,6 +975,25 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             String formattedDiscountedPrice = String.format("%.2f", discounted_price);
             discountedPrice.setText(formattedDiscountedPrice);
+        }
+    }
+
+    private void calculateTotalDiscount() {
+        String net_total = jLabel13.getText();
+
+        if (!net_total.isEmpty()) {
+
+            Double netTotal = Double.valueOf(net_total);
+
+            if (netTotal != 0) {
+                Integer percentage = jSpinField2.getValue();
+
+                Double discount = netTotal * percentage.doubleValue() / 100;
+                String formattedDiscount = String.format("%.2f", discount);
+                jLabel23.setText(formattedDiscount);
+
+                calculateInvoiceTotal();
+            }
         }
     }
 }
