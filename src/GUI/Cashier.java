@@ -528,7 +528,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         if (q.isEmpty()) {
             // nothing to do
-            priceText.setText("0.00");
+            resetPriceText();
             return;
         }
 
@@ -800,7 +800,7 @@ public class Cashier extends javax.swing.JInternalFrame {
         jLabel3.setText("");
         jLabel5.setText("");
         jLabel10.setText("");
-        priceText.setText("");
+        resetPriceText();
         jLabel25.setText("");
     }
 
@@ -830,7 +830,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             priceText.setText(Double.toString(total));
         } else {
-            priceText.setText("0.00");
+            resetPriceText();
         }
     }
 
@@ -899,5 +899,9 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         double total = Double.parseDouble(jLabel13.getText()) - discount.doubleValue();
         invoice_total_text.setText(Double.toString(total));
+    }
+    
+    private void resetPriceText(){
+        priceText.setText("0.00");
     }
 }
