@@ -73,7 +73,7 @@ public class Cashier extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jSpinField1 = new com.toedter.components.JSpinField();
-        jLabel7 = new javax.swing.JLabel();
+        discountedPrice = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         discountText = new javax.swing.JLabel();
@@ -158,8 +158,13 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jSpinField1.setMaximum(100);
         jSpinField1.setMinimum(0);
+        jSpinField1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jSpinField1PropertyChange(evt);
+            }
+        });
 
-        jLabel7.setText("0.00");
+        discountedPrice.setText("0.00");
 
         jLabel27.setText("discounted price (Rs.)");
 
@@ -234,11 +239,11 @@ public class Cashier extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(discountText, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(discountText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel27)
                                 .addGap(5, 5, 5)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(discountedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1))
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -251,7 +256,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(75, 75, 75)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +291,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                     .addComponent(jLabel25)
                     .addComponent(jLabel27)
                     .addComponent(discountText)
-                    .addComponent(jLabel7)
+                    .addComponent(discountedPrice)
                     .addComponent(jLabel17)
                     .addComponent(jLabel20))
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -568,6 +573,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Maximum qty is exceeded", "ERROR", JOptionPane.WARNING_MESSAGE);
                     jTextField2.setForeground(Color.red);
                     jTextField2.setText(null);
+                    calculatePrice();
                 }
 
             } else {
@@ -734,9 +740,14 @@ public class Cashier extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jSpinField1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jSpinField1PropertyChange
+        calculateDiscountAndDiscountedPrice();
+    }//GEN-LAST:event_jSpinField1PropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel discountText;
+    private javax.swing.JLabel discountedPrice;
     private javax.swing.JLabel invoice_total_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -767,7 +778,6 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -833,19 +843,8 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             double total = q * u;
 
-            Integer discount = jSpinField1.getValue();
-
-            if (discount != 0) {
-                double d = discount.doubleValue();
-
-                total = total - d;
-            }
-
-            if (total < 0) {
-                priceText.setForeground(Color.red);
-            }
-
             priceText.setText(Double.toString(total));
+            calculateDiscountAndDiscountedPrice();
         } else {
             resetPriceText();
         }
@@ -917,8 +916,39 @@ public class Cashier extends javax.swing.JInternalFrame {
         double total = Double.parseDouble(jLabel13.getText()) - discount.doubleValue();
         invoice_total_text.setText(Double.toString(total));
     }
-    
-    private void resetPriceText(){
+
+    private void resetPriceText() {
         priceText.setText("0.00");
+        discountedPrice.setText("0.00");
+    }
+
+    private void calculateDiscountAndDiscountedPrice() {
+        Integer percentage = jSpinField1.getValue();
+
+        double discount_percentage = percentage.doubleValue();
+
+        String priceTextString = priceText.getText();
+
+        if (priceTextString.isEmpty()) {
+            return;
+        }
+
+        double price = Double.valueOf(priceTextString);
+
+        double discount = discount_percentage * price / 100;
+        String formattedDiscount = String.format("%.2f", discount);
+        discountText.setText(formattedDiscount);
+
+        double discounted_price = price - discount;
+        if (discounted_price < 0) {
+
+            discountedPrice.setText("0.00");
+            JOptionPane.showMessageDialog(this, "Discounted price cannot be below negative value", "ERROR", JOptionPane.WARNING_MESSAGE);
+            jSpinField1.grabFocus();
+        } else {
+
+            String formattedDiscountedPrice = String.format("%.2f", discounted_price);
+            discountedPrice.setText(formattedDiscountedPrice);
+        }
     }
 }
