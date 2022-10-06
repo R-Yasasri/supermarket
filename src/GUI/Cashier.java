@@ -585,47 +585,61 @@ public class Cashier extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField2KeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String tPrice = priceText.getText();
+        String dPrice = discountedPrice.getText();
         String name = jLabel3.getText();
 
-        if (!tPrice.isEmpty()) {
+        if (!dPrice.isEmpty()) {
 
-            if (Double.parseDouble(tPrice) < 0 || name.isEmpty()) {
+            if (Double.parseDouble(dPrice) < 0 || name.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Invalid data", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
 
-                Vector v = new Vector();
-                String sId = jTextField1.getText();
-                String iId = jLabel5.getText();
-                String iName = jLabel3.getText();
                 String qty = jTextField2.getText();
 
-                String uPriceAndQty = jLabel10.getText();
+                if (qty.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Please provide a valid quantity", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else {
 
-                String uPrice = uPriceAndQty.split(perDelimiter)[0];
-                String unit = uPriceAndQty.split(perDelimiter)[1];
+                    double q = Double.parseDouble(qty);
+                    if (q == 0) {
+                        JOptionPane.showMessageDialog(this, "Quantity cannot be zero", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
 
-                int discount = jSpinField1.getValue();
+                    Vector v = new Vector();
+                    String sId = jTextField1.getText();
+                    String iId = jLabel5.getText();
+                    String iName = jLabel3.getText();
 
-                double nPrice = Double.parseDouble(qty) * Double.parseDouble(uPrice);
+                    String uPriceAndQty = jLabel10.getText();
 
-                v.add(sId);
-                v.add(iId);
-                v.add(iName);
-                v.add(qty);
-                v.add(unit);
-                v.add(uPrice);
-                v.add(nPrice);
-                v.add(discount);
-                v.add(tPrice);
+                    String uPrice = uPriceAndQty.split(perDelimiter)[0];
+                    String unit = uPriceAndQty.split(perDelimiter)[1];
 
-                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-                dtm.addRow(v);
+                    int discount = jSpinField1.getValue();
 
-                clearItemFields(true);
+                    double nPrice = q * Double.parseDouble(uPrice);
 
-                calculateNetTotal();
-                calculateBalance();
+                    v.add(sId);
+                    v.add(iId);
+                    v.add(iName);
+                    v.add(qty);
+                    v.add(unit);
+                    v.add(uPrice);
+                    v.add(nPrice);
+                    v.add(discount);
+                    v.add(dPrice);
+
+                    DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                    dtm.addRow(v);
+
+                    clearItemFields(true);
+
+                    calculateNetTotal();
+                    calculateBalance();
+                }
+
             }
         } else {
             JOptionPane.showMessageDialog(this, "Please provide valid data", "ERROR", JOptionPane.ERROR_MESSAGE);
