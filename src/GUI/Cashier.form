@@ -461,7 +461,7 @@
                         <Column editable="false" title="unit" type="java.lang.Object"/>
                         <Column editable="false" title="unit price" type="java.lang.Object"/>
                         <Column editable="false" title="net price" type="java.lang.Object"/>
-                        <Column editable="true" title="discount" type="java.lang.Object"/>
+                        <Column editable="true" title="discount(%)" type="java.lang.Object"/>
                         <Column editable="false" title="total price" type="java.lang.Object"/>
                       </Table>
                     </Property>

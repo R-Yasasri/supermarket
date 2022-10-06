@@ -302,7 +302,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "stock id", "item id", "item", "qty", "unit", "unit price", "net price", "discount", "total price"
+                "stock id", "item id", "item", "qty", "unit", "unit price", "net price", "discount(%)", "total price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
