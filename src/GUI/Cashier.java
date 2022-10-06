@@ -66,7 +66,7 @@ public class Cashier extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        priceText = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -75,7 +75,7 @@ public class Cashier extends javax.swing.JInternalFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel25 = new javax.swing.JLabel();
         jSpinField1 = new com.toedter.components.JSpinField();
-        jLabel18 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         discountText = new javax.swing.JLabel();
@@ -142,7 +142,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel11.setText("price (Rs.)");
 
-        jLabel7.setText("Rs. 0.00");
+        priceText.setText("0.00");
 
         jLabel20.setText("discount (%)");
 
@@ -162,9 +162,9 @@ public class Cashier extends javax.swing.JInternalFrame {
         jSpinField1.setMaximum(100);
         jSpinField1.setMinimum(0);
 
-        jLabel18.setText("0.00");
+        jLabel7.setText("0.00");
 
-        jLabel27.setText("discounted price:");
+        jLabel27.setText("discounted price (Rs.)");
 
         jLabel17.setText("Rs.");
 
@@ -192,7 +192,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,8 +203,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(75, 75, 75)
                                 .addComponent(jLabel24)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 8, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,21 +213,24 @@ public class Cashier extends javax.swing.JInternalFrame {
                                 .addGap(36, 36, 36)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel18)
-                                .addGap(34, 34, 34)
+                                .addComponent(priceText, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(discountText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(discountText, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel27)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)))))
+                                .addComponent(jButton1))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -238,20 +240,20 @@ public class Cashier extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel22)
+                        .addComponent(jLabel24)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel22)
-                                .addComponent(jLabel24)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -260,13 +262,12 @@ public class Cashier extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel7)
+                            .addComponent(priceText)
                             .addComponent(jLabel25)
-                            .addComponent(jLabel18)
                             .addComponent(jLabel27)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel17)
-                                .addComponent(discountText))
+                            .addComponent(discountText)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel17)
                             .addComponent(jLabel20))
                         .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -476,7 +477,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
                     jLabel25.setText(maxDelimiter + search.getString("qty"));
 
-                    calculateTotalPrice();
+                    calculatePrice();
                 } else {
                     clearItemFields(false);
                     jTextField1.setForeground(Color.red);
@@ -527,6 +528,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         if (q.isEmpty()) {
             // nothing to do
+            priceText.setText("0.00");
             return;
         }
 
@@ -544,7 +546,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
                 Double qty = Double.parseDouble(q);
                 if (qty <= maxQty) {
-                    calculateTotalPrice();
+                    calculatePrice();
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Maximum qty is exceeded", "ERROR", JOptionPane.WARNING_MESSAGE);
@@ -561,7 +563,7 @@ public class Cashier extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField2KeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String tPrice = jLabel7.getText();
+        String tPrice = priceText.getText();
         String name = jLabel3.getText();
 
         if (!tPrice.isEmpty()) {
@@ -735,7 +737,6 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -763,6 +764,7 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel priceText;
     // End of variables declaration//GEN-END:variables
 
     public void init() {
@@ -798,15 +800,15 @@ public class Cashier extends javax.swing.JInternalFrame {
         jLabel3.setText("");
         jLabel5.setText("");
         jLabel10.setText("");
-        jLabel7.setText("");
+        priceText.setText("");
         jLabel25.setText("");
     }
 
-    private void calculateTotalPrice() {
+    private void calculatePrice() {
         String qty = jTextField2.getText();
         String unitPrice = jLabel10.getText().split(perDelimiter)[0];
 
-        jLabel7.setForeground(Color.black);
+        priceText.setForeground(Color.black);
         if (!qty.isEmpty() && !unitPrice.isEmpty()) {
 
             Double q = Double.parseDouble(qty);
@@ -823,12 +825,12 @@ public class Cashier extends javax.swing.JInternalFrame {
             }
 
             if (total < 0) {
-                jLabel7.setForeground(Color.red);
+                priceText.setForeground(Color.red);
             }
 
-            jLabel7.setText(Double.toString(total));
+            priceText.setText(Double.toString(total));
         } else {
-            jLabel7.setText("");
+            priceText.setText("0.00");
         }
     }
 
