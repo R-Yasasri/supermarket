@@ -36,11 +36,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      <Component id="netTotalLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jSpinField2" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="discountSpinField" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jButton2" min="-2" pref="161" max="-2" attributes="0"/>
@@ -53,7 +53,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel23" min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="discountLabel" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -63,15 +63,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton5" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="invoice_total_text" min="-2" pref="69" max="-2" attributes="0"/>
+                      <Component id="invoiceTotalLabel" min="-2" pref="69" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField5" min="-2" pref="95" max="-2" attributes="0"/>
+                      <Component id="paymentTextField" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel19" min="-2" pref="103" max="-2" attributes="0"/>
+                      <Component id="balanceLabel" min="-2" pref="103" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -86,18 +86,18 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="netTotalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="paymentTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="balanceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="discountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="invoice_total_text" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="invoiceTotalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jSpinField2" min="-2" max="-2" attributes="0"/>
+                  <Component id="discountSpinField" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -530,7 +530,7 @@
         <Property name="text" type="java.lang.String" value="net total (Rs.)"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel13">
+    <Component class="javax.swing.JLabel" name="netTotalLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="0.00"/>
       </Properties>
@@ -550,12 +550,12 @@
         <Property name="text" type="java.lang.String" value="balance (Rs.) "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField5">
+    <Component class="javax.swing.JTextField" name="paymentTextField">
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField5KeyReleased"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="paymentTextFieldKeyReleased"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel19">
+    <Component class="javax.swing.JLabel" name="balanceLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="0.00"/>
       </Properties>
@@ -592,9 +592,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.toedter.components.JSpinField" name="jSpinField2">
+    <Component class="com.toedter.components.JSpinField" name="discountSpinField">
       <Events>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jSpinField2PropertyChange"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="discountSpinFieldPropertyChange"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel21">
@@ -602,7 +602,7 @@
         <Property name="text" type="java.lang.String" value="Rs."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel23">
+    <Component class="javax.swing.JLabel" name="discountLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="0.00"/>
       </Properties>
@@ -612,7 +612,7 @@
         <Property name="text" type="java.lang.String" value="Invoice total (Rs.)"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="invoice_total_text">
+    <Component class="javax.swing.JLabel" name="invoiceTotalLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
