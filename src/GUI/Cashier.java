@@ -896,15 +896,22 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     private void calculateBalance() {
         String payment = jTextField5.getText();
-        Integer discount = jSpinField2.getValue();
+
+        String discountString = jLabel23.getText();
+        double discount = Double.valueOf(discountString);
+
         String netTotal = jLabel13.getText();
 
         jTextField5.setForeground(Color.black);
         jLabel19.setForeground(Color.black);
 
-        if (!netTotal.isEmpty() && !payment.isEmpty()) {
+        if (!netTotal.isEmpty()) {
 
             double balance = 0;
+
+            if (payment.isEmpty()) {
+                payment = "0.00";
+            }
 
             double pay = Double.parseDouble(payment);
             double net = Double.parseDouble(netTotal);
@@ -912,9 +919,7 @@ public class Cashier extends javax.swing.JInternalFrame {
             if (discount == 0) {
                 balance = pay - net;
             } else {
-
-                double dis = discount.doubleValue();
-                balance = pay - (net - dis);
+                balance = pay - (net - discount);
             }
 
             jLabel19.setText(Double.toString(balance));
@@ -941,6 +946,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         double total = Double.parseDouble(jLabel13.getText()) - discount;
         invoice_total_text.setText(Double.toString(total));
+        calculateBalance();
     }
 
     private void resetPriceText() {
