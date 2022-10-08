@@ -119,7 +119,7 @@ public class Progressbar extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void icon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Cooperative-logo (1).gif")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Image/logo.png")));
 
     }
 
