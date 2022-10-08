@@ -70,7 +70,7 @@ public class ViewInvoice extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("View Invoice");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logo.png"))); // NOI18N
 
         jButton1.setText("Print");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

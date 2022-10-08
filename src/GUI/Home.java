@@ -794,7 +794,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
     }
 
     private void icon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Cooperative-logo (1).gif")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Image/logo.png")));
 
     }
 

@@ -65,7 +65,7 @@ public class GoodReturn extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("GRN list");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logo.png"))); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

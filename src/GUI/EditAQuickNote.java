@@ -61,7 +61,7 @@ public class EditAQuickNote extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Update a quick note");
         setToolTipText("");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logo.png"))); // NOI18N
 
         jLabel9.setText("Topic:");
 

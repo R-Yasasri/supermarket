@@ -70,7 +70,7 @@ public class AddItem extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Add new item");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Cooperative-logo (1).gif"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logo.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(912, 774));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 774));

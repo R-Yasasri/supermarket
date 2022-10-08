@@ -7,7 +7,7 @@
     <Property name="maximizable" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="true"/>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-      <Image iconType="3" name="/GUI/Cooperative-logo (1).gif"/>
+      <Image iconType="3" name="/Image/logo.png"/>
     </Property>
   </Properties>
   <SyntheticProperties>
