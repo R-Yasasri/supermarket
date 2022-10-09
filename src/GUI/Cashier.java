@@ -83,21 +83,21 @@ public class Cashier extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        netTotalLabel = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
+        paymentTextField = new javax.swing.JTextField();
+        balanceLabel = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jSpinField2 = new com.toedter.components.JSpinField();
+        discountSpinField = new com.toedter.components.JSpinField();
         jLabel21 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
+        discountLabel = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        invoice_total_text = new javax.swing.JLabel();
+        invoiceTotalLabel = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -327,7 +327,7 @@ public class Cashier extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
         );
 
@@ -344,7 +344,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel12.setText("net total (Rs.)");
 
-        jLabel13.setText("0.00");
+        netTotalLabel.setText("0.00");
 
         jLabel14.setText("discount (%)");
 
@@ -352,13 +352,13 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jLabel16.setText("balance (Rs.) ");
 
-        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+        paymentTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField5KeyReleased(evt);
+                paymentTextFieldKeyReleased(evt);
             }
         });
 
-        jLabel19.setText("0.00");
+        balanceLabel.setText("0.00");
 
         jButton2.setText("clear table");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -388,14 +388,20 @@ public class Cashier extends javax.swing.JInternalFrame {
             }
         });
 
+        discountSpinField.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                discountSpinFieldPropertyChange(evt);
+            }
+        });
+
         jLabel21.setText("Rs.");
 
-        jLabel23.setText("0.00");
+        discountLabel.setText("0.00");
 
         jLabel26.setText("Invoice total (Rs.)");
 
-        invoice_total_text.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        invoice_total_text.setText("0.00");
+        invoiceTotalLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        invoiceTotalLabel.setText("0.00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -408,11 +414,11 @@ public class Cashier extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel12)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel13)
+                        .addComponent(netTotalLabel)
                         .addGap(91, 91, 91)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinField2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(discountSpinField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -422,23 +428,23 @@ public class Cashier extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel23)
-                        .addGap(52, 52, 52)
+                        .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel26))
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(invoice_total_text, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(invoiceTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(paymentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(balanceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -449,17 +455,17 @@ public class Cashier extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel12)
-                        .addComponent(jLabel13)
+                        .addComponent(netTotalLabel)
                         .addComponent(jLabel14)
                         .addComponent(jLabel15)
                         .addComponent(jLabel16)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel19)
+                        .addComponent(paymentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(balanceLabel)
                         .addComponent(jLabel21)
-                        .addComponent(jLabel23)
+                        .addComponent(discountLabel)
                         .addComponent(jLabel26)
-                        .addComponent(invoice_total_text))
-                    .addComponent(jSpinField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(invoiceTotalLabel))
+                    .addComponent(discountSpinField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -647,33 +653,33 @@ public class Cashier extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
-        String payment = jTextField5.getText();
+    private void paymentTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_paymentTextFieldKeyReleased
+        String payment = paymentTextField.getText();
 
         if (Validator.isValidNumber(payment)) {
-            jTextField5.setForeground(Color.red);
+            paymentTextField.setForeground(Color.red);
             calculateBalance();
         } else {
 
-            jTextField5.setForeground(Color.black);
+            paymentTextField.setForeground(Color.black);
         }
-    }//GEN-LAST:event_jTextField5KeyReleased
+    }//GEN-LAST:event_paymentTextFieldKeyReleased
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String balance = jLabel19.getText();
+        String balance = balanceLabel.getText();
 
         if (jTable1.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Empty table", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if (balance.equals("0.00") || (jLabel19.getForeground() == Color.red) || (Double.parseDouble(balance) < 0)) {
+        if (balance.equals("0.00") || (balanceLabel.getForeground() == Color.red) || (Double.parseDouble(balance) < 0)) {
             JOptionPane.showMessageDialog(this, "Invalid balance", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         // for later use in invoice generation        
-        String netTotal = jLabel13.getText();// becuase the clearMonetaryFields method is called before generating the invoice and it removes the netTotal value
+        String netTotal = netTotalLabel.getText();// becuase the clearMonetaryFields method is called before generating the invoice and it removes the netTotal value
 
         // save the data
         try {
@@ -683,9 +689,9 @@ public class Cashier extends javax.swing.JInternalFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String today = sdf.format(date);
 
-            int discount = jSpinField2.getValue();
+            int discount = discountSpinField.getValue();
 
-            String payment = jTextField5.getText();
+            String payment = paymentTextField.getText();
 
             db.iud("INSERT INTO invoice (datetime,payment_method,status,discount,payment) VALUES('" + today + "','" + payment_method + "','" + 1 + "','" + discount + "','" + payment + "')");
             ResultSet search = db.search("SELECT MAX(idinvoice) FROM invoice");
@@ -758,11 +764,18 @@ public class Cashier extends javax.swing.JInternalFrame {
         calculateDiscountAndDiscountedPrice();
     }//GEN-LAST:event_jSpinField1PropertyChange
 
+    private void discountSpinFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_discountSpinFieldPropertyChange
+        calculateTotalDiscount();
+    }//GEN-LAST:event_discountSpinFieldPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel balanceLabel;
+    private javax.swing.JLabel discountLabel;
+    private com.toedter.components.JSpinField discountSpinField;
     private javax.swing.JLabel discountText;
     private javax.swing.JLabel discountedPrice;
-    private javax.swing.JLabel invoice_total_text;
+    private javax.swing.JLabel invoiceTotalLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -773,17 +786,14 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -800,11 +810,11 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.components.JSpinField jSpinField1;
-    private com.toedter.components.JSpinField jSpinField2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel netTotalLabel;
+    private javax.swing.JTextField paymentTextField;
     private javax.swing.JLabel priceText;
     // End of variables declaration//GEN-END:variables
 
@@ -877,23 +887,31 @@ public class Cashier extends javax.swing.JInternalFrame {
                 netTotal = netTotal + totalPrice;
             }
 
-            jLabel13.setText(Double.toString(netTotal));
+            netTotalLabel.setText(Double.toString(netTotal));
+            calculateTotalDiscount();
             calculateInvoiceTotal();
             calculateBalance();
         }
     }
 
     private void calculateBalance() {
-        String payment = jTextField5.getText();
-        Integer discount = jSpinField2.getValue();
-        String netTotal = jLabel13.getText();
+        String payment = paymentTextField.getText();
 
-        jTextField5.setForeground(Color.black);
-        jLabel19.setForeground(Color.black);
+        String discountString = discountLabel.getText();
+        double discount = Double.valueOf(discountString);
 
-        if (!netTotal.isEmpty() && !payment.isEmpty()) {
+        String netTotal = netTotalLabel.getText();
+
+        paymentTextField.setForeground(Color.black);
+        balanceLabel.setForeground(Color.black);
+
+        if (!netTotal.isEmpty()) {
 
             double balance = 0;
+
+            if (payment.isEmpty()) {
+                payment = "0.00";
+            }
 
             double pay = Double.parseDouble(payment);
             double net = Double.parseDouble(netTotal);
@@ -901,34 +919,34 @@ public class Cashier extends javax.swing.JInternalFrame {
             if (discount == 0) {
                 balance = pay - net;
             } else {
-
-                double dis = discount.doubleValue();
-                balance = pay - (net - dis);
+                balance = pay - (net - discount);
             }
 
-            jLabel19.setText(Double.toString(balance));
+            balanceLabel.setText(Double.toString(balance));
 
             if (balance < 0) {
-                jLabel19.setForeground(Color.red);
+                balanceLabel.setForeground(Color.red);
             }
         } else {
 
-            jLabel19.setText("0.00");
+            balanceLabel.setText("0.00");
         }
     }
 
     private void clearMonetaryFields() {
 
-        jLabel13.setText("0.00");
-        jSpinField2.setValue(0);
-        jTextField5.setText("");
+        netTotalLabel.setText("0.00");
+        discountSpinField.setValue(0);
+        paymentTextField.setText("");
     }
 
     private void calculateInvoiceTotal() {
-        Integer discount = jSpinField2.getValue();
+        String text = discountLabel.getText();
+        double discount = Double.parseDouble(text);
 
-        double total = Double.parseDouble(jLabel13.getText()) - discount.doubleValue();
-        invoice_total_text.setText(Double.toString(total));
+        double total = Double.parseDouble(netTotalLabel.getText()) - discount;
+        invoiceTotalLabel.setText(Double.toString(total));
+        calculateBalance();
     }
 
     private void resetPriceText() {
@@ -963,6 +981,25 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             String formattedDiscountedPrice = String.format("%.2f", discounted_price);
             discountedPrice.setText(formattedDiscountedPrice);
+        }
+    }
+
+    private void calculateTotalDiscount() {
+        String net_total = netTotalLabel.getText();
+
+        if (!net_total.isEmpty()) {
+
+            Double netTotal = Double.valueOf(net_total);
+
+            if (netTotal != 0) {
+                Integer percentage = discountSpinField.getValue();
+
+                Double discount = netTotal * percentage.doubleValue() / 100;
+                String formattedDiscount = String.format("%.2f", discount);
+                discountLabel.setText(formattedDiscount);
+
+                calculateInvoiceTotal();
+            }
         }
     }
 }
