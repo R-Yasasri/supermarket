@@ -41,6 +41,8 @@ public class Other extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btn5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        btn6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -269,6 +271,49 @@ public class Other extends javax.swing.JFrame {
 
         mainPanel.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 469, -1, -1));
 
+        btn6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn6.setOpaque(false);
+        btn6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn6MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn6MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn6MouseReleased(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/calculator.png"))); // NOI18N
+        jLabel7.setText("Calculator");
+
+        javax.swing.GroupLayout btn6Layout = new javax.swing.GroupLayout(btn6);
+        btn6.setLayout(btn6Layout);
+        btn6Layout.setHorizontalGroup(
+            btn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn6Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn6Layout.setVerticalGroup(
+            btn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn6Layout.createSequentialGroup()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 117, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -407,6 +452,30 @@ public class Other extends javax.swing.JFrame {
         btn5.setBackground(new java.awt.Color(30, 39, 46));
     }//GEN-LAST:event_btn5MouseReleased
 
+    private void btn6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseClicked
+        Calculator cal = new Calculator();
+        Home.viewPanel.add(cal);
+        cal.show();
+    }//GEN-LAST:event_btn6MouseClicked
+
+    private void btn6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseEntered
+        btn6.setOpaque(true);
+        btn6.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn6MouseEntered
+
+    private void btn6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseExited
+        btn6.setOpaque(false);
+        btn6.setBackground(null);
+    }//GEN-LAST:event_btn6MouseExited
+
+    private void btn6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MousePressed
+        btn6.setBackground(new java.awt.Color(47, 53, 66));
+    }//GEN-LAST:event_btn6MousePressed
+
+    private void btn6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseReleased
+        btn6.setBackground(new java.awt.Color(30, 39, 46));
+    }//GEN-LAST:event_btn6MouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -455,12 +524,14 @@ public class Other extends javax.swing.JFrame {
     private javax.swing.JPanel btn3;
     private javax.swing.JPanel btn4;
     private javax.swing.JPanel btn5;
+    private javax.swing.JPanel btn6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     public keeptoo.KGradientPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }
