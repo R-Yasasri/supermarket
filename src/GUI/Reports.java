@@ -433,8 +433,8 @@ public class Reports extends javax.swing.JFrame {
 
         try {
 
-            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/stock_report.jasper");
-            JasperPrint fillReport = JasperFillManager.fillReport(is, null, db.getConnection());
+            String path = baseReportPath + File.separator + "stock_report.jasper";
+            JasperPrint fillReport = JasperFillManager.fillReport(path, null, db.getConnection());
             JasperViewer.viewReport(fillReport, false);
             JasperPrintManager.printReport(fillReport, true);
             CustomLogging.loggingMethod("Stock report was generated", CustomLogging.INFO);
@@ -533,7 +533,6 @@ public class Reports extends javax.swing.JFrame {
             m.put("type", billType);
 
             String path = baseReportPath + File.separator + "bill_report.jasper";
-//            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/bill_report.jasper");
 
             JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
             JasperViewer.viewReport(fillReport, false);
@@ -559,9 +558,6 @@ public class Reports extends javax.swing.JFrame {
             Map<String, Object> m = new HashMap();
             m.put("month", month);
 
-//            String context = getClass().getResource("../reports/customer_returns_report.jasper").toString();
-//            context = context.replace("%20", " ");
-//            context = context.replace("file:/", "");
             String path = baseReportPath + File.separator + "customer_returns_report.jasper";
 
             JasperPrint fillReport = JasperFillManager.fillReport(path, m, db.getConnection());
