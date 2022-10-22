@@ -10,6 +10,7 @@ import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.IconSetter;
 
 /**
  *
@@ -660,7 +661,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_side_men6MouseClicked
 
     private void side_men7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side_men7MouseClicked
-        
+
     }//GEN-LAST:event_side_men7MouseClicked
 
     private void side_men8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side_men8MouseClicked
@@ -794,8 +795,7 @@ public class Home extends javax.swing.JFrame implements Runnable {
     }
 
     private void icon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Image/logo.png")));
-
+       IconSetter.setFrameIcon(this);
     }
 
     public static void setLookAndFeel() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {

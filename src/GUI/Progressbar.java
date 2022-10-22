@@ -7,6 +7,7 @@ package GUI;
 
 import java.awt.Toolkit;
 import model.ErrorReporter;
+import model.IconSetter;
 import model.StockChecker;
 
 /**
@@ -119,8 +120,7 @@ public class Progressbar extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void icon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Image/logo.png")));
-
+        IconSetter.setFrameIcon(this);
     }
 
     private void n() {

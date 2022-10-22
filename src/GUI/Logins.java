@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import model.CustomLogging;
 import model.ErrorReporter;
+import model.IconSetter;
 
 public class Logins extends javax.swing.JFrame {
 
@@ -140,19 +141,19 @@ public class Logins extends javax.swing.JFrame {
             String name = jTextField1.getText();
             String password = new String(jPasswordField1.getPassword());
             ResultSet search = db.search("SELECT nic FROM user WHERE nic='" + name + "' AND password='" + password + "'");
-
+            
             if (search.next()) {
                 Home.setLookAndFeel();
                 this.dispose();
                 Home m1 = new Home();
                 m1.setVisible(true);
-
+                
                 CustomLogging.loggingMethod("admin logged in", CustomLogging.INFO);
                 Home.loggedInUserNIC = search.getString("nic");
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid login", "WARNING", JOptionPane.WARNING_MESSAGE);
             }
-
+            
         } catch (Exception e) {
             ErrorReporter.reportError(e, this);
         }
@@ -206,7 +207,6 @@ public class Logins extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void icon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Image/logo.png")));
-
+        IconSetter.setFrameIcon(this);
     }
 }
